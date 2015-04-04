@@ -1,0 +1,9 @@
+#!/usr/bin/env iojs
+
+/* jslint node: true, esnext: true */
+
+"use strict";
+
+let csm = require('consul-service-manager');
+
+let tar = require("tar-step");

@@ -1,0 +1,14 @@
+{
+	"name": "cluster-node",
+	"version": "0.0.1",
+	"description": "donkey cluster managed node",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "Markus Felten <markus.felten@gmx.de>",
+	"license": "ISC",
+	"dependencies": {
+		"consul-service-manager": "git+ssh://donkey@mfelten.de/Groups/donkey/git/consul-service-manager.git",
+		"tar-step": "git+ssh://donkey@mfelten.de/Groups/donkey/git/tar-step.git"
+	}
+}
