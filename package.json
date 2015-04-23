@@ -9,6 +9,6 @@
 	"license": "ISC",
 	"dependencies": {
 		"consul-service-manager": "git+ssh://donkey@mfelten.de/Groups/donkey/git/consul-service-manager.git",
-		"tar-step": "git+ssh://donkey@mfelten.de/Groups/donkey/git/tar-step.git"
+		"kronos-step-archive-tar": "git+ssh://donkey@mfelten.de/Groups/donkey/git/kronos-step-archive-tar.git"
 	}
 }

@@ -4,6 +4,4 @@
 
 "use strict";
 
-let csm = require('consul-service-manager');
-
-let tar = require("tar-step");
+const csm = require('consul-service-manager');
