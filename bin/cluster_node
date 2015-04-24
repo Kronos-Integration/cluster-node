@@ -5,3 +5,10 @@
 "use strict";
 
 const csm = require('consul-service-manager');
+
+
+csm.manager().then(function (manager) {
+	console.log(`manager: ${manager}`);
+}, function (err) {
+	console.log(`manager failed: ${err}`);
+});
