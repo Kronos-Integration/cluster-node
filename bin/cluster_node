@@ -4,11 +4,24 @@
 
 "use strict";
 
+const fs = require('fs');
+const commander = require('commander');
 const csm = require('consul-service-manager');
 
+const options = {};
 
-csm.manager().then(function (manager) {
-	console.log(`manager: ${manager}`);
+commander
+  .option('-f, --flow <file>', 'specify flow definition')
+  .parse(process.argv);
+
+if (commander.flow) {
+  const content = fs.readFileSync(commander.flow);
+  options.flows = JSON.parse(content);
+}
+
+
+csm.manager(options).then(function (manager) {
+  console.log(`manager: ${manager}`);
 }, function (err) {
-	console.log(`manager failed: ${err}`);
+  console.log(`manager failed: ${err}`);
 });
