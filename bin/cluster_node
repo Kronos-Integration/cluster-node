@@ -11,17 +11,15 @@ const csm = require('consul-service-manager');
 const options = {};
 
 commander
-  .option('-f, --flow <file>', 'specify flow definition')
-  .parse(process.argv);
-
-if (commander.flow) {
-  const content = fs.readFileSync(commander.flow);
-  options.flows = JSON.parse(content);
-}
-
+	.option('-f, --flow <file>', 'specify flow definition')
+	.parse(process.argv);
 
 csm.manager(options).then(function (manager) {
-  console.log(`manager: ${manager}`);
+	if (commander.flow) {
+		manager.declareFlows(JSON.parse(fs.readFileSync(commander.flow)));
+	}
+
+	console.log(`manager: ${manager}`);
 }, function (err) {
-  console.log(`manager failed: ${err}`);
+	console.log(`manager failed: ${err}`);
 });
