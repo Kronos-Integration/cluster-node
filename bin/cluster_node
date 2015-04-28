@@ -5,21 +5,25 @@
 "use strict";
 
 const fs = require('fs');
+const path = require('path');
 const commander = require('commander');
 const csm = require('consul-service-manager');
 
-const options = {};
+
+const options = {
+  stepDirectories: path.join(__dirname, '..', 'node_modules', 'kronos-step-archive-tar', 'lib')
+};
 
 commander
-	.option('-f, --flow <file>', 'specify flow definition')
-	.parse(process.argv);
+  .option('-f, --flow <file>', 'specify flow definition')
+  .parse(process.argv);
 
 csm.manager(options).then(function (manager) {
-	if (commander.flow) {
-		manager.declareFlows(JSON.parse(fs.readFileSync(commander.flow)));
-	}
+  if (commander.flow) {
+    manager.declareFlows(JSON.parse(fs.readFileSync(commander.flow)));
+  }
 
-	console.log(`manager: ${manager}`);
+  console.log(`manager: ${manager}`);
 }, function (err) {
-	console.log(`manager failed: ${err}`);
+  console.log(`manager failed: ${err}`);
 });
