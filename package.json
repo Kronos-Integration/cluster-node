@@ -1,15 +1,19 @@
 {
-  "name": "cluster-node",
-  "version": "0.0.1",
-  "description": "donkey cluster managed node",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Markus Felten <markus.felten@gmx.de>",
-  "license": "ISC",
-  "dependencies": {
-    "commander": "^2.8.1",
-    "consul-service-manager": "git+ssh://donkey@mfelten.de/Groups/donkey/git/consul-service-manager.git",
-    "kronos-step-archive-tar": "git+ssh://donkey@mfelten.de/Groups/donkey/git/kronos-step-archive-tar.git"
-  }
+	"name": "cluster-node",
+	"version": "0.0.1",
+	"description": "donkey cluster managed node",
+	"scripts": {
+		"start": "iojs bin/cluster_node",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"engines": {
+		"iojs": "2.0.0"
+	},
+	"author": "Markus Felten <markus.felten@gmx.de>",
+	"license": "BSD-2-Clause",
+	"dependencies": {
+		"commander": "^2.8.1",
+		"consul-service-manager": "git+ssh://donkey@mfelten.de/Groups/donkey/git/consul-service-manager.git",
+		"kronos-step-archive-tar": "git+ssh://donkey@mfelten.de/Groups/donkey/git/kronos-step-archive-tar.git"
+	}
 }
