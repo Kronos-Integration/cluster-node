@@ -11,7 +11,10 @@ const csm = require('consul-service-manager');
 
 
 const options = {
-  stepDirectories: path.join(__dirname, '..', 'node_modules', 'kronos-step-archive-tar', 'lib')
+  stepDirectories: [
+    path.join(__dirname, '..', 'node_modules', 'kronos-step-archive-tar', 'lib'),
+    path.join(__dirname, '..', 'node_modules', 'kronos-step-file-common', 'lib' /*, 'file-read.js'*/ )
+  ]
 };
 
 commander
@@ -20,7 +23,11 @@ commander
 
 csm.manager(options).then(function (manager) {
   if (commander.flow) {
-    manager.declareFlows(JSON.parse(fs.readFileSync(commander.flow)));
+    try {
+      manager.declareFlows(JSON.parse(fs.readFileSync(commander.flow)));
+    } catch (err) {
+      console.log(`flow failed: ${err}`);
+    }
   }
 
   console.log(`manager: ${manager}`);
