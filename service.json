@@ -1,0 +1,41 @@
+{
+	"name": "org.kronos.cluster",
+
+	"package": {
+		"type": "git",
+		"url": "ssh://lbptsaall7qkb63x.myfritz.net/git/packages/${name}.git"
+	},
+
+	"installdir": "/Groups/services/${name}",
+
+	"directories": {
+		"${installdir}": {
+			"owner": "_kronos"
+		},
+		"/Groups/MF/camera": {
+			"owner": "_kronos",
+			"acl": {
+				"user": "_kronos",
+				"action": "allow",
+				"permissions": ["list", "add_file", "add_subdirectory", "search"]
+			}
+		}
+	},
+
+	"users": {
+		"_kronos": {
+			"RealName": "Application User ${name}",
+			"PrimaryGroupID": 2006,
+			"UniqueID": 2006,
+			"UserShell": "/bin/false",
+			"NFSHomeDirectory": "${installdir}"
+		}
+	},
+	"groups": {
+		"_kronos": {
+			"RealName": "${name} Application Group",
+			"gid": 2006
+		}
+	},
+	"nice": 19
+}
