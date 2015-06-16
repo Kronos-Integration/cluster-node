@@ -1,7 +1,7 @@
 {
 	"name": "cluster-node",
 	"version": "0.0.1",
-	"description": "donkey cluster managed node",
+	"description": "kronos cluster managed node",
 	"scripts": {
 		"start": "iojs bin/cluster_node",
 		"test": "echo \"Error: no test specified\" && exit 1"
