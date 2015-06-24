@@ -1,5 +1,6 @@
 {
 	"name": "cluster-node",
+	"bin": "bin/cluster_node",
 	"version": "0.0.1",
 	"description": "kronos cluster managed node",
 	"scripts": {
