@@ -1,0 +1,31 @@
+{
+	"flow1": {
+		"steps": {
+			"s1": {
+				"type": "kronos-copy",
+				"endpoints": {
+					"in": "stdin",
+					"out": "step:s2/in"
+				}
+			},
+			"s2": {
+				"type": "kronos-copy",
+				"endpoints": {
+					"out": "step:s3/in"
+				}
+			},
+			"s3": {
+				"type": "kronos-copy",
+				"endpoints": {
+					"out": "step:s4/in"
+				}
+			},
+			"s4": {
+				"type": "kronos-copy",
+				"endpoints": {
+					"out": "stdout"
+				}
+			}
+		}
+	}
+}
