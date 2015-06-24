@@ -24,8 +24,9 @@ commander
   .parse(process.argv);
 
 if(commander.dataCenter) {
-  options.consul.dc = commander.dataCenter;
+  options.consul.dataCenter = commander.dataCenter;
 }
+
 csm.manager(options).then(function (manager) {
   if (commander.flow) {
     try {
