@@ -12,7 +12,7 @@
 		"${installdir}": {
 			"owner": "_kronos"
 		},
-		"/Groups/MF/camera": {
+		"/Groups/MF/kronos": {
 			"owner": "_kronos",
 			"acl": {
 				"user": "_kronos",
