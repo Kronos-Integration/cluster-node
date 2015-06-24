@@ -11,16 +11,21 @@ const csm = require('consul-service-manager');
 
 
 const options = {
+  consul: {},
   stepDirectories: [
-    path.join(__dirname, '..', 'node_modules', 'kronos-step-archive-tar', 'lib'),
+    path.join(__dirname, '..', 'node_modules', 'kronos-step-archive-tar'),
     path.join(__dirname, '..', 'node_modules', 'kronos-step-file-common', 'lib' /*, 'file-read.js'*/ )
   ]
 };
 
 commander
   .option('-f, --flow <file>', 'specify flow definition')
+  .option('-d, --dataCenter <dataCenter>', 'specify consul data center')
   .parse(process.argv);
 
+if(commander.dataCenter) {
+  options.consul.dc = commander.dataCenter;
+}
 csm.manager(options).then(function (manager) {
   if (commander.flow) {
     try {
