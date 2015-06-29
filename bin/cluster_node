@@ -21,10 +21,15 @@ const options = {
 commander
   .option('-f, --flow <file>', 'specify flow definition')
   .option('-d, --dataCenter <dataCenter>', 'specify consul data center')
+  .option('-p, --port <portNumber>', `specify kronos http port (default is ${csm.defaultKronosPort})`)
   .parse(process.argv);
 
 if(commander.dataCenter) {
   options.consul.dataCenter = commander.dataCenter;
+}
+
+if(commander.port) {
+  options.port = commander.port;
 }
 
 csm.manager(options).then(function (manager) {
