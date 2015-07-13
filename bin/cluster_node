@@ -11,11 +11,7 @@ const csm = require('consul-service-manager');
 
 
 const options = {
-  consul: {},
-  stepDirectories: [
-    path.join(__dirname, '..', 'node_modules', 'kronos-step-archive-tar'),
-    path.join(__dirname, '..', 'node_modules', 'kronos-step-file-common', 'lib' /*, 'file-read.js'*/ )
-  ]
+  consul: {}
 };
 
 commander
@@ -24,15 +20,18 @@ commander
   .option('-p, --port <portNumber>', `specify kronos http port (default is ${csm.defaultKronosPort})`)
   .parse(process.argv);
 
-if(commander.dataCenter) {
+if (commander.dataCenter) {
   options.consul.dataCenter = commander.dataCenter;
 }
 
-if(commander.port) {
+if (commander.port) {
   options.port = commander.port;
 }
 
 csm.manager(options).then(function (manager) {
+  require('kronos-step-archive-tar').registerWithManager(manager);
+  require('kronos-step-file-common').registerWithManager(manager);
+
   if (commander.flow) {
     try {
       manager.declareFlows(JSON.parse(fs.readFileSync(commander.flow)));
