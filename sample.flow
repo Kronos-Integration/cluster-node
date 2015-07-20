@@ -6,25 +6,37 @@
         "type": "kronos-copy",
         "endpoints": {
           "in": "stdin",
-          "out": "step:s2/in"
+          "out": "step:s2/in",
+          "log": "step:log/in"
         }
       },
       "s2": {
         "type": "kronos-copy",
         "endpoints": {
-          "out": "step:s3/in"
+          "out": "step:s3/in",
+          "log": "step:log/in"
         }
       },
       "s3": {
         "type": "kronos-copy",
         "endpoints": {
-          "out": "step:s4/in"
+          "out": "step:s4/in",
+          "log": "step:log/in"
         }
       },
       "s4": {
         "type": "kronos-copy",
         "endpoints": {
-          "out": "stdout"
+          "out": "stdout",
+          "log": "step:log/in"
+        }
+      },
+      "log": {
+        "type": "kronos-copy",
+        "config" : {
+          "level" : 0
+        },
+        "endpoints": {
         }
       }
     }
