@@ -1,6 +1,6 @@
 {
   "flow1": {
-    "description": "the flows description 1",
+    "description": "the flow description 1",
     "steps": {
       "s1": {
         "type": "kronos-copy",
@@ -33,16 +33,15 @@
       },
       "log": {
         "type": "kronos-copy",
-        "config" : {
-          "level" : 0
+        "config": {
+          "level": 0
         },
-        "endpoints": {
-        }
+        "endpoints": {}
       }
     }
   },
   "flow2": {
-    "description": "the flows description 2",
+    "description": "the flow description 2",
     "steps": {
       "s1": {
         "type": "kronos-copy",
@@ -53,6 +52,12 @@
       },
       "s2": {
         "type": "kronos-copy",
+        "endpoints": {
+          "out": "step:s3/in"
+        }
+      },
+      "s3": {
+        "type": "kronos-untar",
         "endpoints": {
           "out": "stdout"
         }
