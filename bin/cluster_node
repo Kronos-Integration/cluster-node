@@ -7,28 +7,30 @@
 const fs = require('fs');
 const path = require('path');
 const commander = require('commander');
+const ksm = require('kronos-service-manager');
+const ksmr = require('kronos-service-manager-rest');
 const csm = require('consul-service-manager');
 
 
-const options = {
-  consul: {}
-};
+const consulOptions = {};
+
+const restOptions = {};
 
 commander
   .option('-f, --flow <file>', 'specify flow definition')
   .option('-d, --dataCenter <dataCenter>', 'specify consul data center')
-  .option('-p, --port <portNumber>', `specify kronos http port (default is ${csm.defaultKronosPort})`)
+  .option('-p, --port <portNumber>', `specify kronos http port (default is ${ksmr.defaultKronosPort})`)
   .parse(process.argv);
 
 if (commander.dataCenter) {
-  options.consul.dataCenter = commander.dataCenter;
+  consulOptions.dataCenter = commander.dataCenter;
 }
 
 if (commander.port) {
-  options.port = commander.port;
+  restOptions.port = commander.port;
 }
 
-csm.manager(options).then(function (manager) {
+csm.manager(ksmr.manager(ksm.manager(), restOptions), consulOptions).then(function (manager) {
   require('kronos-step-archive-tar').registerWithManager(manager);
   require('kronos-step-file-common').registerWithManager(manager);
 
