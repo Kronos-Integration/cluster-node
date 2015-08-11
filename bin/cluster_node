@@ -13,14 +13,19 @@ const csm = require('consul-service-manager');
 
 
 const consulOptions = {};
-
 const restOptions = {};
+const kronosOptions = {};
 
 commander
+  .option('-n, --name <name>', 'kronos node name')
   .option('-f, --flow <file>', 'specify flow definition')
   .option('-d, --dataCenter <dataCenter>', 'specify consul data center')
   .option('-p, --port <portNumber>', `specify kronos http port (default is ${ksmr.defaultKronosPort})`)
   .parse(process.argv);
+
+if (commander.name) {
+  kronosOptions.name = commander.name;
+}
 
 if (commander.dataCenter) {
   consulOptions.dataCenter = commander.dataCenter;
@@ -30,7 +35,7 @@ if (commander.port) {
   restOptions.port = commander.port;
 }
 
-csm.manager(ksmr.manager(ksm.manager(), restOptions), consulOptions).then(function (manager) {
+csm.manager(ksmr.manager(ksm.manager(kronosOptions), restOptions), consulOptions).then(function (manager) {
   require('kronos-step-archive-tar').registerWithManager(manager);
   require('kronos-step-file-common').registerWithManager(manager);
 
