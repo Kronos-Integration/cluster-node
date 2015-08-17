@@ -41,9 +41,12 @@ csm.manager(ksmr.manager(ksm.manager(kronosOptions), restOptions), consulOptions
 
   if (commander.flow) {
     try {
-      manager.declareFlows(JSON.parse(fs.readFileSync(commander.flow)));
+      const flows = manager.declareFlows(JSON.parse(fs.readFileSync(commander.flow)));
+      for(const f in flows) {
+        manager.intializeFlow(f);
+      }
     } catch (err) {
-      console.log(`flow failed: ${err}`);
+      console.log(`Flow declaration/initialization failed: ${err}`);
     }
   }
 

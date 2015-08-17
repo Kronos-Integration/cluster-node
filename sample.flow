@@ -46,7 +46,7 @@
       "s1": {
         "type": "kronos-copy",
         "endpoints": {
-          "in": "stdin",
+          "in": "kronos+http:0001",
           "out": "step:s2/in"
         }
       },
