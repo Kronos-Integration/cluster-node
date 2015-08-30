@@ -18,7 +18,8 @@ const kronosOptions = {};
 
 commander
   .option('-n, --name <name>', 'kronos node name')
-  .option('-f, --flow <file>', 'specify flow definition')
+  .option('-f, --flow <file>', 'specify flow definition to be registered')
+  .option('-s, --start', 'also start flows after registering')
   .option('-d, --dataCenter <dataCenter>', 'specify consul data center')
   .option('-p, --port <portNumber>', `specify kronos http port (default is ${ksmr.defaultKronosPort})`)
   .parse(process.argv);
@@ -42,8 +43,10 @@ csm.manager(ksmr.manager(ksm.manager(kronosOptions), restOptions), consulOptions
   if (commander.flow) {
     try {
       const flows = manager.registerFlows(JSON.parse(fs.readFileSync(commander.flow)));
-      for(const f of flows) {
-        f.start();
+      if (commander.start) {
+        for (const f of flows) {
+          f.start();
+        }
       }
     } catch (err) {
       console.log(`Flow declaration/initialization failed: ${err}`);
@@ -51,6 +54,7 @@ csm.manager(ksmr.manager(ksm.manager(kronosOptions), restOptions), consulOptions
   }
 
   console.log(`manager: ${manager}`);
+  return manager;
 }, function (err) {
   console.log(`manager failed: ${err}`);
 });
