@@ -7,7 +7,7 @@ After=network-online.target
 Restart=on-failure
 User=kronos
 WorkingDirectory=/var/kronos
-ExecStart=/var/kronos/bin/cluster_node
+ExecStart=/srv/kronos/bin/cluster_node
 ExecReload=/bin/kill -HUP $MAINPID
 KillSignal=SIGINT
 [Install]
