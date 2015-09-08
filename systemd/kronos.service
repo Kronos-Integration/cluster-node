@@ -1,0 +1,14 @@
+[Unit]
+Description=kronos agent
+Requires=network-online.target
+After=network-online.target
+[Service]
+#EnvironmentFile=-/etc/sysconfig/kronos
+Restart=on-failure
+User=kronos
+WorkingDirectory=/var/kronos
+ExecStart=/var/kronos/bin/cluster_node
+ExecReload=/bin/kill -HUP $MAINPID
+KillSignal=SIGINT
+[Install]
+WantedBy=multi-user.target
