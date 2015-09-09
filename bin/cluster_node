@@ -10,7 +10,7 @@ const commander = require('commander');
 const ksm = require('kronos-service-manager');
 const ksmr = require('kronos-service-manager-rest');
 const csm = require('consul-service-manager');
-
+const systemdSocket = require('systemd-socket');
 
 const consulOptions = {};
 const restOptions = {};
@@ -34,6 +34,8 @@ if (commander.dataCenter) {
 
 if (commander.port) {
   restOptions.port = commander.port;
+} else {
+  restOptions.port = systemdSocket();
 }
 
 csm.manager(ksmr.manager(ksm.manager(kronosOptions), restOptions), consulOptions).then(function (manager) {

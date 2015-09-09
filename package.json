@@ -1,24 +1,25 @@
 {
-	"name": "cluster-node",
-	"bin": "bin/cluster_node",
-	"version": "0.0.1",
-	"description": "kronos cluster managed node",
-	"scripts": {
-		"start": "iojs bin/cluster_node",
-		"test": "echo \"Error: no test specified\" && exit 1"
-	},
-	"engines": {
-		"node": ">=4.0.0"
-	},
-	"author": "Markus Felten <markus.felten@gmx.de>",
-	"license": "BSD-2-Clause",
-	"dependencies": {
-		"commander": "^2.8.1",
-		"consul-service-manager": "git+ssh://donkey@mfelten.de/Groups/donkey/git/consul-service-manager.git",
-		"kronos-service-manager": "git+ssh://donkey@mfelten.de/Groups/donkey/git/kronos-service-manager.git",
-		"kronos-service-manager-rest": "git+ssh://donkey@mfelten.de/Groups/donkey/git/kronos-service-manager-rest.git",
-		"kronos-step-archive-tar": "git+ssh://donkey@mfelten.de/Groups/donkey/git/kronos-step-archive-tar.git",
-		"kronos-step-file-common": "git+ssh://donkey@mfelten.de/Groups/donkey/git/kronos-step-file-common.git",
-		"kronos-service-manager-addon": "git+ssh://donkey@mfelten.de/Groups/donkey/git/kronos-service-manager-addon.git"
-	}
+  "name": "kronos-cluster-node",
+  "bin": "bin/cluster_node",
+  "version": "0.0.1",
+  "description": "kronos cluster managed node",
+  "scripts": {
+    "start": "node bin/cluster_node",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": ">=4.0.0"
+  },
+  "author": "Markus Felten <markus.felten@gmx.de>",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "commander": "^2.8.1",
+    "consul-service-manager": "git+ssh://donkey@mfelten.de/Groups/donkey/git/consul-service-manager.git",
+    "kronos-service-manager": "git+ssh://donkey@mfelten.de/Groups/donkey/git/kronos-service-manager.git",
+    "kronos-service-manager-addon": "git+ssh://donkey@mfelten.de/Groups/donkey/git/kronos-service-manager-addon.git",
+    "kronos-service-manager-rest": "git+ssh://donkey@mfelten.de/Groups/donkey/git/kronos-service-manager-rest.git",
+    "kronos-step-archive-tar": "git+ssh://donkey@mfelten.de/Groups/donkey/git/kronos-step-archive-tar.git",
+    "kronos-step-file-common": "git+ssh://donkey@mfelten.de/Groups/donkey/git/kronos-step-file-common.git",
+    "systemd-socket": "0.0.0"
+  }
 }
