@@ -47,7 +47,6 @@ csm.manager(ksmr.manager(ksm.manager(kronosOptions), restOptions), consulOptions
         function (flows) {
           if (commander.start) {
             flows.forEach(f => {
-              console.log(`start: ${f}`);
               f.start();
             });
           }
