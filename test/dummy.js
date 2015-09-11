@@ -10,6 +10,6 @@ const should = chai.should();
 
 describe('dummy', function () {
   it('dummy', function () {
-    assert.equal(1);
+    assert.equal(1, 1);
   });
 });
