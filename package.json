@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "commander": "^2.8.1",
+    "koa-static": "^1.4.9",
     "kronos-consul-service-manager": "git+ssh://donkey@mfelten.de/Groups/donkey/git/kronos-consul-service-manager.git",
     "kronos-service-manager": "git+ssh://donkey@mfelten.de/Groups/donkey/git/kronos-service-manager.git",
     "kronos-service-manager-addon": "git+ssh://donkey@mfelten.de/Groups/donkey/git/kronos-service-manager-addon.git",
