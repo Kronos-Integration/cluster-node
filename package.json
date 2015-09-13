@@ -27,7 +27,6 @@
     "kronos-service-manager-addon": "git+ssh://donkey@mfelten.de/Groups/donkey/git/kronos-service-manager-addon.git",
     "kronos-service-manager-rest": "git+ssh://donkey@mfelten.de/Groups/donkey/git/kronos-service-manager-rest.git",
     "kronos-step-archive-tar": "git+ssh://donkey@mfelten.de/Groups/donkey/git/kronos-step-archive-tar.git",
-    "kronos-step-file-common": "git+ssh://donkey@mfelten.de/Groups/donkey/git/kronos-step-file-common.git",
     "systemd-socket": "0.0.0"
   },
   "devDependencies": {
