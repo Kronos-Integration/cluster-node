@@ -10,7 +10,7 @@ const path = require('path');
 const commander = require('commander');
 const ksm = require('kronos-service-manager');
 const ksmr = require('kronos-service-manager-rest');
-const csm = require('consul-service-manager');
+const csm = require('kronos-consul-service-manager');
 const systemdSocket = require('systemd-socket');
 
 const consulOptions = {};
