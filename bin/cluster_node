@@ -4,6 +4,7 @@
 
 "use strict";
 
+const os = require('os');
 const fs = require('fs');
 const path = require('path');
 const commander = require('commander');
@@ -17,7 +18,7 @@ const restOptions = {};
 const kronosOptions = {};
 
 commander
-  .option('-n, --name <name>', 'kronos node name')
+  .option('-n, --name <name>', 'kronos node name defaults to hostname')
   .option('-f, --flow <file>', 'specify flow definition to be registered')
   .option('-s, --start', 'also start flows after registering')
   .option('-d, --dataCenter <dataCenter>', 'specify consul data center')
@@ -26,6 +27,8 @@ commander
 
 if (commander.name) {
   kronosOptions.name = commander.name;
+} else {
+  kronosOptions.name = os.hostname();
 }
 
 if (commander.dataCenter) {
