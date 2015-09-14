@@ -1,0 +1,8 @@
+[Unit]
+Description=Kronos rest api
+
+[Socket]
+ListenStream=10000
+
+[Install]
+WantedBy=sockets.target
