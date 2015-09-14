@@ -12,6 +12,7 @@ const ksm = require('kronos-service-manager');
 const ksmr = require('kronos-service-manager-rest');
 const csm = require('kronos-consul-service-manager');
 const systemdSocket = require('systemd-socket');
+//const launchd = require('node-launchd');
 const serve = require('koa-static');
 
 const consulOptions = {
@@ -42,6 +43,13 @@ if (commander.dataCenter) {
 if (commander.port) {
   restOptions.port = commander.port;
 } else {
+  /*
+  const fd = getSocketFileDescriptorForName('HTTPSocket');
+  if (fd) {
+    restOptions.port = {
+      fd: fd
+    };
+  }*/
   restOptions.port = systemdSocket();
 }
 
