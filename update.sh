@@ -1,3 +1,14 @@
+if [ $(uname) = 'Linux' ]
+then
+  npm cache clean
+  git pull
+  npm install
+else
+  echo sonstwas
+fi
+
+exit
+ 
 OWNER=admin
 LAUNCH_CFG=/Library/LaunchDaemons/kronos.plist
 
