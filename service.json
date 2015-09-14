@@ -3,7 +3,7 @@
 
 	"package": {
 		"type": "git",
-		"url": "ssh://lbptsaall7qkb63x.myfritz.net/git/packages/${name}.git"
+		"url": "ssh://donkey@mfelten.de/Groups/donkey/git/packages/${name}.git"
 	},
 
 	"installdir": "/Groups/services/${name}",
