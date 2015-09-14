@@ -13,6 +13,7 @@ const ksmr = require('kronos-service-manager-rest');
 const csm = require('kronos-consul-service-manager');
 const systemdSocket = require('systemd-socket');
 //const launchd = require('node-launchd');
+const rebirth = require('rebirth');
 const serve = require('koa-static');
 
 const consulOptions = {
@@ -52,6 +53,11 @@ if (commander.port) {
   }*/
   restOptions.port = systemdSocket();
 }
+
+process.on('SIGHUP', function () {
+  console.log('reboot');
+  rebirth();
+});
 
 csm.manager(ksmr.manager(ksm.manager(kronosOptions), restOptions), consulOptions).then(function (manager) {
 
