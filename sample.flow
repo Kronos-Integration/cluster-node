@@ -1,67 +1,36 @@
 {
-  "flow1": {
-    "description": "the flow description 1",
-    "steps": {
-      "s1": {
-        "type": "kronos-copy",
-        "endpoints": {
-          "in": "stdin",
-          "out": "step:s2/in",
-          "log": "step:log/in"
-        }
-      },
-      "s2": {
-        "type": "kronos-copy",
-        "endpoints": {
-          "out": "step:s3/in",
-          "log": "step:log/in"
-        }
-      },
-      "s3": {
-        "type": "kronos-copy",
-        "endpoints": {
-          "out": "step:s4/in",
-          "log": "step:log/in"
-        }
-      },
-      "s4": {
-        "type": "kronos-copy",
-        "endpoints": {
-          "out": "stdout",
-          "log": "step:log/in"
-        }
-      },
-      "log": {
-        "type": "kronos-copy",
-        "config": {
-          "level": 0
-        },
-        "endpoints": {}
+  "name": "flow1",
+  "description": "the flow description 1",
+  "steps": {
+    "s1": {
+      "type": "kronos-stdin",
+      "endpoints": {
+        "out": "s2/in",
+        "log": "log/in"
       }
-    }
-  },
-  "flow2": {
-    "description": "the flow description 2",
-    "steps": {
-      "s1": {
-        "type": "kronos-copy",
-        "endpoints": {
-          "in": "kronos+http:0001",
-          "out": "step:s2/in"
-        }
-      },
-      "s2": {
-        "type": "kronos-copy",
-        "endpoints": {
-          "out": "step:s3/in"
-        }
-      },
-      "s3": {
-        "type": "kronos-untar",
-        "endpoints": {
-          "out": "stdout"
-        }
+    },
+    "s2": {
+      "type": "kronos-copy",
+      "endpoints": {
+        "out": "s3/in",
+        "log": "log/in"
       }
+    },
+    "s3": {
+      "type": "kronos-copy",
+      "endpoints": {
+        "out": "s4/in",
+        "log": "log/in"
+      }
+    },
+    "s4": {
+      "type": "kronos-stdout",
+      "endpoints": {
+        "log": "log/in"
+      }
+    },
+    "log": {
+      "type": "kronos-stderr"
     }
   }
 }

@@ -26,7 +26,7 @@ const kronosOptions = {};
 commander
   .option('-n, --name <name>', 'kronos node name defaults to hostname')
   .option('-f, --flow <file>', 'specify flow definition to be registered')
-  .option('-s, --start', 'also start flows after registering')
+  .option('-s, --start', 'also start flow after registering')
   .option('-d, --dataCenter <dataCenter>', 'specify consul data center')
   .option('-p, --port <portNumber>', `specify kronos http port (default is ${ksmr.defaultKronosPort})`)
   .parse(process.argv);
@@ -71,12 +71,10 @@ csm.manager(ksmr.manager(ksm.manager(kronosOptions), restOptions), consulOptions
 
   if (commander.flow) {
     try {
-      manager.registerFlows(JSON.parse(fs.readFileSync(commander.flow))).then(
-        function (flows) {
+      manager.registerFlow(JSON.parse(fs.readFileSync(commander.flow))).then(
+        function (flow) {
           if (commander.start) {
-            flows.forEach(f => {
-              f.start();
-            });
+            flow.start();
           }
         },
         function (rejected) {
