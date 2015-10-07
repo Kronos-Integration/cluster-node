@@ -79,11 +79,11 @@ csm.manager(ksmr.manager(ksm.manager(kronosOptions), restOptions), consulOptions
           }
         },
         function (rejected) {
-          console.log(`Flow declaration/initialization failed: ${rejected}`);
+          console.log(`Flow initialization failed: ${rejected}`);
         }
       );
     } catch (err) {
-      console.log(`Flow declaration/initialization failed: ${err}`);
+      console.log(`Flow initialization failed: ${err}`);
     }
   }
 
