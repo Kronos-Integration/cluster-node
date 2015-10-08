@@ -18,6 +18,7 @@ const os = require('os'),
 
 var journald;
 
+// try to use journald if present
 try {
   journald = require('journald');
 } catch (e) {}
