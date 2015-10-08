@@ -2,7 +2,7 @@ if [ $(uname) = 'Linux' ]
 then
   npm cache clean
   git pull
-  npm install
+  npm install --production
 else
   echo sonstwas
 fi
