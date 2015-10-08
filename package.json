@@ -1,7 +1,7 @@
 {
   "name": "kronos-cluster-node",
   "bin": "bin/cluster_node",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "kronos cluster managed node",
   "scripts": {
     "start": "node bin/cluster_node",
@@ -12,7 +12,7 @@
     "semantic-release": "semantic-release pre && semantic-release post"
   },
   "engines": {
-    "node": ">=4.0.0"
+    "node": ">=4.1.2"
   },
   "author": "Markus Felten <markus.felten@gmx.de>",
   "license": "BSD-2-Clause",
