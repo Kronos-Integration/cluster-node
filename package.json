@@ -29,6 +29,7 @@
     "kronos-service-manager-rest": "git+ssh://donkey@mfelten.de/Groups/donkey/git/kronos-service-manager-rest.git",
     "kronos-step-archive-tar": "git+ssh://donkey@mfelten.de/Groups/donkey/git/kronos-step-archive-tar.git",
     "rebirth": "^0.2.2",
+    "journald": "0.0.5",
     "systemd-socket": "0.0.0"
   },
   "devDependencies": {

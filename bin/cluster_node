@@ -4,20 +4,28 @@
 
 "use strict";
 
-const os = require('os');
-const fs = require('fs');
-const path = require('path');
-const commander = require('commander');
-const ksm = require('kronos-service-manager');
-const ksmr = require('kronos-service-manager-rest');
-const csm = require('kronos-consul-service-manager');
-const systemdSocket = require('systemd-socket');
-//const launchd = require('node-launchd');
-const rebirth = require('rebirth');
-const serve = require('koa-static');
+const os = require('os'),
+  fs = require('fs'),
+  path = require('path'),
+  commander = require('commander'),
+  ksm = require('kronos-service-manager'),
+  ksmr = require('kronos-service-manager-rest'),
+  csm = require('kronos-consul-service-manager'),
+  systemdSocket = require('systemd-socket'),
+  // launchd = require('node-launchd'),
+  rebirth = require('rebirth'),
+  serve = require('koa-static');
+
+var journald;
+
+try {
+  journald = require('journald');
+} catch (e) {}
+
+const logger = journald ? journald.Log : console;
 
 const consulOptions = {
-  logger: console
+  logger: logger
 };
 
 const restOptions = {};
@@ -55,7 +63,7 @@ if (commander.port) {
 }
 
 process.on('SIGHUP', function () {
-  console.log('reboot');
+  logger.log('reboot');
   rebirth();
 });
 
@@ -63,7 +71,7 @@ csm.manager(ksmr.manager(ksm.manager(kronosOptions), restOptions), consulOptions
 
   const docroot = path.join(__dirname, '../docroot');
 
-  console.log(`serving ${docroot}`);
+  logger.log(`serving ${docroot}`);
   manager.app.use(serve(docroot));
 
   require('kronos-step-archive-tar').registerWithManager(manager);
@@ -73,22 +81,22 @@ csm.manager(ksmr.manager(ksm.manager(kronosOptions), restOptions), consulOptions
     try {
       manager.registerFlow(JSON.parse(fs.readFileSync(commander.flow))).then(
         function (flow) {
-          console.log(`Flow declared: ${flow}`);
+          logger.log(`Flow declared: ${flow}`);
           if (commander.start) {
             flow.start();
           }
         },
         function (rejected) {
-          console.log(`Flow initialization failed: ${rejected}`);
+          logger.log(`Flow initialization failed: ${rejected}`);
         }
       );
     } catch (err) {
-      console.log(`Flow initialization failed: ${err}`);
+      logger.log(`Flow initialization failed: ${err}`);
     }
   }
 
-  console.log(`manager: ${manager}`);
+  logger.log(`manager: ${manager}`);
   return manager;
 }, function (err) {
-  console.log(`manager failed: ${err}`);
+  logger.log(`manager failed: ${err}`);
 });
