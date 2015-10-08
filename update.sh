@@ -2,6 +2,7 @@ if [ $(uname) = 'Linux' ]
 then
   npm cache clean
   git pull
+  rm -rf node_modules
   npm install --production
 else
   echo sonstwas
