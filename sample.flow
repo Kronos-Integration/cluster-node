@@ -1,6 +1,6 @@
 {
   "name": "flow1",
-  "description": "the flow description 1",
+  "description": "the flow 1",
   "steps": {
     "s1": {
       "type": "kronos-stdin",
