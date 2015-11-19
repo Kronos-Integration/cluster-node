@@ -8,7 +8,6 @@
     "cover": "node --harmony ./node_modules/istanbul/lib/cli.js cover --hook-run-in-context ./node_modules/mocha/bin/_mocha -- --R spec --U exports test",
     "doc": "./node_modules/.bin/jsdoc lib/*.js",
     "test": "mocha --harmony test/*.js",
-    "ci-test-report": "mocha --harmony --reporter mocha-html-reporter test/*.js",
     "semantic-release": "semantic-release pre && semantic-release post"
   },
   "engines": {
@@ -25,9 +24,9 @@
     "koa-static": "^1.4.9",
     "kronos-service-manager-consul": "https://github.com/Kronos-Integration/kronos-service-manager-consul.git",
     "kronos-service-manager": "^1.0.4",
-    "kronos-step-stdio": "https://github.com/Kronos-Integration/kronos-step-stdio.git",
+    "kronos-step-stdio": "^1.0.0",
     "kronos-service-manager-rest": "git+ssh://donkey@mfelten.de/Groups/donkey/git/kronos-service-manager-rest.git",
-    "kronos-step-archive-tar": "https://github.com/Kronos-Integration/kronos-step-archive-tar.git",
+    "kronos-step-archive-tar": "^1.0.0",
     "rebirth": "^0.2.2",
     "systemd-socket": "0.0.0"
   },
@@ -36,7 +35,6 @@
     "istanbul": "0.4.0",
     "jsdoc": "^3.3.2",
     "mocha": "^2.3.2",
-    "mocha-html-reporter": "^0.0.1",
     "semantic-release": "^6.0.1"
   }
 }
