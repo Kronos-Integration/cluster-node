@@ -9,7 +9,7 @@ const os = require('os'),
   path = require('path'),
   commander = require('commander'),
   ksm = require('kronos-service-manager'),
-  ksmr = require('kronos-service-manager-rest'),
+  ksma = require('kronos-service-manager-admin'),
   ksmc = require('kronos-service-manager-consul'),
   systemdSocket = require('systemd-socket'),
   // launchd = require('node-launchd'),
@@ -29,7 +29,7 @@ const consulOptions = {
   logger: logger
 };
 
-const restOptions = {};
+const adminOptions = {};
 const kronosOptions = {};
 
 commander
@@ -37,7 +37,7 @@ commander
   .option('-f, --flow <file>', 'specify flow definition to be registered')
   .option('-s, --start', 'also start flow after registering')
   .option('-d, --dataCenter <dataCenter>', 'specify consul data center')
-  .option('-p, --port <portNumber>', `specify kronos http port (default is ${ksmr.defaultKronosPort})`)
+  .option('-p, --port <portNumber>', `specify kronos http port (default is ${ksma.defaultKronosPort})`)
   .parse(process.argv);
 
 if (commander.name) {
@@ -51,7 +51,7 @@ if (commander.dataCenter) {
 }
 
 if (commander.port) {
-  restOptions.port = commander.port;
+  adminOptions.port = commander.port;
 } else {
   /*
   const fd = getSocketFileDescriptorForName('HTTPSocket');
@@ -60,7 +60,7 @@ if (commander.port) {
       fd: fd
     };
   }*/
-  restOptions.port = systemdSocket();
+  adminOptions.port = systemdSocket();
 }
 
 process.on('SIGHUP', function () {
@@ -68,7 +68,7 @@ process.on('SIGHUP', function () {
   rebirth();
 });
 
-ksmc.manager(ksmr.manager(ksm.manager(kronosOptions), restOptions), consulOptions).then(function (manager) {
+ksmc.manager(ksma.manager(ksm.manager(kronosOptions), adminOptions), consulOptions).then(function (manager) {
 
   const docroot = path.join(__dirname, '../docroot');
 
@@ -77,6 +77,7 @@ ksmc.manager(ksmr.manager(ksm.manager(kronosOptions), restOptions), consulOption
 
   require('kronos-step-archive-tar').registerWithManager(manager);
   require('kronos-step-stdio').registerWithManager(manager);
+  require('kronos-flow').registerWithManager(manager);
 
   if (commander.flow) {
     try {

@@ -23,9 +23,10 @@
     "commander": "^2.8.1",
     "koa-static": "^1.4.9",
     "kronos-service-manager-consul": "https://github.com/Kronos-Integration/kronos-service-manager-consul.git",
+    "kronos-service-manager-admin": "https://github.com/Kronos-Integration/kronos-service-manager-admin.git",
     "kronos-service-manager": "^1.0.4",
+    "kronos-flow": "^1.0.0",
     "kronos-step-stdio": "^1.0.0",
-    "kronos-service-manager-rest": "git+ssh://donkey@mfelten.de/Groups/donkey/git/kronos-service-manager-rest.git",
     "kronos-step-archive-tar": "^1.0.0",
     "rebirth": "^0.2.2",
     "systemd-socket": "0.0.0"
