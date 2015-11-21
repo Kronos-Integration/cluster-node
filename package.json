@@ -17,7 +17,7 @@
   "license": "BSD-2-Clause",
   "repository": {
     "type": "git",
-    "url": "ssh://donkey@mfelten.de/Groups/donkey/git/kronos-cluster-node.git"
+    "url": "https://github.com/Kronos-Integration/kronos-cluster-node.git"
   },
   "dependencies": {
     "commander": "2.9.0",
