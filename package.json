@@ -22,7 +22,7 @@
   "dependencies": {
     "commander": "2.9.0",
     "koa-static": "1.5.2",
-    "kronos-flow": "1.2.0",
+    "kronos-flow": "1.2.1",
     "kronos-service-manager": "1.0.5",
     "kronos-service-manager-admin": "https://github.com/Kronos-Integration/kronos-service-manager-admin.git",
     "kronos-service-manager-consul": "^1.0.0",
