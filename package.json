@@ -22,8 +22,8 @@
   "dependencies": {
     "commander": "2.9.0",
     "koa-static": "1.5.2",
-    "kronos-flow": "1.2.1",
-    "kronos-service-manager": "1.0.5",
+    "kronos-flow": "1.2.2",
+    "kronos-service-manager": "1.1.0",
     "kronos-service-manager-admin": "https://github.com/Kronos-Integration/kronos-service-manager-admin.git",
     "kronos-service-manager-consul": "^1.0.0",
     "kronos-step-archive-tar": "^1.0.0",
@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "chai": "3.4.1",
-    "istanbul": "0.4.0",
+    "istanbul": "0.4.1",
     "jsdoc": "3.4.0",
     "mocha": "2.3.4",
     "semantic-release": "6.0.3"
