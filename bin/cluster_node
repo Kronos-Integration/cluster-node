@@ -81,7 +81,7 @@ ksmc.manager(ksma.manager(ksm.manager(kronosOptions), adminOptions), consulOptio
 
   if (commander.flow) {
     try {
-      manager.registerFlow(JSON.parse(fs.readFileSync(commander.flow))).then(
+      manager.registerFlow(manager.getStepInstance(JSON.parse(fs.readFileSync(commander.flow)))).then(
         function (flow) {
           logger.log(`Flow declared: ${flow}`);
           if (commander.start) {
