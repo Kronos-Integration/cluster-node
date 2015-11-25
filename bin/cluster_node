@@ -25,12 +25,11 @@ try {
 
 const logger = journald ? journald.Log : console;
 
-const consulOptions = {
+const consulOptions = {};
+const adminOptions = {};
+const kronosOptions = {
   logger: logger
 };
-
-const adminOptions = {};
-const kronosOptions = {};
 
 commander
   .option('-n, --name <name>', 'kronos node name defaults to hostname')
