@@ -1,0 +1,40 @@
+# Maintainer: Markus Felten <markus.felten@gmx.de>
+pkgname=donkey
+pkgrel=1
+#pkgver() {
+#  cd "$pkgname"
+#  git describe --long --tags | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
+#   return "0.5.2"
+#}
+pkgver="v1.0.0"
+epoch=
+pkgdesc="consul"
+arch=('armv7h')
+url="http://kronosjs.com/"
+license=('BSD')
+groups=()
+depends=()
+#makedepends=('git','nodejs')
+#checkdepends=()
+optdepends=()
+provides=()
+conflicts=()
+replaces=()
+backup=()
+options=()
+install=
+changelog=
+source=(${pkgname}::https://github.com/Kronos-Integration/kronos-cluster-node.git#tag=v${pkgver})
+noextract=()
+md5sums=('SKIP')
+validpgpkeys=()
+
+build() {
+  cd $srcdir
+  npm install 
+}
+
+package() {
+  install -g donkey -o donkey
+}
+
