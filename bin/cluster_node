@@ -76,6 +76,7 @@ ksmc.manager(ksma.manager(ksm.manager(kronosOptions), adminOptions), consulOptio
 
   require('kronos-step-archive-tar').registerWithManager(manager);
   require('kronos-step-stdio').registerWithManager(manager);
+  require('kronos-step-system').registerWithManager(manager);
   require('kronos-flow').registerWithManager(manager);
 
   if (commander.flow) {
