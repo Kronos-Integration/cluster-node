@@ -32,18 +32,16 @@ const kronosOptions = {
 };
 
 commander
-  .option('-n, --name <name>', 'kronos node name defaults to hostname')
+// TODO where to get the version from ? .version('0.0.1')
+  .description('run cluster node')
+  .option('-n, --nodename <name>', 'kronos node name defaults to hostname')
   .option('-f, --flow <file>', 'specify flow definition to be registered')
   .option('-s, --start', 'also start flow after registering')
   .option('-d, --dataCenter <dataCenter>', 'specify consul data center')
   .option('-p, --port <portNumber>', `specify kronos http port (default is ${ksma.defaultKronosPort})`)
   .parse(process.argv);
 
-if (commander.name) {
-  kronosOptions.name = commander.name;
-} else {
-  kronosOptions.name = os.hostname();
-}
+kronosOptions.name = commander.nodename ? commander.nodename : os.hostname();
 
 if (commander.dataCenter) {
   consulOptions.dataCenter = commander.dataCenter;
