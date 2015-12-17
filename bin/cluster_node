@@ -84,7 +84,12 @@ ksmc.manager(ksma.manager(ksm.manager(kronosOptions), adminOptions), consulOptio
         function (flow) {
           logger.log(`Flow declared: ${flow}`);
           if (commander.start) {
-            flow.start();
+            logger.log(`starting ... ${flow}`);
+
+            flow.start().then(() => logger.log(`Flow started: ${flow}`), (rejected) => logger.log(
+                `Flow error: ${flow} ${rejected}`))
+              .catch((error) => logger.log(
+                `Flow started failed: ${error}`));
           }
         },
         function (rejected) {
