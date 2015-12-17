@@ -1,13 +1,19 @@
 {
-  "name": "flow1",
+  "name": "post-demo",
   "type": "kronos-flow",
-  "description": "the flow 1",
+  "description": "http post demo",
   "steps": {
     "s1": {
-      "type": "kronos-stdin",
-      "endpoints": {
-        "out": "s2/in",
-        "log": "log/in"
+      "type": "kronos-http-routing",
+      "listener": {
+        "name": "demo",
+        "port": 12345
+      },
+      "routes": {
+        "/in": {
+          "method": "POST",
+          "target": "s2/in"
+        }
       }
     },
     "s2": {
