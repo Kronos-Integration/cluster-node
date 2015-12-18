@@ -73,10 +73,8 @@ ksmc.manager(ksma.manager(ksm.manager(kronosOptions), adminOptions), consulOptio
   logger.log(`serving ${docroot}`);
   manager.app.use(serve(docroot));
 
-  require('kronos-step-archive-tar').registerWithManager(manager);
-  require('kronos-step-stdio').registerWithManager(manager);
-  require('kronos-step-system').registerWithManager(manager);
-  require('kronos-flow').registerWithManager(manager);
+  ['kronos-step-archive-tar', 'kronos-step-stdio', 'kronos-step-system', 'kronos-flow'].forEach(name => require(
+    name).registerWithManager(manager));
 
   if (commander.flow) {
     try {
