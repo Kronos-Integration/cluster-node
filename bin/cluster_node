@@ -11,7 +11,6 @@ const os = require('os'),
   commander = require('commander'),
   ksm = require('kronos-service-manager'),
   ksma = require('kronos-service-manager-admin'),
-  ksmc = require('kronos-service-manager-consul'),
   systemdSocket = require('systemd-socket'),
   // launchd = require('node-launchd'),
   rebirth = require('rebirth'),
@@ -66,15 +65,19 @@ process.on('SIGHUP', function () {
   rebirth();
 });
 
-ksmc.manager(ksma.manager(ksm.manager(kronosOptions), adminOptions), consulOptions).then(function (manager) {
+ksma.manager(ksm.manager(kronosOptions), adminOptions).then(function (manager) {
 
   const docroot = path.join(__dirname, '../docroot');
 
   logger.log(`serving ${docroot}`);
   manager.app.use(serve(docroot));
 
-  ['kronos-step-archive-tar', 'kronos-step-stdio', 'kronos-step-system', 'kronos-flow'].forEach(name => require(
+  ['kronos-service-manager-consul', 'kronos-step-archive-tar', 'kronos-step-stdio', 'kronos-step-system',
+    'kronos-flow'
+  ].forEach(name => require(
     name).registerWithManager(manager));
+
+  console.log(`services: ${JSON.stringify(Object.keys(manager.services))}`);
 
   if (commander.flow) {
     try {
