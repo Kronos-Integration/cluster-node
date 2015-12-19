@@ -72,10 +72,13 @@ ksma.manager(ksm.manager(kronosOptions), adminOptions).then(function (manager) {
   logger.log(`serving ${docroot}`);
   manager.app.use(serve(docroot));
 
-  ['kronos-service-manager-consul', 'kronos-step-archive-tar', 'kronos-step-stdio', 'kronos-step-system',
-    'kronos-flow'
-  ].forEach(name => require(
-    name).registerWithManager(manager));
+  try {
+    ['kronos-service-manager-consul', 'kronos-step-archive-tar', 'kronos-step-stdio', 'kronos-step-system',
+      'kronos-flow'
+    ].forEach(name => require(name).registerWithManager(manager));
+  } catch (e) {
+    console.log(e);
+  }
 
   console.log(`services: ${JSON.stringify(Object.keys(manager.services))}`);
 
