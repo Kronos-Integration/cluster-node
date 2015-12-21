@@ -29,7 +29,8 @@ const kronosOptions = {
       "logLevel": "trace"
     },
     "admin": {
-      "logLevel": "trace"
+      "logLevel": "trace",
+      "port": 10000
     }
   }
 };
@@ -41,7 +42,7 @@ commander
   .option('-f, --flow <file>', 'specify flow definition to be registered')
   .option('-s, --start', 'also start flow after registering')
   .option('-d, --dataCenter <dataCenter>', 'specify consul data center')
-  .option('-p, --port <portNumber>', `specify kronos http port (default is ${ksma.defaultPort})`)
+  .option('-p, --port <portNumber>', `specify kronos http port (default is ${kronosOptions.services.admin.port})`)
   .parse(process.argv);
 
 kronosOptions.name = commander.nodename ? commander.nodename : os.hostname();
