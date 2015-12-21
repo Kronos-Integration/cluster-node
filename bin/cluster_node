@@ -5,16 +5,13 @@
 "use strict";
 
 const os = require('os'),
-  fs = require('fs'),
   path = require('path'),
   pkginfo = require('pkginfo')(module, 'name', 'version'),
   commander = require('commander'),
   ksm = require('kronos-service-manager'),
   ksma = require('kronos-service-manager-admin'),
   systemdSocket = require('systemd-socket'),
-  // launchd = require('node-launchd'),
-  rebirth = require('rebirth'),
-  serve = require('koa-static');
+  rebirth = require('rebirth');
 
 var journald;
 
@@ -25,10 +22,16 @@ try {
 
 const logger = journald ? journald.Log : console;
 
-const consulOptions = {};
-const adminOptions = {};
 const kronosOptions = {
-  logger: logger
+  logger: logger,
+  services: {
+    "consul": {
+      "logLevel": "trace"
+    },
+    "admin": {
+      "logLevel": "trace"
+    }
+  }
 };
 
 commander
@@ -38,75 +41,49 @@ commander
   .option('-f, --flow <file>', 'specify flow definition to be registered')
   .option('-s, --start', 'also start flow after registering')
   .option('-d, --dataCenter <dataCenter>', 'specify consul data center')
-  .option('-p, --port <portNumber>', `specify kronos http port (default is ${ksma.defaultKronosPort})`)
+  .option('-p, --port <portNumber>', `specify kronos http port (default is ${ksma.defaultPort})`)
   .parse(process.argv);
 
 kronosOptions.name = commander.nodename ? commander.nodename : os.hostname();
 
 if (commander.dataCenter) {
-  consulOptions.dataCenter = commander.dataCenter;
+  serviceConfigs.consul.dataCenter = commander.dataCenter;
 }
 
 if (commander.port) {
-  adminOptions.port = commander.port;
+  kronosOptions.services.admin.port = commander.port;
 } else {
-  /*
-  const fd = getSocketFileDescriptorForName('HTTPSocket');
-  if (fd) {
-    restOptions.port = {
-      fd: fd
-    };
-  }*/
-  adminOptions.port = systemdSocket();
+  kronosOptions.services.admin.port = systemdSocket();
 }
 
-process.on('SIGHUP', function () {
+process.on('SIGHUP', () => {
   logger.log('reboot');
   rebirth();
 });
 
-ksma.manager(ksm.manager(kronosOptions), adminOptions).then(function (manager) {
+ksm.manager(kronosOptions).then(manager => {
+    manager.registerModules(['kronos-service-manager-consul', 'kronos-service-manager-admin',
+      'kronos-step-archive-tar', 'kronos-step-stdio', 'kronos-step-system', 'kronos-flow'
+    ]);
 
-  const docroot = path.join(__dirname, '../docroot');
+    console.log(`services: ${JSON.stringify(Object.keys(manager.services))}`);
 
-  logger.log(`serving ${docroot}`);
-  manager.app.use(serve(docroot));
-
-  try {
-    ['kronos-service-manager-consul', 'kronos-step-archive-tar', 'kronos-step-stdio', 'kronos-step-system',
-      'kronos-flow'
-    ].forEach(name => require(name).registerWithManager(manager));
-  } catch (e) {
-    console.log(e);
-  }
-
-  console.log(`services: ${JSON.stringify(Object.keys(manager.services))}`);
-
-  if (commander.flow) {
-    try {
-      manager.registerFlow(manager.getStepInstance(JSON.parse(fs.readFileSync(commander.flow)))).then(
-        function (flow) {
-          logger.log(`Flow declared: ${flow}`);
-          if (commander.start) {
-            logger.log(`starting ... ${flow}`);
-
-            flow.start().then(() => logger.log(`Flow started: ${flow}`), (rejected) => logger.log(
-                `Flow error: ${flow} ${rejected}`))
-              .catch((error) => logger.log(
-                `Flow started failed: ${error}`));
-          }
-        },
-        function (rejected) {
-          logger.log(`Flow initialization failed: ${rejected}`);
+    if (commander.flow) {
+      manager.loadFlowFromFile(commander.flow).then(flow => {
+        logger.log(`Flow declared: ${flow}`);
+        if (commander.start) {
+          logger.log(`Starting ... ${flow}`);
+          flow.start().then(() => logger.log(`Flow started: ${flow}`)).catch(error => logger.log(
+            `Flow started failed: ${error}`))
         }
-      );
-    } catch (err) {
-      logger.log(`Flow initialization failed: ${err}`);
+      }).catch(error => {
+        logger.log(`Flow initialization failed: ${error}`);
+      });
     }
-  }
 
-  logger.log(`manager: ${manager}`);
-  return manager;
-}, function (err) {
-  logger.log(`manager failed: ${err}`);
-});
+    logger.log(`manager: ${manager}`);
+    return manager;
+  },
+  function (err) {
+    logger.log(`manager failed: ${err}`);
+  });
