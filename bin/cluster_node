@@ -67,7 +67,10 @@ ksm.manager(kronosOptions).then(manager => {
       'kronos-step-archive-tar', 'kronos-step-stdio', 'kronos-step-system', 'kronos-flow'
     ]);
 
-    console.log(`services: ${JSON.stringify(Object.keys(manager.services))}`);
+    console.log(Object.keys(manager.services).map(name => {
+      const s = manager.services[name];
+      return `${name}:\n  logLevel: ${s.logLevel}`;
+    }).join('\n'));
 
     if (commander.flow) {
       manager.loadFlowFromFile(commander.flow).then(flow => {
