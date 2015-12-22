@@ -69,7 +69,7 @@ ksm.manager(kronosOptions).then(manager => {
 
     console.log(Object.keys(manager.services).map(name => {
       const s = manager.services[name];
-      return `${name}:\n  logLevel: ${s.logLevel}`;
+      return `${name}:\n  state: ${s.state}\n  logLevel: ${s.logLevel}`;
     }).join('\n'));
 
     if (commander.flow) {
