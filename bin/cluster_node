@@ -9,7 +9,6 @@ const os = require('os'),
   pkginfo = require('pkginfo')(module, 'name', 'version'),
   commander = require('commander'),
   ksm = require('kronos-service-manager'),
-  ksma = require('kronos-service-manager-admin'),
   systemdSocket = require('systemd-socket'),
   rebirth = require('rebirth');
 
@@ -24,6 +23,9 @@ const logger = journald ? journald.Log : console;
 
 const kronosOptions = {
   logger: logger,
+  npmModulesNames: ['kronos-service-manager-consul', 'kronos-service-manager-admin',
+    'kronos-step-archive-tar', 'kronos-step-stdio', 'kronos-step-system', 'kronos-flow'
+  ],
   services: {
     "consul": {
       "logLevel": "trace"
@@ -63,10 +65,6 @@ process.on('SIGHUP', () => {
 });
 
 ksm.manager(kronosOptions).then(manager => {
-    manager.registerModules(['kronos-service-manager-consul', 'kronos-service-manager-admin',
-      'kronos-step-archive-tar', 'kronos-step-stdio', 'kronos-step-system', 'kronos-flow'
-    ]);
-
     console.log(Object.keys(manager.services).map(name => {
       const s = manager.services[name];
       return `${name}:\n  state: ${s.state}\n  logLevel: ${s.logLevel}`;
