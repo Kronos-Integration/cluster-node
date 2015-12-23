@@ -22,7 +22,7 @@
   "dependencies": {
     "commander": "2.9.0",
     "koa-static": "1.5.2",
-    "kronos-flow": "1.3.1",
+    "kronos-flow": "1.4.0",
     "kronos-service-manager": "2.8.0",
     "kronos-service-manager-admin": "1.1.4",
     "kronos-service-manager-consul": "1.4.0",
