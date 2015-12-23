@@ -23,9 +23,6 @@ const logger = journald ? journald.Log : console;
 
 const kronosOptions = {
   logger: logger,
-  npmModulesNames: ['kronos-service-manager-consul', 'kronos-service-manager-admin',
-    'kronos-step-archive-tar', 'kronos-step-stdio', 'kronos-step-system', 'kronos-flow'
-  ],
   services: {
     "consul": {
       "logLevel": "trace"
@@ -64,10 +61,18 @@ process.on('SIGHUP', () => {
   rebirth();
 });
 
+
 ksm.manager(kronosOptions).then(manager => {
+    ['kronos-step-archive-tar', 'kronos-step-stdio', 'kronos-step-system', 'kronos-flow',
+      'kronos-adapter-inbound-http', 'kronos-http-routing-step', 'kronos-flow-control-step',
+      'kronos-service-manager-consul', 'kronos-service-manager-admin',
+    ].forEach(name => {
+      require(name).registerWithManager(manager);
+    });
+
     console.log(Object.keys(manager.services).map(name => {
       const s = manager.services[name];
-      return `${name}:\n  state: ${s.state}\n  logLevel: ${s.logLevel}`;
+      return `${name}:\n  state: ${s.state}\n  autostart: ${s.autostart}\n  logLevel: ${s.logLevel}`;
     }).join('\n'));
 
     if (commander.flow) {
