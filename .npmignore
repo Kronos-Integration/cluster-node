@@ -1,11 +1,10 @@
 coverage
 node_modules
 build
-dist
-out
 *.log
-*.dump
+*.tmp
 .DS_Store
-.nyc_output
 .test
 .tmp
+.gitignore
+.npmrc
