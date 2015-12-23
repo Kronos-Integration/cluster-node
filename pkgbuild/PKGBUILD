@@ -31,10 +31,10 @@ validpgpkeys=()
 
 build() {
   cd $srcdir
-  npm install 
+  npm install --production
 }
 
 package() {
-  install -g donkey -o donkey
+  install -g kronos -o kronos -d $pkgdir/var/kronos
 }
 
