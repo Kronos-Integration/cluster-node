@@ -64,8 +64,6 @@ process.on('SIGHUP', () => {
   rebirth();
 });
 
-
-
 ksm.manager(kronosOptions).then(manager => {
     try {
       const baseDir = path.join(__dirname, '..', 'node_modules');
@@ -90,44 +88,28 @@ ksm.manager(kronosOptions).then(manager => {
           } catch (e) {}
         });
       }, function () {
-        console.log(`registering done`);
+        console.log(Object.keys(manager.services).map(name => {
+          const s = manager.services[name];
+          return `${name}:\n  state: ${s.state}\n  autostart: ${s.autostart}\n  logLevel: ${s.logLevel}`;
+        }).join('\n'));
+
+        if (commander.flow) {
+          manager.loadFlowFromFile(commander.flow).then(flow => {
+            logger.log(`Flow declared: ${flow}`);
+            if (commander.start) {
+              logger.log(`Starting ... ${flow}`);
+              flow.start().then(() => logger.log(`Flow started: ${flow}`)).catch(error => logger.log(
+                `Flow started failed: ${error}`))
+            }
+          }).catch(error => {
+            logger.log(`Flow initialization failed: ${error}`);
+          });
+        }
       });
     } catch (e) {
       console.log(e);
     }
 
-    /*
-        ['kronos-step-archive-tar', 'kronos-step-stdio', 'kronos-step-system', 'kronos-flow',
-          'kronos-adapter-inbound-http', 'kronos-http-routing-step', 'kronos-flow-control-step',
-          'kronos-service-manager-consul', 'kronos-service-manager-admin',
-        ].forEach(name => {
-          try {
-            require(name).registerWithManager(manager);
-          } catch (e) {
-            console.log(e);
-          }
-        });
-    */
-
-    console.log(Object.keys(manager.services).map(name => {
-      const s = manager.services[name];
-      return `${name}:\n  state: ${s.state}\n  autostart: ${s.autostart}\n  logLevel: ${s.logLevel}`;
-    }).join('\n'));
-
-    if (commander.flow) {
-      manager.loadFlowFromFile(commander.flow).then(flow => {
-        logger.log(`Flow declared: ${flow}`);
-        if (commander.start) {
-          logger.log(`Starting ... ${flow}`);
-          flow.start().then(() => logger.log(`Flow started: ${flow}`)).catch(error => logger.log(
-            `Flow started failed: ${error}`))
-        }
-      }).catch(error => {
-        logger.log(`Flow initialization failed: ${error}`);
-      });
-    }
-
-    logger.log(`manager: ${manager}`);
     return manager;
   },
   function (err) {
