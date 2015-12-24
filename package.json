@@ -29,6 +29,7 @@
     "kronos-step-archive-tar": "^1.0.0",
     "kronos-step-stdio": "^2.0.0",
     "kronos-step-system": "1.1.0",
+    "list_files": "^0.1.1",
     "pkginfo": "^0.3.1",
     "rebirth": "^0.2.2",
     "systemd-socket": "0.0.0"

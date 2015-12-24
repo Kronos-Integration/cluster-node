@@ -5,12 +5,14 @@
 "use strict";
 
 const os = require('os'),
+  fs = require('fs'),
   path = require('path'),
   pkginfo = require('pkginfo')(module, 'name', 'version'),
   commander = require('commander'),
   ksm = require('kronos-service-manager'),
   systemdSocket = require('systemd-socket'),
-  rebirth = require('rebirth');
+  rebirth = require('rebirth'),
+  list_files = require('list_files').list_files;
 
 var journald;
 
@@ -37,6 +39,7 @@ const kronosOptions = {
 commander
   .version(module.exports.version)
   .description('run cluster node')
+  //  .option('-ar, --autoregister', 'load and register all installed kronos moudles')
   .option('-n, --nodename <name>', 'kronos node name defaults to hostname')
   .option('-f, --flow <file>', 'specify flow definition to be registered')
   .option('-s, --start', 'also start flow after registering')
@@ -62,17 +65,49 @@ process.on('SIGHUP', () => {
 });
 
 
+
 ksm.manager(kronosOptions).then(manager => {
-    ['kronos-step-archive-tar', 'kronos-step-stdio', 'kronos-step-system', 'kronos-flow',
-      'kronos-adapter-inbound-http', 'kronos-http-routing-step', 'kronos-flow-control-step',
-      'kronos-service-manager-consul', 'kronos-service-manager-admin',
-    ].forEach(name => {
-      try {
-        require(name).registerWithManager(manager);
-      } catch (e) {
-        console.log(e);
-      }
-    });
+    try {
+      const baseDir = path.join(__dirname, '..', 'node_modules');
+      list_files(baseDir, '', 'package.json', function (error, file, stat) {
+        const f = path.join(baseDir, file);
+        fs.readFile(f, function (err, data) {
+          if (err) return;
+
+          try {
+            const p = JSON.parse(data);
+            if (p.tags) {
+              if (p.tags.indexOf('kronos-step') >= 0 || p.tags.indexOf('kronos-service') >= 0) {
+                try {
+                  require(p.name).registerWithManager(manager);
+                  console.log(`${p.name} registered`);
+
+                } catch (e) {
+                  console.log(`${f}: ${p.name} ${e}`);
+                }
+              }
+            }
+          } catch (e) {}
+        });
+      }, function () {
+        console.log(`registering done`);
+      });
+    } catch (e) {
+      console.log(e);
+    }
+
+    /*
+        ['kronos-step-archive-tar', 'kronos-step-stdio', 'kronos-step-system', 'kronos-flow',
+          'kronos-adapter-inbound-http', 'kronos-http-routing-step', 'kronos-flow-control-step',
+          'kronos-service-manager-consul', 'kronos-service-manager-admin',
+        ].forEach(name => {
+          try {
+            require(name).registerWithManager(manager);
+          } catch (e) {
+            console.log(e);
+          }
+        });
+    */
 
     console.log(Object.keys(manager.services).map(name => {
       const s = manager.services[name];
