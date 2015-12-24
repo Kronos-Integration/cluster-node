@@ -67,7 +67,11 @@ ksm.manager(kronosOptions).then(manager => {
       'kronos-adapter-inbound-http', 'kronos-http-routing-step', 'kronos-flow-control-step',
       'kronos-service-manager-consul', 'kronos-service-manager-admin',
     ].forEach(name => {
-      require(name).registerWithManager(manager);
+      try {
+        require(name).registerWithManager(manager);
+      } catch (e) {
+        console.log(e);
+      }
     });
 
     console.log(Object.keys(manager.services).map(name => {
