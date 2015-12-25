@@ -14,7 +14,7 @@ url="http://kronosjs.com/"
 license=('BSD')
 groups=()
 depends=()
-#makedepends=('git','nodejs')
+makedepends=('git')
 #checkdepends=()
 optdepends=()
 provides=()
@@ -24,17 +24,19 @@ backup=()
 options=()
 install=
 changelog=
-source=(${pkgname}::https://github.com/Kronos-Integration/kronos-cluster-node.git#tag=v${pkgver})
+#source=(${pkgname}::https://github.com/Kronos-Integration/kronos-cluster-node.git#tag=v${pkgver})
+source=(${pkgname}::git+https://github.com/Kronos-Integration/kronos-cluster-node.git)
 noextract=()
 md5sums=('SKIP')
 validpgpkeys=()
 
 build() {
-  cd $srcdir
+  cd "${pkgname}"
   npm install --production
 }
 
 package() {
-  install -g kronos -o kronos -d $pkgdir/var/kronos
+  cd "${pkgname}"
+  install -g kronos -o kronos -d $pkgdir/var/kronos/bin
 }
 
