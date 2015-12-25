@@ -74,35 +74,38 @@ ksm.manager(kronosOptions).then(manager => {
 
           try {
             const p = JSON.parse(data);
-            if (p.tags) {
-              if (p.tags.indexOf('kronos-step') >= 0 || p.tags.indexOf('kronos-service') >= 0) {
-                try {
-                  require(p.name).registerWithManager(manager);
-                  console.log(`${p.name} registered`);
 
-                } catch (e) {
-                  console.log(`${f}: ${p.name} ${e}`);
-                }
+            if (p.keywords && p.keywords.find(keyword => {
+                keyword === 'kronos-step' || keyword === 'kronos-service'
+              })) {
+              try {
+                require(p.name).registerWithManager(manager);
+                manager.info(level => `${p.name} registered`);
+
+              } catch (e) {
+                manager.error(level => `${f}: ${p.name} ${e}`);
               }
             }
-          } catch (e) {}
+          } catch (e) {
+            manager.error(level => `${f}: ${e}`);
+          }
         });
       }, function () {
-        console.log(Object.keys(manager.services).map(name => {
+        manager.info(level => Object.keys(manager.services).map(name => {
           const s = manager.services[name];
           return `${name}:\n  state: ${s.state}\n  autostart: ${s.autostart}\n  logLevel: ${s.logLevel}`;
         }).join('\n'));
 
         if (commander.flow) {
           manager.loadFlowFromFile(commander.flow).then(flow => {
-            logger.log(`Flow declared: ${flow}`);
+            manager.info(level => `Flow declared: ${flow}`);
             if (commander.start) {
-              logger.log(`Starting ... ${flow}`);
+              manager.info(level => `Starting ... ${flow}`);
               flow.start().then(() => logger.log(`Flow started: ${flow}`)).catch(error => logger.log(
                 `Flow started failed: ${error}`))
             }
           }).catch(error => {
-            logger.log(`Flow initialization failed: ${error}`);
+            manager.error(level => `Flow initialization failed: ${error}`);
           });
         }
       });
@@ -113,5 +116,5 @@ ksm.manager(kronosOptions).then(manager => {
     return manager;
   },
   function (err) {
-    logger.log(`manager failed: ${err}`);
+    manager.error(level => `manager failed: ${err}`);
   });
