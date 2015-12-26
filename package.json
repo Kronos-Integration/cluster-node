@@ -23,7 +23,7 @@
     "commander": "2.9.0",
     "koa-static": "1.5.2",
     "kronos-flow": "1.4.0",
-    "kronos-service-manager": "2.10.1",
+    "kronos-service-manager": "2.11.0",
     "kronos-service-manager-admin": "1.1.4",
     "kronos-service-manager-consul": "1.4.0",
     "kronos-step-archive-tar": "^1.0.0",
