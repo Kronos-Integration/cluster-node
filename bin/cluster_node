@@ -23,15 +23,17 @@ try {
 
 const logger = journald ? journald.Log : console;
 
+let logLevel = "trace";
+
 const kronosOptions = {
   logger: logger,
-  logLevel: "trace",
+  logLevel: logLevel,
   services: {
     "consul": {
-      "logLevel": "trace"
+      "logLevel": logLevel
     },
     "admin": {
-      "logLevel": "trace",
+      "logLevel": logLevel,
       "port": 10000
     }
   }
@@ -44,9 +46,14 @@ commander
   .option('-n, --nodename <name>', 'kronos node name defaults to hostname')
   .option('-f, --flow <file>', 'specify flow definition to be registered')
   .option('-s, --start', 'also start flow after registering')
+  .option('-d, --debug', 'enable debugging')
   .option('-d, --dataCenter <dataCenter>', 'specify consul data center')
   .option('-p, --port <portNumber>', `specify kronos http port (default is ${kronosOptions.services.admin.port})`)
   .parse(process.argv);
+
+if (commander.debug) {
+  logLevel = 'debug';
+}
 
 kronosOptions.name = commander.nodename ? commander.nodename : os.hostname();
 
@@ -71,19 +78,21 @@ ksm.manager(kronosOptions).then(manager => {
       list_files(baseDir, '', 'package.json', function (error, file, stat) {
         const f = path.join(baseDir, file);
         fs.readFile(f, function (err, data) {
-          if (err) return;
-
+          if (err) {
+            manager.error(level => `loading ${f}: ${e}`);
+            return;
+          }
           try {
             const p = JSON.parse(data);
 
-            if (p.keywords && p.keywords.find(keyword => {
-                keyword === 'kronos-step' || keyword === 'kronos-service'
-              })) {
-              try {
-                require(p.name).registerWithManager(manager);
-                manager.info(level => `${p.name} registered`);
-              } catch (e) {
-                manager.error(level => `${f}: ${p.name} ${e}`);
+            if (p.keywords) {
+              if (p.keywords.indexOf('kronos-step') >= 0 || p.keywords.indexOf('kronos-service') >= 0) {
+                try {
+                  require(p.name).registerWithManager(manager);
+                  manager.info(level => `${p.name} registered`);
+                } catch (e) {
+                  manager.error(level => `${f}: ${p.name} ${e}`);
+                }
               }
             }
           } catch (e) {
