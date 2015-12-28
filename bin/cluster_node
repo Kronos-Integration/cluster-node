@@ -79,7 +79,7 @@ ksm.manager(kronosOptions).then(manager => {
         const f = path.join(baseDir, file);
         fs.readFile(f, function (err, data) {
           if (err) {
-            manager.error(level => `loading ${f}: ${e}`);
+            manager.error(`loading ${f}: ${e}`);
             return;
           }
           try {
@@ -91,12 +91,12 @@ ksm.manager(kronosOptions).then(manager => {
                   require(p.name).registerWithManager(manager);
                   manager.info(level => `${p.name} registered`);
                 } catch (e) {
-                  manager.error(level => `${f}: ${p.name} ${e}`);
+                  manager.error(`${f}: ${p.name} ${e}`);
                 }
               }
             }
           } catch (e) {
-            manager.error(level => `${f}: ${e}`);
+            manager.error(`${f}: ${e}`);
           }
         });
       }, function () {
@@ -110,20 +110,20 @@ ksm.manager(kronosOptions).then(manager => {
             manager.info(level => `Flow declared: ${flow}`);
             if (commander.start) {
               manager.info(level => `Starting ... ${flow}`);
-              flow.start().then(() => logger.log(`Flow started: ${flow}`)).catch(error => logger.log(
+              flow.start().then(() => manager.info(`Flow started: ${flow}`)).catch(error => manager.error(
                 `Flow started failed: ${error}`))
             }
           }).catch(error => {
-            manager.error(level => `Flow initialization failed: ${error}`);
+            manager.error(`Flow initialization failed: ${error}`);
           });
         }
       });
     } catch (e) {
-      manager.error(level => e);
+      manager.error(e);
     }
 
     return manager;
   },
   function (err) {
-    manager.error(level => `manager failed: ${err}`);
+    manager.error(`manager failed: ${err}`);
   });
