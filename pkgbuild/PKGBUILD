@@ -37,6 +37,6 @@ build() {
 
 package() {
   cd "${pkgname}"
-  install -g kronos -o kronos -d $pkgdir/var/kronos/bin
+  install -g kronos -o kronos -d $pkgdir/var/kronos
+  tar cf - bin node_modules package.json|(cd $pkgdir/var/kronos;tar xf - )
 }
-
