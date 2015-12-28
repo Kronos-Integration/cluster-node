@@ -6,7 +6,7 @@ pkgrel=1
 #  git describe --long --tags | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
 #   return "0.5.2"
 #}
-pkgver="1.0.0"
+pkgver="1.0.1"
 epoch=
 pkgdesc="kronos"
 arch=('armv7h')
@@ -38,5 +38,6 @@ build() {
 package() {
   cd "${pkgname}"
   install -g kronos -o kronos -d $pkgdir/var/kronos
-  tar cf - bin node_modules package.json|(cd $pkgdir/var/kronos;tar xf - )
+  install -g kronos -o kronos -d $pkgdir/srv/kronos
+  tar cf - bin node_modules package.json|(cd $pkgdir/srv/kronos;tar xf - )
 }
