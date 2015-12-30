@@ -100,10 +100,15 @@ ksm.manager(kronosOptions).then(manager => {
           }
         });
       }, function () {
-        manager.info(level => Object.keys(manager.services).map(name => {
+        Object.keys(manager.services).forEach(name => {
           const s = manager.services[name];
-          return `${name}:\n  state: ${s.state}\n  autostart: ${s.autostart}\n  logLevel: ${s.logLevel}`;
-        }).join('\n'));
+          manager.info(level => ({
+            'service-name': name,
+            'state': s.state,
+            //'autostart': s.autostart,
+            'logLevel': s.logLevel
+          }));
+        });
 
         if (commander.flow) {
           manager.loadFlowFromFile(commander.flow).then(flow => {
