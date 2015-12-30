@@ -1,12 +1,12 @@
 # Maintainer: Markus Felten <markus.felten@gmx.de>
-pkgname=donkey
+pkgname=kronos-cluster-node
 pkgrel=2
 #pkgver() {
 #  cd "$pkgname"
 #  git describe --long --tags | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
 #   return "0.5.2"
 #}
-pkgver="1.0.1"
+pkgver="1.0.0"
 epoch=
 pkgdesc="kronos"
 arch=('armv7h')
@@ -40,5 +40,8 @@ package() {
   install -g kronos -o kronos -d $pkgdir/var/kronos
   install -g kronos -o kronos -d $pkgdir/srv/kronos
   tar cf - bin node_modules package.json|(cd $pkgdir/srv/kronos;tar xf - )
-  (cd pkgbuild/support;tar cf - .)|(cd $pkgdir;tar xf - )
+  (cd pkgbuild/support
+   mkdir -p etc/systemd/system/multi-user.target.wants
+   ln -s usr/lib/systemd/kronos-cluster-node.service etc/systemd/system/multi-user.target.wants/kronos-cluster-node.service
+   tar cf - .)|(cd $pkgdir;tar xf - )
 }
