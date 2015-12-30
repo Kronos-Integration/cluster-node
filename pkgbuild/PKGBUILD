@@ -1,19 +1,14 @@
 # Maintainer: Markus Felten <markus.felten@gmx.de>
 pkgname=kronos-cluster-node
-pkgrel=2
-#pkgver() {
-#  cd "$pkgname"
-#  git describe --long --tags | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
-#   return "0.5.2"
-#}
-pkgver="1.0.0"
+pkgrel=1
+pkgver=r190.6a264a9
 epoch=
-pkgdesc="kronos"
+pkgdesc="kronos cluster node"
 arch=('armv7h')
 url="http://kronosjs.com/"
 license=('BSD')
 groups=()
-depends=()
+depends=('nodejs')
 makedepends=('git')
 #checkdepends=()
 optdepends=()
@@ -29,6 +24,11 @@ source=(${pkgname}::git+https://github.com/Kronos-Integration/kronos-cluster-nod
 noextract=()
 md5sums=('SKIP')
 validpgpkeys=()
+
+pkgver() {
+  cd "$pkgname"
+  printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
 
 build() {
   cd "${pkgname}"
