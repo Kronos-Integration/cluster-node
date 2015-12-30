@@ -1,6 +1,6 @@
 # Maintainer: Markus Felten <markus.felten@gmx.de>
 pkgname=donkey
-pkgrel=1
+pkgrel=2
 #pkgver() {
 #  cd "$pkgname"
 #  git describe --long --tags | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
@@ -40,4 +40,5 @@ package() {
   install -g kronos -o kronos -d $pkgdir/var/kronos
   install -g kronos -o kronos -d $pkgdir/srv/kronos
   tar cf - bin node_modules package.json|(cd $pkgdir/srv/kronos;tar xf - )
+  (cd ${srcdir}/pkgbuild/support;tar cf - .)|(cd $pkgdir;tar xf - )
 }
