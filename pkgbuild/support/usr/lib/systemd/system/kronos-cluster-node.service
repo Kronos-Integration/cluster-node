@@ -1,9 +1,8 @@
 [Unit]
-Description=kronos agent
+Description=kronos cluster node 
 Requires=network-online.target
 After=network-online.target
 [Service]
-#EnvironmentFile=-/etc/sysconfig/kronos
 Restart=on-failure
 User=kronos
 WorkingDirectory=/var/kronos
