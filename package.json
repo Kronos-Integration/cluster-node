@@ -28,7 +28,7 @@
     "kronos-service-manager-admin": "1.1.4",
     "kronos-service-manager-consul": "1.6.1",
     "kronos-step-archive-tar": "^1.0.1",
-    "kronos-step-passthrough": "^1.1.4",
+    "kronos-step-passthrough": "^1.2.0",
     "kronos-step-stdio": "^2.0.0",
     "kronos-step-system": "1.2.0",
     "list_files": "^0.1.1",
