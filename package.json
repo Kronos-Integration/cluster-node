@@ -26,7 +26,7 @@
     "kronos-service-manager-admin": "git+https://github.com/Kronos-Integration/kronos-service-manager-admin.git",
     "kronos-http-routing-step": "^2.5.2",
     "kronos-service-manager": "2.12.1",
-    "kronos-service-manager-consul": "1.6.1",
+    "kronos-service-manager-consul": "1.7.0",
     "kronos-step-archive-tar": "^1.1.0",
     "kronos-step-passthrough": "^1.1.4",
     "kronos-step-stdio": "^2.0.0",
