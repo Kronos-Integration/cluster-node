@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-makepkg
+rm -rf kronos-cluster-node pkg src custom.db.tar.gz
+
+makepkg -f
 
 REPO=mfelten_de@mfelten.de:/home/mfelten_de/docroot/arch-linux/packages
 
