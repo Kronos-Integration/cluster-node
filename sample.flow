@@ -17,20 +17,6 @@
       }
     },
     "s2": {
-      "type": "kronos-copy",
-      "endpoints": {
-        "out": "s3/in",
-        "log": "log/in"
-      }
-    },
-    "s3": {
-      "type": "kronos-copy",
-      "endpoints": {
-        "out": "s4/in",
-        "log": "log/in"
-      }
-    },
-    "s4": {
       "type": "kronos-stdout",
       "endpoints": {
         "log": "log/in"
