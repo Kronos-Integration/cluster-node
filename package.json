@@ -22,7 +22,7 @@
   "dependencies": {
     "commander": "2.9.0",
     "kronos-flow": "^1.5.0",
-    "kronos-flow-control-step": "^1.5.0",
+    "kronos-flow-control-step": "^1.5.1",
     "kronos-service-manager-admin": "git+https://github.com/Kronos-Integration/kronos-service-manager-admin.git",
     "kronos-http-routing-step": "^2.5.2",
     "kronos-service-manager": "2.12.1",
