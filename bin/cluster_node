@@ -74,6 +74,8 @@ process.on('SIGHUP', () => {
 
 ksm.manager(kronosOptions).then(manager => {
     try {
+      require('kronos-health-check-service').registerWithManager(manager);
+
       const baseDir = path.join(__dirname, '..', 'node_modules');
       list_files(baseDir, '', 'package.json', function (error, file, stat) {
         const f = path.join(baseDir, file);
@@ -86,7 +88,9 @@ ksm.manager(kronosOptions).then(manager => {
             const p = JSON.parse(data);
 
             if (p.keywords) {
-              if (p.keywords.indexOf('kronos-step') >= 0 || p.keywords.indexOf('kronos-service') >= 0) {
+              if (p.keywords.indexOf('kronos-step') >= 0 ||
+                p.keywords.indexOf('kronos-service') >= 0 ||
+                p.keywords.indexOf('kronos-interceptor') >= 0) {
                 try {
                   require(p.name).registerWithManager(manager);
                   manager.info(level => `${p.name} registered`);
@@ -124,6 +128,7 @@ ksm.manager(kronosOptions).then(manager => {
         }
       });
     } catch (e) {
+      console.log(e);
       manager.error(e);
     }
 

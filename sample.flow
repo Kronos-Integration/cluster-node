@@ -10,9 +10,14 @@
         "port": 12345
       },
       "routes": {
-        "/in": {
+        "in": {
+          "path": "/in",
           "method": "POST",
-          "target": "s2/in"
+          "target": "s2/in",
+          "interceptors" : [
+            { "type": "timeout", "timeout" : 2000 },
+            { "type": "limit", "limit" : 10 }
+          ]
         }
       }
     },
