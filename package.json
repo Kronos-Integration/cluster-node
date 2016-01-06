@@ -30,7 +30,7 @@
     "kronos-service-manager": "2.13.1",
     "kronos-service-manager-admin": "git+https://github.com/Kronos-Integration/kronos-service-manager-admin.git",
     "kronos-step-passthrough": "^1.1.4",
-    "kronos-step-stdio": "^2.0.2",
+    "kronos-step-stdio": "^2.1.0",
     "kronos-step-system": "^1.3.1",
     "list_files": "^0.1.1",
     "pkginfo": "^0.3.1",
