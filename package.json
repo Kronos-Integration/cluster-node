@@ -25,7 +25,7 @@
     "kronos-flow-control-step": "^1.6.0",
     "kronos-health-check-service": "^1.0.1",
     "kronos-http-routing-step": "^2.6.0",
-    "kronos-service-consul": "1.9.0",
+    "kronos-service-consul": "1.11.0",
     "kronos-service-manager": "^2.13.1",
     "kronos-service-manager-admin": "git+https://github.com/Kronos-Integration/kronos-service-manager-admin.git",
     "kronos-step-archive-tar": "^1.4.1",
