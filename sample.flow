@@ -9,26 +9,30 @@
         "name": "demo",
         "port": 12345
       },
-      "routes": {
+      "endpoints": {
         "in": {
           "path": "/in",
           "method": "POST",
-          "target": "s2/in",
-          "interceptors" : [
-            { "type": "timeout", "timeout" : 2000 },
-            { "type": "limit", "limit" : 10 }
-          ]
+          "target": "s2/in"
         }
       }
     },
     "s2": {
       "type": "kronos-stdout",
       "endpoints": {
-        "log": "log/in"
+        "in": {
+          "interceptors": [
+            {
+              "type": "timeout",
+              "timeout": 2000
+            },
+            {
+              "type": "request-limit",
+              "limit": 10
+            }
+          ]
+        }
       }
-    },
-    "log": {
-      "type": "kronos-stderr"
     }
   }
 }
