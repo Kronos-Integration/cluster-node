@@ -1,0 +1,38 @@
+{
+  "name": "http-post-demo",
+  "type": "kronos-flow",
+  "description": "http post demo",
+  "steps": {
+    "s1": {
+      "type": "kronos-http-routing",
+      "listener": {
+        "name": "demo",
+        "port": 12345
+      },
+      "endpoints": {
+        "in": {
+          "path": "/in",
+          "method": "POST",
+          "target": "s2/in"
+        }
+      }
+    },
+    "s2": {
+      "type": "kronos-stdout",
+      "endpoints": {
+        "in": {
+          "interceptors": [
+            {
+              "type": "timeout",
+              "timeout": 2000
+            },
+            {
+              "type": "request-limit",
+              "limit": 10
+            }
+          ]
+        }
+      }
+    }
+  }
+}

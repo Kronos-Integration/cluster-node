@@ -1,24 +1,18 @@
 {
-  "name": "post-demo",
+  "name": "untar-demo",
   "type": "kronos-flow",
   "description": "http post demo",
   "steps": {
-    "s1": {
-      "type": "kronos-http-routing",
-      "listener": {
-        "name": "demo",
-        "port": 12345
-      },
+    "stdin": {
+      "type": "kronos-stdin",
       "endpoints": {
-        "in": {
-          "path": "/in",
-          "method": "POST",
-          "target": "s2/in"
+        "out": {
+          "target": "untar/in"
         }
       }
     },
-    "s2": {
-      "type": "kronos-stdout",
+    "untar": {
+      "type": "kronos-untar",
       "endpoints": {
         "in": {
           "interceptors": [
@@ -31,8 +25,14 @@
               "limit": 10
             }
           ]
+        },
+        "out": {
+          "target": "stdout/in"
         }
       }
+    },
+    "stdout": {
+      "type": "kronos-stdout"
     }
   }
 }
