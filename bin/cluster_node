@@ -21,9 +21,15 @@ try {
   journald = require('journald');
 } catch (e) {}
 
+
+Error.prepareStackTrace = function (err, stackObj) {
+  return stackObj[0];
+};
+
 const logger = journald ? journald.Log : console;
 
 let logLevel = "trace";
+
 
 const kronosOptions = {
   logger: logger,
@@ -35,6 +41,10 @@ const kronosOptions = {
     "admin": {
       "logLevel": logLevel,
       "port": 10000
+    },
+    "health-check": {
+      "logLevel": logLevel,
+      "port": 9999
     }
   }
 };
@@ -74,6 +84,7 @@ process.on('SIGHUP', () => {
 
 ksm.manager(kronosOptions).then(manager => {
     try {
+      require('kronos-koa-service').registerWithManager(manager);
       require('kronos-health-check-service').registerWithManager(manager);
 
       const baseDir = path.join(__dirname, '..', 'node_modules');
