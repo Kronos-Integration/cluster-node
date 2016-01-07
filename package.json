@@ -29,7 +29,7 @@
     "kronos-service-admin": "git+https://github.com/Kronos-Integration/kronos-service-admin.git",
     "kronos-service-manager": "^2.13.1",
     "kronos-step-archive-tar": "^1.4.1",
-    "kronos-step-passthrough": "^1.1.4",
+    "kronos-step-passthrough": "^1.2.1",
     "kronos-step-stdio": "^2.1.0",
     "kronos-step-system": "^1.5.0",
     "list_files": "^0.1.1",
