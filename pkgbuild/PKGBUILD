@@ -1,7 +1,7 @@
 # Maintainer: Markus Felten <markus.felten@gmx.de>
 pkgname=kronos-cluster-node
 pkgrel=1
-pkgver=r190.6a264a9
+pkgver=r259.49d0ccf
 epoch=
 pkgdesc="kronos cluster node"
 arch=('any')
@@ -33,6 +33,7 @@ pkgver() {
 build() {
   cd "${pkgname}"
   npm install --production
+  find . -name tests -type d -print0|xargs -0 rm -rf
 }
 
 package() {
