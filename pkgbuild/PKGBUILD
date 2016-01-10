@@ -33,7 +33,25 @@ pkgver() {
 build() {
   cd "${pkgname}"
   npm install --production
-  find . -name tests -type d -print0|xargs -0 rm -rf
+  find node_modules -name test -type d -print0|xargs -0 rm -rf
+  find node_modules -name tests -type d -print0|xargs -0 rm -rf
+  find node_modules -name doc -type d -print0|xargs -0 rm -rf
+  find node_modules -name docs -type d -print0|xargs -0 rm -rf
+  find node_modules -name example -type d -print0|xargs -0 rm -rf
+  find node_modules -name examples -type d -print0|xargs -0 rm -rf
+  find node_modules -name "*.patch" -print0|xargs -0 rm
+  find node_modules -name "README*" -print0|xargs -0 rm
+  find node_modules -name "Readme*" -print0|xargs -0 rm
+  find node_modules -name "readme*" -print0|xargs -0 rm
+  find node_modules -name "HISTORY*" -print0|xargs -0 rm
+  find node_modules -name "History*" -print0|xargs -0 rm
+  find node_modules -name "CHANGELOG*" -print0|xargs -0 rm
+  find node_modules -name "Changelog*" -print0|xargs -0 rm
+  find node_modules -name "Makefile*" -print0|xargs -0 rm
+  find node_modules -name ".npmignore" -print0|xargs -0 rm
+  find node_modules -name ".travis.yml" -print0|xargs -0 rm
+  find node_modules -name ".jshintrc" -print0|xargs -0 rm
+  find node_modules -name ".nvmrc" -print0|xargs -0 rm
 }
 
 package() {
