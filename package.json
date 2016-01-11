@@ -22,7 +22,7 @@
   "dependencies": {
     "commander": "2.9.0",
     "kronos-adapter-inbound-file": "^1.0.2",
-    "kronos-adapter-outbound-file": "^1.0.7",
+    "kronos-adapter-outbound-file": "1.0.8",
     "kronos-flow": "^1.6.1",
     "kronos-flow-control-step": "^1.6.1",
     "kronos-health-check-service": "^1.0.1",
