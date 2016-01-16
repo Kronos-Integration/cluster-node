@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "commander": "2.9.0",
-    "kronos-adapter-inbound-file": "1.2.0",
+    "kronos-adapter-inbound-file": "1.2.1",
     "kronos-adapter-outbound-file": "1.1.0",
     "kronos-flow": "1.6.2",
     "kronos-flow-control-step": "^1.6.1",
