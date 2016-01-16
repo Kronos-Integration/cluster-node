@@ -32,7 +32,7 @@
     "kronos-service-manager": "^2.13.1",
     "kronos-step-archive-tar": "1.5.0",
     "kronos-step-gzip": "^1.0.5",
-    "kronos-step-passthrough": "1.2.3",
+    "kronos-step-passthrough": "1.2.4",
     "kronos-step-stdio": "^2.1.1",
     "kronos-step-system": "1.6.1",
     "list_files": "^0.1.1",
