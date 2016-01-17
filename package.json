@@ -34,7 +34,7 @@
     "kronos-step-gzip": "^1.0.5",
     "kronos-step-passthrough": "1.2.4",
     "kronos-step-stdio": "^2.1.1",
-    "kronos-step-system": "1.6.1",
+    "kronos-step-system": "1.6.2",
     "list_files": "^0.1.1",
     "pkginfo": "^0.3.1",
     "rebirth": "^0.2.2",
