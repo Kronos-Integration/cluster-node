@@ -26,7 +26,7 @@
     "kronos-flow": "1.6.3",
     "kronos-flow-control-step": "1.7.1",
     "kronos-health-check-service": "^1.0.1",
-    "kronos-http-routing-step": "^2.6.1",
+    "kronos-http-routing-step": "^2.6.2",
     "kronos-service-admin": "1.2.0",
     "kronos-service-consul": "^1.11.2",
     "kronos-service-manager": "^2.13.1",
