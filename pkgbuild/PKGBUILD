@@ -1,7 +1,7 @@
 # Maintainer: Markus Felten <markus.felten@gmx.de>
 pkgname=kronos-cluster-node
 pkgrel=1
-pkgver=r259.49d0ccf
+pkgver=r306.7ee24ba
 epoch=
 pkgdesc="kronos cluster node"
 arch=('any')
@@ -46,6 +46,8 @@ build() {
   find node_modules -name "HISTORY*" -print0|xargs -0 rm
   find node_modules -name "History*" -print0|xargs -0 rm
   find node_modules -name "CHANGELOG*" -print0|xargs -0 rm
+  find node_modules -name "*.1" -print0|xargs -0 rm
+  find node_modules -name "CONTRIBUTING*" -print0|xargs -0 rm
   find node_modules -name "Changelog*" -print0|xargs -0 rm
   find node_modules -name "Makefile*" -print0|xargs -0 rm
   find node_modules -name ".npmignore" -print0|xargs -0 rm
