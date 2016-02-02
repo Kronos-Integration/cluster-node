@@ -32,7 +32,7 @@
     "kronos-interceptor-line-tokenizer-csv": "1.1.2",
     "kronos-interceptor-line-tokens2obj": "1.1.2",
     "kronos-service-admin": "1.2.0",
-    "kronos-service-consul": "^1.11.2",
+    "kronos-service-consul": "^2.0.1",
     "kronos-service-manager": "2.14.0",
     "kronos-step-archive-tar": "1.5.1",
     "kronos-step-gzip": "^1.0.5",
