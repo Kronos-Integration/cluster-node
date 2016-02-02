@@ -14,38 +14,25 @@ const os = require('os'),
   rebirth = require('rebirth'),
   list_files = require('list_files').list_files;
 
-var journald;
 
-// try to use journald if present
-try {
-  journald = require('journald');
-} catch (e) {}
-
-
-Error.prepareStackTrace = function (err, stackObj) {
-  return stackObj[0];
-};
-
-const logger = journald ? journald.Log : console;
+Error.prepareStackTrace = (err, stackObj) => stackObj[0];
 
 let logLevel = "trace";
 
-
-const kronosOptions = {
-  logger: logger,
-  logLevel: logLevel,
-  services: {
-    "consul": {
-      "logLevel": logLevel
-    },
-    "admin": {
-      "logLevel": logLevel,
-      "port": 10000
-    },
-    "health-check": {
-      "logLevel": logLevel,
-      "port": 9999
-    }
+const config = {
+  "kronos": {
+    "logLevel": logLevel
+  },
+  "consul": {
+    "logLevel": logLevel
+  },
+  "admin": {
+    "logLevel": logLevel,
+    "port": 10000
+  },
+  "health-check": {
+    "logLevel": logLevel,
+    "port": 9999
   }
 };
 
@@ -58,85 +45,82 @@ commander
   .option('-s, --start', 'also start flow after registering')
   .option('-d, --debug', 'enable debugging')
   .option('-d, --dataCenter <dataCenter>', 'specify consul data center')
-  .option('-p, --port <portNumber>', `specify kronos http port (default is ${kronosOptions.services.admin.port})`)
+  .option('-p, --port <portNumber>', `specify kronos http port (default is ${config.admin.port})`)
   .parse(process.argv);
 
 if (commander.debug) {
   logLevel = 'debug';
 }
 
-kronosOptions.name = commander.nodename ? commander.nodename : os.hostname();
+//kronosOptions.name = commander.nodename ? commander.nodename : os.hostname();
 
 if (commander.dataCenter) {
-  serviceConfigs.consul.dataCenter = commander.dataCenter;
+  config.consul.dataCenter = commander.dataCenter;
 }
 
 if (commander.port) {
-  kronosOptions.services.admin.port = commander.port;
+  config.admin.port = commander.port;
 } else {
-  kronosOptions.services.admin.port = systemdSocket();
+  config.admin.port = systemdSocket();
 }
 
-process.on('SIGHUP', () => {
-  logger.log('reboot');
-  rebirth();
-});
+process.on('SIGHUP', () => rebirth());
 
-ksm.manager(kronosOptions).then(manager => {
+ksm.manager(config).then(manager => {
     try {
-      require('kronos-koa-service').registerWithManager(manager);
-      require('kronos-health-check-service').registerWithManager(manager);
-
       const baseDir = path.join(__dirname, '..', 'node_modules');
-      list_files(baseDir, '', 'package.json', function (error, file, stat) {
-        const f = path.join(baseDir, file);
-        fs.readFile(f, function (err, data) {
-          if (err) {
-            manager.error(`loading ${f}: ${e}`);
-            return;
-          }
-          try {
-            const p = JSON.parse(data);
 
-            if (p.keywords) {
-              if (p.keywords.indexOf('kronos-step') >= 0 ||
-                p.keywords.indexOf('kronos-service') >= 0 ||
-                p.keywords.indexOf('kronos-interceptor') >= 0) {
-                try {
-                  require(p.name).registerWithManager(manager);
-                  manager.info(level => `${p.name} registered`);
-                } catch (e) {
-                  manager.error(`${f}: ${p.name} ${e}`);
+      Promise.all([
+        require('kronos-koa-service').registerWithManager(manager),
+        require('kronos-health-check-service').registerWithManager(manager)
+      ]).then(() => {
+        list_files(baseDir, '', 'package.json', function (error, file, stat) {
+          const f = path.join(baseDir, file);
+          fs.readFile(f, function (err, data) {
+            if (err) {
+              manager.error(`loading ${f}: ${e}`);
+              return;
+            }
+            try {
+              const p = JSON.parse(data);
+
+              if (p.keywords) {
+                if (p.keywords.indexOf('kronos-step') >= 0 ||
+                  p.keywords.indexOf('kronos-service') >= 0 ||
+                  p.keywords.indexOf('kronos-interceptor') >= 0) {
+                  try {
+                    require(p.name).registerWithManager(manager);
+                    manager.info(level => `${p.name} registered`);
+                  } catch (e) {
+                    manager.error(`${f}: ${p.name} ${e}`);
+                  }
                 }
               }
+            } catch (e) {
+              manager.error(`${f}: ${e}`);
             }
-          } catch (e) {
-            manager.error(`${f}: ${e}`);
+          });
+        }, () => {
+          Object.keys(manager.services).forEach(name => {
+            const s = manager.services[name];
+            manager.info(level => ({
+              'service-name': name,
+              'state': s.state,
+              'logLevel': s.logLevel
+            }));
+          });
+
+          if (commander.flow) {
+            manager.loadFlowFromFile(commander.flow).then(flow => {
+              manager.info(level => `Flow declared: ${flow}`);
+              if (commander.start) {
+                manager.info(level => `Starting ... ${flow}`);
+                flow.start().then(() => manager.info(`Flow started: ${flow}`)).catch(error => manager.error(
+                  `Flow started failed: ${error}`))
+              }
+            }).catch(error => manager.error(`Flow initialization failed: ${error}`));
           }
         });
-      }, function () {
-        Object.keys(manager.services).forEach(name => {
-          const s = manager.services[name];
-          manager.info(level => ({
-            'service-name': name,
-            'state': s.state,
-            //'autostart': s.autostart,
-            'logLevel': s.logLevel
-          }));
-        });
-
-        if (commander.flow) {
-          manager.loadFlowFromFile(commander.flow).then(flow => {
-            manager.info(level => `Flow declared: ${flow}`);
-            if (commander.start) {
-              manager.info(level => `Starting ... ${flow}`);
-              flow.start().then(() => manager.info(`Flow started: ${flow}`)).catch(error => manager.error(
-                `Flow started failed: ${error}`))
-            }
-          }).catch(error => {
-            manager.error(`Flow initialization failed: ${error}`);
-          });
-        }
       });
     } catch (e) {
       console.log(e);
@@ -145,6 +129,4 @@ ksm.manager(kronosOptions).then(manager => {
 
     return manager;
   },
-  function (err) {
-    manager.error(`manager failed: ${err}`);
-  });
+  err => manager.error(`manager failed: ${err}`));
