@@ -30,7 +30,7 @@
     "kronos-interceptor-line-parser": "2.0.0",
     "kronos-interceptor-line-tokenizer-csv": "^2.0.1",
     "kronos-interceptor-line-tokens2obj": "2.0.0",
-    "kronos-service-admin": "^2.0.1",
+    "kronos-service-admin": "^2.0.2",
     "kronos-service-consul": "^2.0.1",
     "kronos-service-health-check": "^2.0.1",
     "kronos-service-manager": "^3.2.0",
