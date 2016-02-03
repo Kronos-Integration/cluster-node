@@ -66,62 +66,58 @@ if (commander.port) {
 
 process.on('SIGHUP', () => rebirth());
 
-ksm.manager(config).then(manager => {
+ksm.manager(config /*, [require('kronos-koa-service'), require('kronos-health-check-service')]*/ ).then(manager => {
     try {
       const baseDir = path.join(__dirname, '..', 'node_modules');
 
-      Promise.all([
-        require('kronos-koa-service').registerWithManager(manager),
-        require('kronos-health-check-service').registerWithManager(manager)
-      ]).then(() => {
-        list_files(baseDir, '', 'package.json', function (error, file, stat) {
-          const f = path.join(baseDir, file);
-          fs.readFile(f, function (err, data) {
-            if (err) {
-              manager.error(`loading ${f}: ${e}`);
-              return;
-            }
-            try {
-              const p = JSON.parse(data);
+      list_files(baseDir, '', 'package.json', (error, file, stat) => {
+        const f = path.join(baseDir, file);
+        fs.readFile(f, function (err, data) {
+          if (err) {
+            manager.error(`loading ${f}: ${e}`);
+            return;
+          }
+          try {
+            const p = JSON.parse(data);
 
-              if (p.keywords) {
-                if (p.keywords.indexOf('kronos-step') >= 0 ||
-                  p.keywords.indexOf('kronos-service') >= 0 ||
-                  p.keywords.indexOf('kronos-interceptor') >= 0) {
-                  try {
-                    require(p.name).registerWithManager(manager);
-                    manager.info(level => `${p.name} registered`);
-                  } catch (e) {
-                    manager.error(`${f}: ${p.name} ${e}`);
-                  }
+            if (p.keywords) {
+              if (p.keywords.indexOf('kronos-step') >= 0 ||
+                p.keywords.indexOf('kronos-service') >= 0 ||
+                p.keywords.indexOf('kronos-interceptor') >= 0) {
+                try {
+                  require(p.name).registerWithManager(manager);
+                  manager.info(level => `${p.name} registered`);
+                } catch (e) {
+                  manager.error(`${f}: ${p.name} ${e}`);
                 }
               }
-            } catch (e) {
-              manager.error(`${f}: ${e}`);
             }
-          });
-        }, () => {
-          Object.keys(manager.services).forEach(name => {
-            const s = manager.services[name];
-            manager.info(level => ({
-              'service-name': name,
-              'state': s.state,
-              'logLevel': s.logLevel
-            }));
-          });
-
-          if (commander.flow) {
-            manager.loadFlowFromFile(commander.flow).then(flow => {
-              manager.info(level => `Flow declared: ${flow}`);
-              if (commander.start) {
-                manager.info(level => `Starting ... ${flow}`);
-                flow.start().then(() => manager.info(`Flow started: ${flow}`)).catch(error => manager.error(
-                  `Flow started failed: ${error}`))
-              }
-            }).catch(error => manager.error(`Flow initialization failed: ${error}`));
+          } catch (e) {
+            manager.error(`${f}: ${e}`);
           }
         });
+      }, () => {
+        Object.keys(manager.services).forEach(name => {
+          const s = manager.services[name];
+          manager.info(level => ({
+            'service-name': name,
+            'state': s.state,
+            'logLevel': s.logLevel
+          }));
+        });
+
+        if (commander.flow) {
+          manager.loadFlowFromFile(commander.flow).then(flow => {
+            manager.info(level => `Flow declared: ${flow}`);
+            if (commander.start) {
+              manager.info(level => `Starting ... ${flow}`);
+              flow.start().then(() => manager.info(`Flow started: ${flow}`)).catch(error => manager.error(
+                `Flow started failed: ${error}`));
+            }
+          }).catch(error => manager.error(`Flow initialization failed: ${error}`));
+        }
       });
+
     } catch (e) {
       console.log(e);
       manager.error(e);
