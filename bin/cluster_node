@@ -31,8 +31,7 @@ const config = {
     "port": 10000
   },
   "health-check": {
-    "logLevel": logLevel,
-    "port": 9999
+    "logLevel": logLevel
   }
 };
 
