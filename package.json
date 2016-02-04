@@ -1,14 +1,14 @@
 {
   "name": "kronos-cluster-node",
   "bin": "bin/cluster_node",
-  "version": "0.0.0",
+  "version": "0.0.0-semantic-release",
   "description": "kronos cluster managed node sample application",
   "scripts": {
     "start": "node bin/cluster_node",
-    "cover": "node ./node_modules/istanbul/lib/cli.js cover --hook-run-in-context ./node_modules/mocha/bin/_mocha -- --R spec --U exports tests",
-    "doc": "./node_modules/.bin/jsdoc lib/*.js",
-    "test": "mocha tests/*.js",
-    "semantic-release": "semantic-release pre && semantic-release post"
+    "cover": "node ./node_modules/istanbul/lib/cli.js cover --hook-run-in-context ./node_modules/mocha/bin/_mocha -- --R spec --U exports tests/*_test.js",
+    "doc": "jsdoc lib/*.js",
+    "test": "mocha tests/*_test.js",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "engines": {
     "node": ">=5"
@@ -47,7 +47,7 @@
   },
   "devDependencies": {
     "chai": "3.5.0",
-    "istanbul": "1.0.0-alpha.2",
+    "istanbul": "0.4.2",
     "jsdoc": "3.4.0",
     "mocha": "2.4.5",
     "semantic-release": "6.2.0"
