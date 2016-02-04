@@ -20,7 +20,6 @@
     "url": "https://github.com/Kronos-Integration/kronos-cluster-node.git"
   },
   "dependencies": {
-    "commander": "2.9.0",
     "kronos-adapter-inbound-file": "2.0.0",
     "kronos-adapter-outbound-file": "2.0.0",
     "kronos-flow": "2.0.0",
@@ -34,11 +33,13 @@
     "kronos-service-consul": "^2.0.2",
     "kronos-service-health-check": "^2.0.2",
     "kronos-service-manager": "^3.2.0",
+    "kronos-service-uti": "^1.0.0",
     "kronos-step-archive-tar": "2.0.0",
     "kronos-step-gzip": "^2.0.0",
     "kronos-step-passthrough": "^2.0.0",
     "kronos-step-stdio": "^3.0.0",
     "kronos-step-system": "^2.0.0",
+    "commander": "2.9.0",
     "list_files": "^0.1.1",
     "pkginfo": "^0.3.1",
     "rebirth": "^0.2.2",
