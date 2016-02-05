@@ -32,7 +32,7 @@
     "kronos-interceptor-line-tokens2obj": "2.0.1",
     "kronos-interceptor-message-handler": "2.0.0",
     "kronos-interceptor-object-data-processor-chunk": "^2.0.0",
-    "kronos-interceptor-object-data-processor-row": "^1.2.0",
+    "kronos-interceptor-object-data-processor-row": "^1.2.1",
     "kronos-interceptor-stream-obj2string": "^2.0.0",
     "kronos-service-admin": "2.0.2",
     "kronos-service-consul": "2.0.3",
