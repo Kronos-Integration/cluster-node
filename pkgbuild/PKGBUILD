@@ -1,7 +1,7 @@
 # Maintainer: Markus Felten <markus.felten@gmx.de>
 pkgname=kronos-cluster-node
 pkgrel=1
-pkgver=r396.fff4918
+pkgver=r397.9964f2a
 epoch=
 pkgdesc="kronos cluster node"
 arch=('any')
@@ -55,7 +55,6 @@ build() {
   find node_modules -name ".travis.yml" -print0|xargs -0 rm
   find node_modules -name ".jshintrc" -print0|xargs -0 rm
   find node_modules -name ".nvmrc" -print0|xargs -0 rm
-  find node_modules -name ".map" -print0|xargs -0 rm
 }
 
 package() {
