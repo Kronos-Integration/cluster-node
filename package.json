@@ -32,7 +32,7 @@
     "kronos-interceptor-line-tokens2obj": "2.0.0",
     "kronos-interceptor-message-handler": "2.0.0",
     "kronos-service-admin": "2.0.2",
-    "kronos-service-consul": "2.0.2",
+    "kronos-service-consul": "2.0.3",
     "kronos-service-health-check": "2.0.2",
     "kronos-service-manager": "^3.2.1",
     "kronos-service-uti": "1.0.0",
