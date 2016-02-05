@@ -65,7 +65,7 @@ if (commander.port) {
 
 process.on('SIGHUP', () => rebirth());
 
-ksm.manager(config /*, [require('kronos-koa-service'), require('kronos-health-check-service')]*/ ).then(manager => {
+ksm.manager(config).then(manager => {
     try {
       const baseDir = path.join(__dirname, '..', 'node_modules');
 
@@ -118,7 +118,6 @@ ksm.manager(config /*, [require('kronos-koa-service'), require('kronos-health-ch
       });
 
     } catch (e) {
-      console.log(e);
       manager.error(e);
     }
 
