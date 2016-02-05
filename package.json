@@ -36,7 +36,7 @@
     "kronos-interceptor-stream-obj2string": "^2.0.4",
     "kronos-service-admin": "^2.0.3",
     "kronos-service-consul": "2.0.4",
-    "kronos-service-health-check": "2.0.3",
+    "kronos-service-health-check": "2.1.0",
     "kronos-service-manager": "^3.2.3",
     "kronos-service-uti": "1.0.0",
     "kronos-step-archive-tar": "2.0.0",
