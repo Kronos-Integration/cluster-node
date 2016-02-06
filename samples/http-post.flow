@@ -6,6 +6,7 @@
     "s1": {
       "type": "kronos-http-routing",
       "listener": {
+        "type": "koa",
         "name": "demo",
         "port": 12345
       },

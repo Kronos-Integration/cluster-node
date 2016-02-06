@@ -80,12 +80,11 @@ ksm.manager(config).then(manager => {
             const p = JSON.parse(data);
 
             if (p.keywords) {
-              if (p.keywords.indexOf('kronos-step') >= 0 ||
-                p.keywords.indexOf('kronos-service') >= 0 ||
-                p.keywords.indexOf('kronos-interceptor') >= 0) {
+              if (p.keywords.find(k => k === 'kronos-step' || k === 'kronos-service' || k ===
+                  'kronos-interceptor')) {
                 try {
                   require(p.name).registerWithManager(manager);
-                  manager.info(level => `${p.name} registered`);
+                  manager.trace(level => `${p.name} registered`);
                 } catch (e) {
                   manager.error(`${f}: ${p.name} ${e}`);
                 }
@@ -100,8 +99,7 @@ ksm.manager(config).then(manager => {
           const s = manager.services[name];
           manager.info(level => ({
             'service-name': name,
-            'state': s.state,
-            'logLevel': s.logLevel
+            'state': s.state
           }));
         });
 
@@ -116,7 +114,6 @@ ksm.manager(config).then(manager => {
           }).catch(error => manager.error(`Flow initialization failed: ${error}`));
         }
       });
-
     } catch (e) {
       manager.error(e);
     }
