@@ -12,6 +12,7 @@
       },
       "endpoints": {
         "in": {
+          "serviceName" : "myService",
           "path": "/in",
           "method": "POST",
           "target": "s2/in"
