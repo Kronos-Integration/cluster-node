@@ -51,59 +51,52 @@ config.forEach(c => c.logLevel = logLevel);
 
 process.on('SIGHUP', () => rebirth());
 
-ksm.manager(config).then(manager => {
-    try {
-      const baseDir = path.join(__dirname, '..', 'node_modules');
+const baseDir = path.join(__dirname, '..', 'node_modules');
 
-      list_files(baseDir, '', 'package.json', (error, file, stat) => {
-        const f = path.join(baseDir, file);
-        fs.readFile(f, function (err, data) {
-          if (err) {
-            manager.error(`loading ${f}: ${e}`);
-            return;
-          }
-          try {
-            const p = JSON.parse(data);
+const modules = [];
 
-            if (p.keywords) {
-              if (p.keywords.find(k => k === 'kronos-step' || k === 'kronos-service' || k ===
-                  'kronos-interceptor')) {
-                try {
-                  require(p.name).registerWithManager(manager);
-                  manager.trace(level => `${p.name} registered`);
-                } catch (e) {
-                  manager.error(`${f}: ${p.name} ${e}`);
-                }
-              }
-            }
-          } catch (e) {
-            manager.error(`${f}: ${e}`);
-          }
-        });
-      }, () => {
-        Object.keys(manager.services).forEach(name => {
-          const s = manager.services[name];
-          manager.info(level => ({
-            'service-name': name,
-            'state': s.state
-          }));
-        });
-
-        if (commander.flow) {
-          manager.loadFlowFromFile(commander.flow).then(flow => {
-            manager.info(level => `Flow declared: ${flow}`);
-            if (commander.start) {
-              manager.info(level => `Starting ... ${flow}`);
-              flow.start().then(() => manager.info(`Flow started: ${flow}`)).catch(error => manager.error(
-                `Flow started failed: ${error}`));
-            }
-          }).catch(error => manager.error(`Flow initialization failed: ${error}`));
-        }
-      });
-    } catch (e) {
-      manager.error(e);
+list_files(baseDir, '', 'package.json', (error, file, stat) => {
+  const f = path.join(baseDir, file);
+  fs.readFile(f, (err, data) => {
+    if (err) {
+      console.error(`loading ${f}: ${e}`);
+      return;
     }
+    try {
+      const p = JSON.parse(data);
 
-    return manager;
-  },
-  err => manager.error(`manager failed: ${err}`));
+      if (p.keywords) {
+        if (p.keywords.find(k => k === 'kronos-step' || k === 'kronos-service' || k ===
+            'kronos-interceptor')) {
+          try {
+            modules.push(require(p.name));
+          } catch (e) {
+            console.error(`${f}: ${p.name} ${e}`);
+          }
+        }
+      }
+    } catch (e) {
+      console.error(`${f}: ${e}`);
+    }
+  });
+}, () => {
+  ksm.manager(config, modules).then(manager => {
+    Object.keys(manager.services).forEach(name => {
+      const s = manager.services[name];
+      manager.info(level => ({
+        'service-name': name,
+        'state': s.state
+      }));
+    });
+    if (commander.flow) {
+      manager.loadFlowFromFile(commander.flow).then(flow => {
+        manager.info(level => `Flow declared: ${flow}`);
+        if (commander.start) {
+          manager.info(level => `Starting ... ${flow}`);
+          flow.start().then(() => manager.info(`Flow started: ${flow}`)).catch(error => manager.error(
+            `Flow started failed: ${error}`));
+        }
+      }).catch(error => manager.error(`Flow initialization failed: ${error}`));
+    }
+  });
+});
