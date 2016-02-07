@@ -17,51 +17,37 @@ const os = require('os'),
 
 Error.prepareStackTrace = (err, stackObj) => stackObj[0];
 
-let logLevel = "trace";
+let logLevel = "info";
 
-const config = {
-  "kronos": {
-    "logLevel": logLevel
-  },
-  "consul": {
-    "logLevel": logLevel
-  },
-  "admin": {
-    "logLevel": logLevel,
-    "port": 10000
-  },
-  "health-check": {
-    "logLevel": logLevel
-  }
-};
+const config = [{
+  // service-manager
+}, {
+  name: "admin",
+  port: 10000
+}, {
+  name: "kronos"
+}, {
+  name: "consul"
+}];
+
+const sds = systemdSocket();
+if (sds) {
+  config[1].port = sds;
+}
 
 commander
   .version(module.exports.version)
   .description('run cluster node')
-  //  .option('-ar, --autoregister', 'load and register all installed kronos moudles')
-  .option('-n, --nodename <name>', 'kronos node name defaults to hostname')
   .option('-f, --flow <file>', 'specify flow definition to be registered')
   .option('-s, --start', 'also start flow after registering')
   .option('-d, --debug', 'enable debugging')
-  .option('-d, --dataCenter <dataCenter>', 'specify consul data center')
-  .option('-p, --port <portNumber>', `specify kronos http port (default is ${config.admin.port})`)
   .parse(process.argv);
 
 if (commander.debug) {
   logLevel = 'debug';
 }
 
-//kronosOptions.name = commander.nodename ? commander.nodename : os.hostname();
-
-if (commander.dataCenter) {
-  config.consul.dataCenter = commander.dataCenter;
-}
-
-if (commander.port) {
-  config.admin.port = commander.port;
-} else {
-  config.admin.port = systemdSocket();
-}
+config.forEach(c => c.logLevel = logLevel);
 
 process.on('SIGHUP', () => rebirth());
 
