@@ -15,7 +15,7 @@ const os = require('os'),
   list_files = require('list_files').list_files;
 
 
-Error.prepareStackTrace = (err, stackObj) => stackObj[0];
+//Error.prepareStackTrace = (err, stackObj) => stackObj[0];
 
 let logLevel = "info";
 
@@ -59,7 +59,7 @@ list_files(baseDir, '', 'package.json', (error, file, stat) => {
   const f = path.join(baseDir, file);
   fs.readFile(f, (err, data) => {
     if (err) {
-      console.error(`loading ${f}: ${e}`);
+      console.error(`loading ${f}: ${err}`);
       return;
     }
     try {
