@@ -41,10 +41,14 @@ commander
   .option('-f, --flow <file>', 'specify flow definition to be registered')
   .option('-s, --start', 'also start flow after registering')
   .option('-d, --debug', 'enable debugging')
+  .option('-t, --trace', 'enable tracing')
   .parse(process.argv);
 
 if (commander.debug) {
   logLevel = 'debug';
+}
+else if (commander.trace) {
+  logLevel = 'trace';
 }
 
 config.forEach(c => c.logLevel = logLevel);
