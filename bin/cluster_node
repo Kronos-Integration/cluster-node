@@ -25,8 +25,6 @@ const config = [{
   name: "admin",
   port: 10000
 }, {
-  name: "kronos"
-}, {
   name: "consul"
 }];
 
@@ -46,8 +44,7 @@ commander
 
 if (commander.debug) {
   logLevel = 'debug';
-}
-else if (commander.trace) {
+} else if (commander.trace) {
   logLevel = 'trace';
 }
 
