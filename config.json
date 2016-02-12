@@ -1,0 +1,9 @@
+[{
+  "name": "kronos"
+}, {
+  "name": "admin",
+  "port": 10000
+}, {
+  "name": "registry",
+  "checkInterval": "60s"
+}]

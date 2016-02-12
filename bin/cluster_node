@@ -14,31 +14,16 @@ const os = require('os'),
   rebirth = require('rebirth'),
   list_files = require('list_files').list_files;
 
-
 //Error.prepareStackTrace = (err, stackObj) => stackObj[0];
 
 let logLevel = "info";
-
-const config = [{
-  name: "kronos"
-}, {
-  name: "admin",
-  port: 10000
-}, {
-  name: "registry", // consul
-  checkInterval: "60s"
-}];
-
-const sds = systemdSocket();
-if (sds) {
-  config[1].port = sds;
-}
 
 commander
   .version(module.exports.version)
   .description('run cluster node')
   .option('-f, --flow <file>', 'specify flow definition to be registered')
   .option('-s, --start', 'start flow after registering')
+  .option('-c, --config <file>', 'use config from file')
   .option('-d, --debug', 'enable debugging')
   .option('-t, --trace', 'enable tracing')
   .parse(process.argv);
@@ -49,7 +34,23 @@ if (commander.debug) {
   logLevel = 'trace';
 }
 
-config.forEach(c => c.logLevel = logLevel);
+const cfg = commander.config ? new Promise((fullfill, reject) => {
+  fs.readFile(commander.config, (err, data) => {
+    if (err) reject(err);
+    else {
+      fullfill(JSON.parse(data));
+    }
+  });
+}) : Promise.resolve([{
+  name: "kronos"
+}, {
+  name: "admin",
+  port: 10000
+}, {
+  name: "registry", // consul
+  checkInterval: "60s"
+}]);
+
 
 process.on('SIGHUP', () => rebirth());
 
@@ -82,23 +83,34 @@ list_files(baseDir, '', 'package.json', (error, file, stat) => {
     }
   });
 }, () => {
-  ksm.manager(config, modules).then(manager => {
-    Object.keys(manager.services).forEach(name => {
-      const s = manager.services[name];
-      manager.info(level => ({
-        'service-name': name,
-        'state': s.state
-      }));
-    });
-    if (commander.flow) {
-      manager.loadFlowFromFile(commander.flow).then(flow => {
-        manager.info(level => `Flow declared: ${flow}`);
-        if (commander.start) {
-          manager.info(level => `Starting ... ${flow}`);
-          flow.start().then(() => manager.info(`Flow started: ${flow}`)).catch(error => manager.error(
-            `Flow started failed: ${error}`));
-        }
-      }).catch(error => manager.error(`Flow initialization failed: ${error}`));
+  cfg.then(cfg => {
+    cfg.forEach(c => c.logLevel = logLevel);
+
+    const sds = systemdSocket();
+    if (sds) {
+      cfg[1].port = sds;
     }
+
+    return cfg;
+  }).then(cfg => {
+    ksm.manager(cfg, modules).then(manager => {
+      Object.keys(manager.services).forEach(name => {
+        const s = manager.services[name];
+        manager.info(level => ({
+          'service-name': name,
+          'state': s.state
+        }));
+      });
+      if (commander.flow) {
+        manager.loadFlowFromFile(commander.flow).then(flow => {
+          manager.info(level => `Flow declared: ${flow}`);
+          if (commander.start) {
+            manager.info(level => `Starting ... ${flow}`);
+            flow.start().then(() => manager.info(`Flow started: ${flow}`)).catch(error => manager.error(
+              `Flow started failed: ${error}`));
+          }
+        }).catch(error => manager.error(`Flow initialization failed: ${error}`));
+      }
+    });
   });
 });
