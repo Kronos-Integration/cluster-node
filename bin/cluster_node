@@ -94,13 +94,6 @@ list_files(baseDir, '', 'package.json', (error, file, stat) => {
     return cfg;
   }).then(cfg => {
     ksm.manager(cfg, modules).then(manager => {
-      Object.keys(manager.services).forEach(name => {
-        const s = manager.services[name];
-        manager.info(level => ({
-          'service-name': name,
-          'state': s.state
-        }));
-      });
       if (commander.flow) {
         manager.loadFlowFromFile(commander.flow).then(flow => {
           manager.info(level => `Flow declared: ${flow}`);
