@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "commander": "2.9.0",
-    "install": "^0.4.2",
+    "install": "^0.4.4",
     "kronos-adapter-inbound-file": "2.0.0",
     "kronos-adapter-outbound-file": "2.0.0",
     "kronos-adapter-outbound-http": "^1.0.0",
