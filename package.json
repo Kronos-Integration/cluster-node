@@ -40,7 +40,7 @@
     "kronos-service-admin": "^2.0.11",
     "kronos-service-consul": "^2.5.2",
     "kronos-service-health-check": "2.2.0",
-    "kronos-service-manager": "^3.2.8",
+    "kronos-service-manager": "^3.2.9",
     "kronos-service-uti": "1.0.0",
     "kronos-step-archive-tar": "2.0.0",
     "kronos-step-gzip": "^2.0.0",
