@@ -94,6 +94,9 @@ list_files(baseDir, '', 'package.json', (error, file, stat) => {
     return cfg;
   }).then(cfg => {
     ksm.manager(cfg, modules).then(manager => {
+
+      process.on('SIGINT', () => manager.stop().then(() => process.exit()));
+
       if (commander.flow) {
         manager.loadFlowFromFile(commander.flow).then(flow => {
           manager.info(level => `Flow declared: ${flow}`);
