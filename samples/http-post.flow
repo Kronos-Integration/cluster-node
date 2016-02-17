@@ -10,8 +10,12 @@
         "in": {
           "serviceName" : "myService",
           "path": "/in",
-          "method": "POST",
-          "target": "s2/in"
+          "method": "PUT",
+          "target": "s2/in",
+          "interceptors" : [{
+            "type" : "koa-data-request",
+            "data" : { "key" : "value"}
+          }]
         }
       }
     },
