@@ -12,14 +12,17 @@
           "path": "/in",
           "method": "PUT",
           "target": "s2/in",
-          "interceptors" : [{
-            "type" : "koa-data-request",
-            "data" : { "key" : "value"}
+          "interceptors": [{
+          "type" : "koa-request"
           }]
         }
       }
     },
     "s2": {
+      "type": "kronos-file",
+      "fileName": "/tmp/aFile"
+    },
+    "s3": {
       "type": "kronos-stdout",
       "endpoints": {
         "in": {
