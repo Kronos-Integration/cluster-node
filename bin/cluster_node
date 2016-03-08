@@ -88,13 +88,12 @@ list_files(baseDir, '', 'package.json', (error, file, stat) => {
 
     const sds = systemdSocket();
     if (sds) {
-      cfg[1].port = sds;
+      cfg[1 /* TODO admin */ ].port = sds;
     }
 
     return cfg;
-  }).then(cfg => {
+  }).then(cfg =>
     ksm.manager(cfg, modules).then(manager => {
-
       process.on('SIGINT', () => manager.stop().then(() => process.exit()));
 
       if (commander.flow) {
@@ -107,6 +106,6 @@ list_files(baseDir, '', 'package.json', (error, file, stat) => {
           }
         }).catch(error => manager.error(`Flow initialization failed: ${error}`));
       }
-    });
-  });
+    })
+  );
 });

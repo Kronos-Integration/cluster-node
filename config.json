@@ -2,6 +2,7 @@
   "name": "kronos"
 }, {
   "name": "admin",
+  "hostname": "localhost",
   "port": 10000
 }, {
   "name": "registry",
