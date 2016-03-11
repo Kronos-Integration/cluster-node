@@ -84,7 +84,6 @@ function kronosModules() {
                   'kronos-service' || k ===
                   'kronos-interceptor')) {
                 try {
-                  //console.log(p.name);
                   modules.push(require(p.name));
                   fullfill();
                   return;
