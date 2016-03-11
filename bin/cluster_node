@@ -12,7 +12,8 @@ const os = require('os'),
   ksm = require('kronos-service-manager'),
   systemdSocket = require('systemd-socket'),
   rebirth = require('rebirth'),
-  list_files = require('list_files').list_files;
+  glob = require('glob');
+
 
 //Error.prepareStackTrace = (err, stackObj) => stackObj[0];
 
@@ -51,61 +52,82 @@ const cfg = commander.config ? new Promise((fullfill, reject) => {
   checkInterval: "60s"
 }]);
 
-
 process.on('SIGHUP', () => rebirth());
 
-const baseDir = path.join(__dirname, '..', 'node_modules');
-
-const modules = [];
-
-list_files(baseDir, '', 'package.json', (error, file, stat) => {
-  const f = path.join(baseDir, file);
-  fs.readFile(f, (err, data) => {
-    if (err) {
-      console.error(`loading ${f}: ${err}`);
-      return;
-    }
-    try {
-      const p = JSON.parse(data);
-
-      if (p.keywords) {
-        if (p.keywords.find(k => k === 'kronos-step' || k === 'kronos-service' || k ===
-            'kronos-interceptor')) {
-          try {
-            modules.push(require(p.name));
-          } catch (e) {
-            console.error(`${f}: ${p.name} ${e}`);
-          }
-        }
+function pglob(path, options) {
+  return new Promise((fullfull, reject) => {
+    glob(path, options, (err, files) => {
+      if (err) {
+        reject(err);
+      } else {
+        fullfull(files);
       }
-    } catch (e) {
-      console.error(`${f}: ${e}`);
+    });
+  });
+}
+
+function kronosModules() {
+  return pglob(path.join(__dirname, '..', 'node_modules/*/package.json'), {}).then(files => {
+    const modules = [];
+    return Promise.all(files.map(file =>
+      new Promise((fullfill, reject) => {
+        fs.readFile(file, (err, data) => {
+          if (err) {
+            reject(`loading ${file}: ${err}`);
+            return;
+          }
+          try {
+            const p = JSON.parse(data);
+
+            if (p.keywords) {
+              if (p.keywords.find(k => k === 'kronos-step' || k ===
+                  'kronos-service' || k ===
+                  'kronos-interceptor')) {
+                try {
+                  //console.log(p.name);
+                  modules.push(require(p.name));
+                  fullfill();
+                  return;
+                } catch (e) {
+                  reject(`${file}: ${p.name} ${e}`);
+                }
+              }
+            }
+          } catch (e) {
+            reject(e);
+          }
+
+          fullfill();
+        });
+      })
+    )).then(results => modules);
+  });
+}
+
+
+Promise.all([kronosModules(), cfg]).then(results => {
+  const modules = results[0];
+  const cfg = results[1];
+
+  cfg.forEach(c => c.logLevel = logLevel);
+
+  const sds = systemdSocket();
+  if (sds) {
+    cfg[1 /* TODO admin */ ].port = sds;
+  }
+
+  ksm.manager(cfg, modules).then(manager => {
+    process.on('SIGINT', () => manager.stop().then(() => process.exit()));
+    if (commander.flow) {
+      manager.loadFlowFromFile(commander.flow).then(flow => {
+        manager.info(level => `Flow declared: ${flow}`);
+        if (commander.start) {
+          manager.info(level => `Starting ... ${flow}`);
+          flow.start().then(() => manager.info(`Flow started: ${flow}`)).catch(error =>
+            manager.error(
+              `Flow started failed: ${error}`));
+        }
+      }).catch(error => manager.error(`Flow initialization failed: ${error}`));
     }
   });
-}, () => {
-  cfg.then(cfg => {
-    cfg.forEach(c => c.logLevel = logLevel);
-
-    const sds = systemdSocket();
-    if (sds) {
-      cfg[1 /* TODO admin */ ].port = sds;
-    }
-
-    return cfg;
-  }).then(cfg =>
-    ksm.manager(cfg, modules).then(manager => {
-      process.on('SIGINT', () => manager.stop().then(() => process.exit()));
-
-      if (commander.flow) {
-        manager.loadFlowFromFile(commander.flow).then(flow => {
-          manager.info(level => `Flow declared: ${flow}`);
-          if (commander.start) {
-            manager.info(level => `Starting ... ${flow}`);
-            flow.start().then(() => manager.info(`Flow started: ${flow}`)).catch(error => manager.error(
-              `Flow started failed: ${error}`));
-          }
-        }).catch(error => manager.error(`Flow initialization failed: ${error}`));
-      }
-    })
-  );
-});
+}).catch(console.log);
