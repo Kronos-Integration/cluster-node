@@ -1,7 +1,7 @@
 [{
   "name": "kronos"
 }, {
-  "name": "admin",
+  "name": "koa-admin",
   "hostname": "localhost",
   "port": 10000
 }, {

@@ -45,7 +45,7 @@ const cfg = commander.config ? new Promise((fullfill, reject) => {
 }) : Promise.resolve([{
   name: "kronos"
 }, {
-  name: "admin",
+  name: "koa-admin",
   port: 10000
 }, {
   name: "registry", // consul
