@@ -10,6 +10,7 @@ const os = require('os'),
   pkginfo = require('pkginfo')(module, 'name', 'version'),
   commander = require('commander'),
   ksm = require('kronos-service-manager'),
+  ee = require('expression-expander'),
   systemdSocket = require('systemd-socket'),
   rebirth = require('rebirth'),
   glob = require('glob');
@@ -39,7 +40,17 @@ const cfg = commander.config ? new Promise((fullfill, reject) => {
   fs.readFile(commander.config, (err, data) => {
     if (err) reject(err);
     else {
-      fullfill(JSON.parse(data));
+      const ctx = ee.createContext({
+        evaluate: (expression, context) => {
+          const r = expression.match(/file\(\s*\'([^\']+)\'\s*\)/);
+          if (r) {
+            console.log(`file: ${r[1]}`);
+            return fs.readFileSync(r[1]);
+          }
+          return undefined;
+        }
+      });
+      fullfill(ctx.expand(JSON.parse(data)));
     }
   });
 }) : Promise.resolve([{

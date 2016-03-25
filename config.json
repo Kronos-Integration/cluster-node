@@ -5,6 +5,13 @@
   "hostname": "localhost",
   "port": 10000
 }, {
+  "name": "admin",
+  "ssh": {
+    "hostKeys": [
+      "${file('etc/hostKey')}"
+    ]
+  }
+}, {
   "name": "registry",
   "checkInterval": "60s"
 }]
