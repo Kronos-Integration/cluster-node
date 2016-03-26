@@ -9,7 +9,8 @@
   "ssh": {
     "hostKeys": [
       "${file('etc/hostKey')}"
-    ]
+    ],
+    "port": 10001
   }
 }, {
   "name": "registry",
