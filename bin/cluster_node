@@ -44,9 +44,7 @@ const cfg = commander.config ? new Promise((fullfill, reject) => {
         evaluate: (expression, context) => {
           const r = expression.match(/file\(\s*\'([^\']+)\'\s*\)/);
           if (r) {
-            const file = path.resolve(path.dirname(commander.config), r[1]);
-            //console.log(`file: ${file}`);
-            return fs.readFileSync(file);
+            return fs.readFileSync(path.resolve(path.dirname(commander.config), r[1]));
           }
           return undefined;
         }
