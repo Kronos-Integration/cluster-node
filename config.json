@@ -3,14 +3,14 @@
 }, {
   "name": "koa-admin",
   "hostname": "localhost",
-  "port": 10000
+  "port": 10001
 }, {
   "name": "admin",
   "ssh": {
     "hostKeys": [
       "${file('etc/hostKey')}"
     ],
-    "port": 10001
+    "port": 10002
   }
 }, {
   "name": "registry",
