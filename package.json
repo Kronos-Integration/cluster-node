@@ -46,7 +46,7 @@
     "kronos-step-aggregate": "1.2.0",
     "kronos-step-archive-tar": "2.0.2",
     "kronos-step-file": "^1.0.2",
-    "kronos-step-gzip": "2.0.1",
+    "kronos-step-gzip": "2.0.2",
     "kronos-step-passthrough": "2.0.3",
     "kronos-step-stdio": "3.0.4",
     "kronos-step-system": "2.0.2",
