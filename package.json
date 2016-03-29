@@ -24,7 +24,7 @@
     "expression-expander": "^3.0.0",
     "glob": "^7.0.3",
     "kronos-adapter-inbound-file": "2.0.2",
-    "kronos-adapter-outbound-file": "2.0.2",
+    "kronos-adapter-outbound-file": "2.0.3",
     "kronos-adapter-outbound-http": "1.0.3",
     "kronos-flow": "2.5.12",
     "kronos-flow-control-step": "2.2.5",
