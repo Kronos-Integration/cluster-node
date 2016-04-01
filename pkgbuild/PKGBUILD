@@ -1,7 +1,7 @@
 # Maintainer: Markus Felten <markus.felten@gmx.de>
 pkgname=kronos-cluster-node
 pkgrel=1
-pkgver=r508.6c242bd
+pkgver=r713.3c00436
 epoch=
 pkgdesc="kronos cluster node"
 arch=('any')
@@ -33,31 +33,31 @@ pkgver() {
 build() {
   cd "${pkgname}"
   npm install --production
-  find node_modules -name test -type d -print0|xargs -0 rm -rf
-  find node_modules -name tests -type d -print0|xargs -0 rm -rf
-  find node_modules -name doc -type d -print0|xargs -0 rm -rf
-  find node_modules -name docs -type d -print0|xargs -0 rm -rf
-  find node_modules -name dist -type d -print0|xargs -0 rm -rf
-  find node_modules -name example -type d -print0|xargs -0 rm -rf
-  find node_modules -name examples -type d -print0|xargs -0 rm -rf
-  find node_modules -name "*~" -print0|xargs -0 rm
-  find node_modules -name "*.patch" -print0|xargs -0 rm
-  find node_modules -name "README*" -print0|xargs -0 rm
-  find node_modules -name "Readme*" -print0|xargs -0 rm
-  find node_modules -name "readme*" -print0|xargs -0 rm
-  find node_modules -name "HISTORY*" -print0|xargs -0 rm
-  find node_modules -name "History*" -print0|xargs -0 rm
-  find node_modules -name "CHANGELOG*" -print0|xargs -0 rm
-  find node_modules -name "*.1" -print0|xargs -0 rm
-  find node_modules -name "CONTRIBUTING*" -print0|xargs -0 rm
-  find node_modules -name "Contributors*" -print0|xargs -0 rm
-  find node_modules -name "CHANGES*" -print0|xargs -0 rm
-  find node_modules -name "Changelog*" -print0|xargs -0 rm
-  find node_modules -name "Makefile*" -print0|xargs -0 rm
-  find node_modules -name ".npmignore" -print0|xargs -0 rm
-  find node_modules -name ".travis.yml" -print0|xargs -0 rm
-  find node_modules -name ".jshintrc" -print0|xargs -0 rm
-  find node_modules -name ".nvmrc" -print0|xargs -0 rm
+  find node_modules -name test -type d -print0|xargs -r -0 rm -rf
+  find node_modules -name tests -type d -print0|xargs -r -0 rm -rf
+  find node_modules -name doc -type d -print0|xargs -r -0 rm -rf
+  find node_modules -name docs -type d -print0|xargs -r -0 rm -rf
+  find node_modules -name dist -type d -print0|xargs -r -0 rm -rf
+  find node_modules -name example -type d -print0|xargs -r -0 rm -rf
+  find node_modules -name examples -type d -print0|xargs -r -0 rm -rf
+  find node_modules -name "*~" -print0|xargs -r -0 rm
+  find node_modules -name "*.patch" -print0|xargs -r -0 rm
+  find node_modules -name "README*" -print0|xargs -r -0 rm
+  find node_modules -name "Readme*" -print0|xargs -r -0 rm
+  find node_modules -name "readme*" -print0|xargs -r -0 rm
+  find node_modules -name "HISTORY*" -print0|xargs -r -0 rm
+  find node_modules -name "History*" -print0|xargs -r -0 rm
+  find node_modules -name "CHANGELOG*" -print0|xargs -r -0 rm
+  find node_modules -name "*.1" -print0|xargs -r -0 rm
+  find node_modules -name "CONTRIBUTING*" -print0|xargs -r -0 rm
+  find node_modules -name "Contributors*" -print0|xargs -r -0 rm
+  find node_modules -name "CHANGES*" -print0|xargs -r -0 rm
+  find node_modules -name "Changelog*" -print0|xargs -r -0 rm
+  find node_modules -name "Makefile*" -print0|xargs -r -0 rm
+  find node_modules -name ".npmignore" -print0|xargs -r -0 rm
+  find node_modules -name ".travis.yml" -print0|xargs -r -0 rm
+  find node_modules -name ".jshintrc" -print0|xargs -r -0 rm
+  find node_modules -name ".nvmrc" -print0|xargs -r -0 rm
 }
 
 package() {
