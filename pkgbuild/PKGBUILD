@@ -64,7 +64,7 @@ package() {
   cd "${pkgname}"
   install -g kronos -o kronos -d $pkgdir/var/kronos
   install -g kronos -o kronos -d $pkgdir/srv/kronos
-  tar cf - samples bin node_modules package.json|(cd $pkgdir/srv/kronos;tar xf - )
+  tar cf - samples bin node_modules package.json config.json|(cd $pkgdir/srv/kronos;tar xf - )
   (cd pkgbuild/support
    mkdir -p etc/systemd/system/multi-user.target.wants
    ln -s usr/lib/systemd/kronos-cluster-node.service etc/systemd/system/multi-user.target.wants/kronos-cluster-node.service
