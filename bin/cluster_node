@@ -36,6 +36,7 @@ if (commander.debug) {
   logLevel = 'trace';
 }
 
+
 const cfg = commander.config ? new Promise((fullfill, reject) => {
   fs.readFile(commander.config, (err, data) => {
     if (err) reject(err);
@@ -126,6 +127,8 @@ Promise.all([kronosModules(), cfg]).then(results => {
   }
 
   ksm.manager(cfg, modules).then(manager => {
+    process.on('unhandledRejection', reason => manager.error(reason));
+
     process.on('SIGINT', () => manager.stop().then(() => process.exit()));
     if (commander.flow) {
       manager.loadFlowFromFile(commander.flow).then(flow => {
