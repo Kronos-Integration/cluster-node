@@ -2,7 +2,7 @@
 
 /* jslint node: true, esnext: true */
 
-"use strict";
+'use strict';
 
 const os = require('os'),
   fs = require('fs'),
@@ -18,7 +18,7 @@ const os = require('os'),
 
 //Error.prepareStackTrace = (err, stackObj) => stackObj[0];
 
-let logLevel = "info";
+let logLevel = 'info';
 
 commander
   .version(module.exports.version)
@@ -54,13 +54,13 @@ const cfg = commander.config ? new Promise((fullfill, reject) => {
     }
   });
 }) : Promise.resolve([{
-  name: "kronos"
+  name: 'kronos'
 }, {
-  name: "koa-admin",
+  name: 'koa-admin',
   port: 10000
 }, {
-  name: "registry", // consul
-  checkInterval: "60s"
+  name: 'registry', // consul
+  checkInterval: '60s'
 }]);
 
 process.on('SIGHUP', () => rebirth());
@@ -113,7 +113,6 @@ function kronosModules() {
     )).then(results => modules);
   });
 }
-
 
 Promise.all([kronosModules(), cfg]).then(results => {
   const modules = results[0];
