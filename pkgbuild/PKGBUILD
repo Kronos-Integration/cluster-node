@@ -1,7 +1,7 @@
 # Maintainer: Markus Felten <markus.felten@gmx.de>
 pkgname=kronos-cluster-node
 pkgrel=1
-pkgver=r714.9b60a64
+pkgver=r769.4b835cd
 epoch=
 pkgdesc="kronos cluster node"
 arch=('any')
@@ -40,7 +40,6 @@ build() {
   find node_modules -name dist -type d -print0|xargs -r -0 rm -rf
   find node_modules -name example -type d -print0|xargs -r -0 rm -rf
   find node_modules -name examples -type d -print0|xargs -r -0 rm -rf
-  find node_modules -name "*~" -print0|xargs -r -0 rm
   find node_modules -name "*.patch" -print0|xargs -r -0 rm
   find node_modules -name "README*" -print0|xargs -r -0 rm
   find node_modules -name "Readme*" -print0|xargs -r -0 rm
@@ -54,10 +53,12 @@ build() {
   find node_modules -name "CHANGES*" -print0|xargs -r -0 rm
   find node_modules -name "Changelog*" -print0|xargs -r -0 rm
   find node_modules -name "Makefile*" -print0|xargs -r -0 rm
-  find node_modules -name ".npmignore" -print0|xargs -r -0 rm
-  find node_modules -name ".travis.yml" -print0|xargs -r -0 rm
-  find node_modules -name ".jshintrc" -print0|xargs -r -0 rm
-  find node_modules -name ".nvmrc" -print0|xargs -r -0 rm
+  find . -name ".gitignore" -print0|xargs -r -0 rm
+  find . -name ".npmignore" -print0|xargs -r -0 rm
+  find . -name ".travis.yml" -print0|xargs -r -0 rm
+  find . -name "*~" -print0|xargs -r -0 rm
+  find . -name ".jshintrc" -print0|xargs -r -0 rm
+  find . -name ".nvmrc" -print0|xargs -r -0 rm
 }
 
 package() {
