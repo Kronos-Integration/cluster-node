@@ -15,9 +15,6 @@ const os = require('os'),
   rebirth = require('rebirth'),
   glob = require('glob');
 
-
-//Error.prepareStackTrace = (err, stackObj) => stackObj[0];
-
 let logLevel = 'info';
 
 commander
@@ -35,7 +32,6 @@ if (commander.debug) {
 } else if (commander.trace) {
   logLevel = 'trace';
 }
-
 
 const cfg = commander.config ? new Promise((fullfill, reject) => {
   fs.readFile(commander.config, (err, data) => {
