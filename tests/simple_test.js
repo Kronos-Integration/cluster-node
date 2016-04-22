@@ -11,6 +11,8 @@ const chai = require('chai'),
   child_process = require('child_process');
 
 describe('cluster_node', function () {
+  this.timeout(10000);
+
   it('simple start', done => {
     const child = child_process.exec([
       path.join(__dirname, '../bin/cluster_node'),
@@ -24,6 +26,7 @@ describe('cluster_node', function () {
       done();
     });
 
-    setTimeout(() => child.kill('SIGKILL'), 1000);
+    console.log(`child:`, child);
+    setTimeout(() => child.kill('SIGKILL'), 5000);
   });
 });
