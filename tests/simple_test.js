@@ -11,8 +11,7 @@ const chai = require('chai'),
   child_process = require('child_process');
 
 describe('cluster_node', function () {
-  it('simple start', function (done) {
-
+  it('simple start', done => {
     const child = child_process.exec([
       path.join(__dirname, '../bin/cluster_node'),
       '--trace'
@@ -20,14 +19,11 @@ describe('cluster_node', function () {
       console.log(err);
       console.log(stdout);
       //assert.isNull(err);
-      //assert.isTrue(fs.existsSync(path.join(dir, "success.txt")), "did not find success.txt");
-      //assert.match(stdout, /completed/, "Expected a success message");
+      assert.match(stdout, /kronos transitioned from starting.*running/);
+
       done();
     });
 
-    setTimeout(() => {
-      console.log(`send signal`);
-      child.kill('SIGKILL');
-    }, 1000);
+    setTimeout(() => child.kill('SIGKILL'), 1000);
   });
 });
