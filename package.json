@@ -27,7 +27,7 @@
     "kronos-adapter-outbound-file": "2.0.3",
     "kronos-adapter-outbound-http": "1.0.4",
     "kronos-flow": "^2.5.15",
-    "kronos-flow-control-step": "2.2.8",
+    "kronos-flow-control-step": "2.2.9",
     "kronos-http-routing-step": "^4.3.4",
     "kronos-interceptor-http-request": "2.3.0",
     "kronos-interceptor-line-header": "2.0.4",
