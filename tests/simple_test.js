@@ -14,17 +14,18 @@ describe('cluster_node', function () {
   this.timeout(10000);
 
   it('simple start', done => {
-    const child = child_process.exec([
-      path.join(__dirname, '../bin/cluster_node'),
-      '--trace'
-    ].join(' '), (err, stdout, stderr) => {
-      console.log(err);
-      console.log(stdout);
-      //assert.isNull(err);
-      assert.match(stdout, /kronos transitioned from starting.*running/);
+    const child = child_process.spawn(
+      path.join(__dirname, '../bin/cluster_node'), ['--trace', '--config', path.join(__dirname,
+        '../config.json')], {
+        cwd: path.join(__dirname, '..')
+      }, (err, stdout, stderr) => {
+        console.log(err);
+        console.log(stdout);
+        //assert.isNull(err);
+        assert.match(stdout, /kronos transitioned from starting.*running/);
 
-      done();
-    });
+        done();
+      });
 
     console.log(`child:`, child);
     setTimeout(() => child.kill('SIGKILL'), 5000);
