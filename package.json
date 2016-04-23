@@ -25,7 +25,7 @@
     "glob": "^7.0.3",
     "kronos-adapter-inbound-file": "2.0.5",
     "kronos-adapter-outbound-file": "2.0.4",
-    "kronos-adapter-outbound-http": "1.0.6",
+    "kronos-adapter-outbound-http": "1.0.7",
     "kronos-flow": "^2.5.15",
     "kronos-flow-control-step": "2.2.10",
     "kronos-http-routing-step": "^4.3.4",
