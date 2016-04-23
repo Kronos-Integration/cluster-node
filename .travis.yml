@@ -18,7 +18,6 @@ before_script:
   - npm prune
   - npm install -g codecov
   - ./tests/travis/start_consul.sh
-  - /usr/bin/env node --version
 script:
   - npm run-script cover
 after_script:
