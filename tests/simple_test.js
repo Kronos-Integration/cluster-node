@@ -20,7 +20,6 @@ describe('cluster_node', function () {
         cwd: path.join(__dirname, '..')
       }, (err, stdout, stderr) => {
         console.log(err);
-        console.log(stdout);
         //assert.isNull(err);
         assert.match(stdout, /kronos transitioned from starting.*running/);
 
@@ -29,6 +28,9 @@ describe('cluster_node', function () {
 
     child.stdout.on('data', data => {
       console.log(`stdout: ${data}`);
+      if (data.match(/kronos transitioned from starting.*running/)) {
+        done();
+      }
     });
 
     child.stderr.on('data', data => {
@@ -39,7 +41,7 @@ describe('cluster_node', function () {
       console.log(`child process exited with code ${code}`);
     });
 
-    console.log(`child:`, child);
+    //console.log(`child:`, child);
     setTimeout(() => child.kill('SIGKILL'), 5000);
   });
 });
