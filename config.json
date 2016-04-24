@@ -17,4 +17,8 @@
   "checkInterval": "60s",
   "port": 8500,
   "host": "localhost"
+}, {
+  "name": "health-check",
+  "memoryInterval": 60,
+  "uptimeInterval": 60
 }]
