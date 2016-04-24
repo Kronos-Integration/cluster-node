@@ -7,13 +7,14 @@
 const os = require('os'),
   fs = require('fs'),
   path = require('path'),
-  pkginfo = require('pkginfo')(module, 'name', 'version'),
   commander = require('commander'),
   ksm = require('kronos-service-manager'),
   ee = require('expression-expander'),
   systemdSocket = require('systemd-socket'),
   rebirth = require('rebirth'),
   glob = require('glob');
+
+require('pkginfo')(module, 'version');
 
 let logLevel = 'info';
 
