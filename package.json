@@ -29,7 +29,7 @@
     "kronos-flow": "^2.5.15",
     "kronos-flow-control-step": "2.2.10",
     "kronos-http-routing-step": "^4.3.4",
-    "kronos-interceptor-http-request": "2.3.0",
+    "kronos-interceptor-http-request": "2.3.1",
     "kronos-interceptor-line-header": "2.0.4",
     "kronos-interceptor-line-parser": "^2.0.1",
     "kronos-interceptor-line-tokenizer-csv": "^2.0.2",
