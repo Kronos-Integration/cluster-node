@@ -25,8 +25,6 @@ describe('cluster_node', function () {
 
     child.stdout.on('data', data => {
       data = `${data}`;
-      //data.replace(/(\r\n|\n|\r)/gm, '');
-      //data.trim();
       data = data.substring(0, data.length - 1);
 
       console.log(data);
