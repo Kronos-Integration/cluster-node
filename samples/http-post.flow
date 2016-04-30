@@ -6,7 +6,7 @@
   "steps": {
     "web": {
       "type": "kronos-http-routing",
-      "listener": "admin",
+      "listener": "koa-admin",
       "endpoints": {
         "in": {
           "serviceName" : "myService",
@@ -22,23 +22,6 @@
     "write-file": {
       "type": "kronos-file",
       "fileName": "/tmp/aFile"
-    },
-    "s3": {
-      "type": "kronos-stdout",
-      "endpoints": {
-        "in": {
-          "interceptors": [
-            {
-              "type": "timeout",
-              "timeout": 2000
-            },
-            {
-              "type": "request-limit",
-              "limit": 10
-            }
-          ]
-        }
-      }
     }
   }
 }
