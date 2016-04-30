@@ -2,8 +2,9 @@
   "name": "http-post-demo",
   "type": "kronos-flow",
   "description": "http post demo",
+  "logLevel":"trace",
   "steps": {
-    "s1": {
+    "web": {
       "type": "kronos-http-routing",
       "listener": "admin",
       "endpoints": {
@@ -11,14 +12,14 @@
           "serviceName" : "myService",
           "path": "/in",
           "method": "PUT",
-          "target": "s2/in",
+          "target": "write-file/in",
           "interceptors": [{
           "type" : "koa-request"
           }]
         }
       }
     },
-    "s2": {
+    "write-file": {
       "type": "kronos-file",
       "fileName": "/tmp/aFile"
     },
