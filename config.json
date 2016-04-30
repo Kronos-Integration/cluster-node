@@ -14,7 +14,7 @@
   }
 }, {
   "name": "registry",
-  "checkInterval": "60s",
+  "checkInterval": 60,
   "port": 8500,
   "host": "localhost"
 }, {
