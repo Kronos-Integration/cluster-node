@@ -18,10 +18,14 @@ require('pkginfo')(module, 'version');
 
 let logLevel = 'info';
 
+let flowFileNames = [];
+
 commander
   .version(module.exports.version)
   .description('run cluster node')
-  .option('-f, --flow <file>', 'specify flow definition to be registered')
+  .option('-f, --flow <file>', 'flow to be registered', function (name) {
+    flowFileNames.push(name);
+  })
   .option('-s, --start', 'start flow after registering')
   .option('-c, --config <file>', 'use config from file')
   .option('-d, --debug', 'enable debugging')
@@ -124,10 +128,10 @@ Promise.all([kronosModules(), cfg]).then(results => {
 
   ksm.manager(cfg, modules).then(manager => {
     process.on('unhandledRejection', reason => manager.error(reason));
-
     process.on('SIGINT', () => manager.stop().then(() => process.exit()));
-    if (commander.flow) {
-      manager.loadFlowFromFile(commander.flow).then(flow => {
+
+    flowFileNames.forEach(name => {
+      manager.loadFlowFromFile(name).then(flow => {
         manager.info(level => `Flow declared: ${flow}`);
         if (commander.start) {
           manager.info(level => `Starting ... ${flow}`);
@@ -136,6 +140,6 @@ Promise.all([kronosModules(), cfg]).then(results => {
               `Flow started failed: ${error}`));
         }
       }).catch(error => manager.error(`Flow initialization failed: ${error}`));
-    }
+    });
   });
 }).catch(console.log);
