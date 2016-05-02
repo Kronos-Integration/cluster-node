@@ -56,6 +56,9 @@ build() {
   find . -name ".gitignore" -print0|xargs -r -0 rm
   find . -name ".gitmodules" -print0|xargs -r -0 rm
   find . -name ".verb.md" -print0|xargs -r -0 rm
+  find . -name "SECURITY.md" -print0|xargs -r -0 rm
+  find . -name "SFTPStream.md" -print0|xargs -r -0 rm
+  find . -name "LIMITS.md" -print0|xargs -r -0 rm
   find . -name ".npmignore" -print0|xargs -r -0 rm
   find . -name ".travis.yml" -print0|xargs -r -0 rm
   find . -name ".jshintrc" -print0|xargs -r -0 rm
@@ -68,6 +71,7 @@ build() {
   find . -name ".gitattributes" -print0|xargs -r -0 rm
   find . -name ".tern-project" -print0|xargs -r -0 rm
   find . -name ".dockerignore" -print0|xargs -r -0 rm
+  find . -name ".dir-locals.el" -print0|xargs -r -0 rm
 }
 
 package() {
