@@ -38,7 +38,7 @@
     "kronos-interceptor-object-data-processor-chunk": "2.0.6",
     "kronos-interceptor-object-data-processor-row": "^1.2.7",
     "kronos-interceptor-stream-obj2string": "2.0.6",
-    "kronos-service-admin": "^2.21.3",
+    "kronos-service-admin": "^2.21.4",
     "kronos-service-consul": "^2.11.11",
     "kronos-service-health-check": "^2.8.2",
     "kronos-service-manager": "^3.3.9",
