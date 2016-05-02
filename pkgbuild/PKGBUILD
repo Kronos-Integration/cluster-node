@@ -44,6 +44,8 @@ build() {
   find node_modules -iname example -type d -print0|xargs -r -0 rm -rf
   find node_modules -iname examples -type d -print0|xargs -r -0 rm -rf
   find node_modules -iname "readme*" -print0|xargs -r -0 rm
+  find node_modules -iname "AUTHORS*" -print0|xargs -r -0 rm
+  find node_modules -iname "NOTICE*" -print0|xargs -r -0 rm
   find node_modules -iname "HISTORY*" -print0|xargs -r -0 rm
   find node_modules -iname "SUMMARY.md" -print0|xargs -r -0 rm
   find node_modules -iname "CONTRIBUTING*" -print0|xargs -r -0 rm
@@ -52,10 +54,15 @@ build() {
   find node_modules -iname "CHANGELOG*" -print0|xargs -r -0 rm
   find node_modules -iname "Makefile*" -print0|xargs -r -0 rm
   find . -name ".gitignore" -print0|xargs -r -0 rm
+  find . -name ".gitmodules" -print0|xargs -r -0 rm
+  find . -name ".verb.md" -print0|xargs -r -0 rm
   find . -name ".npmignore" -print0|xargs -r -0 rm
   find . -name ".travis.yml" -print0|xargs -r -0 rm
   find . -name ".jshintrc" -print0|xargs -r -0 rm
   find . -name ".eslintrc" -print0|xargs -r -0 rm
+  find . -name ".eslintignore" -print0|xargs -r -0 rm
+  find . -name ".nvmrc" -print0|xargs -r -0 rm
+  find . -name ".zuul.yml" -print0|xargs -r -0 rm
   find . -name ".doclets.yml" -print0|xargs -r -0 rm
   find . -name ".editorconfig" -print0|xargs -r -0 rm
   find . -name ".gitattributes" -print0|xargs -r -0 rm
