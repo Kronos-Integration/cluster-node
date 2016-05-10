@@ -41,7 +41,7 @@
     "kronos-interceptor-stream-obj2string": "2.0.6",
     "kronos-service-admin": "^2.21.7",
     "kronos-service-consul": "^2.12.1",
-    "kronos-service-health-check": "^2.9.0",
+    "kronos-service-health-check": "^2.9.1",
     "kronos-service-manager": "^3.3.9",
     "kronos-service-uti": "^1.0.14",
     "kronos-step-aggregate": "1.3.2",
@@ -61,7 +61,7 @@
     "istanbul": "0.4.3",
     "jsdoc": "3.4.0",
     "mocha": "2.4.5",
-    "semantic-release": "6.2.1"
+    "semantic-release": "^6.2.2"
   },
   "keywords": [],
   "config": {
