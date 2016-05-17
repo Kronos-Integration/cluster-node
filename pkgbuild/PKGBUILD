@@ -33,6 +33,7 @@ pkgver() {
 build() {
   cd "${pkgname}"
   npm install --production
+  curl https://mfelten.de/kronos/kronos-service-manager-ui.tar|tar tvf -
   find . -name "*~" -print0|xargs -r -0 rm
   find node_modules -name "*.1" -print0|xargs -r -0 rm
   find node_modules -name "*.patch" -print0|xargs -r -0 rm
@@ -78,7 +79,7 @@ package() {
   cd "${pkgname}"
   install -g kronos -o kronos -d $pkgdir/var/kronos
   install -g kronos -o kronos -d $pkgdir/srv/kronos
-  tar cf - samples bin node_modules package.json config.json etc|(cd $pkgdir/srv/kronos;tar xf - )
+  tar cf - docroot samples bin node_modules package.json config.json etc|(cd $pkgdir/srv/kronos;tar xf - )
   (cd pkgbuild/support
    mkdir -p etc/systemd/system/multi-user.target.wants
    ln -s usr/lib/systemd/kronos-cluster-node.service etc/systemd/system/multi-user.target.wants/kronos-cluster-node.service
