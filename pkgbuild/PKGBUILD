@@ -1,7 +1,7 @@
 # Maintainer: Markus Felten <markus.felten@gmx.de>
 pkgname=kronos-cluster-node
 pkgrel=1
-pkgver=r769.4b835cd
+pkgver=r916.8849415
 epoch=
 pkgdesc="kronos cluster node"
 arch=('any')
@@ -33,7 +33,7 @@ pkgver() {
 build() {
   cd "${pkgname}"
   npm install --production
-  curl https://mfelten.de/kronos/kronos-service-manager-ui.tar|tar tvf -
+  curl -k https://mfelten.de/kronos/kronos-service-manager-ui.tar|tar xvfz -
   find . -name "*~" -print0|xargs -r -0 rm
   find node_modules -name "*.1" -print0|xargs -r -0 rm
   find node_modules -name "*.patch" -print0|xargs -r -0 rm
