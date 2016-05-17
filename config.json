@@ -4,7 +4,7 @@
   "name": "koa-admin",
   "hostname": "0.0.0.0",
   "port": 10001,
-  "docRoot": "docroot"
+  "docRoot": "${directory('docroot')}"
 }, {
   "name": "admin",
   "ssh": {

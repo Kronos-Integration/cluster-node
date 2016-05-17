@@ -44,10 +44,16 @@ const cfg = commander.config ? new Promise((fullfill, reject) => {
     else {
       const ctx = ee.createContext({
         evaluate: (expression, context) => {
-          const r = expression.match(/file\(\s*\'([^\']+)\'\s*\)/);
+          let r = expression.match(/file\(\s*\'([^\']+)\'\s*\)/);
           if (r) {
             return fs.readFileSync(path.resolve(path.dirname(commander.config), r[1]));
           }
+
+          r = expression.match(/directory\(\s*\'([^\']+)\'\s*\)/);
+          if (r) {
+            return path.resolve(path.dirname(commander.config), r[1]);
+          }
+
           return undefined;
         }
       });
