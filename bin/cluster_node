@@ -133,6 +133,7 @@ Promise.all([kronosModules(), cfg]).then(results => {
   }
 
   ksm.manager(cfg, modules).then(manager => {
+    process.on('uncaughtException', err => manager.error(err));
     process.on('unhandledRejection', reason => manager.error(reason));
     process.on('SIGINT', () => manager.stop().then(() => process.exit()));
 
