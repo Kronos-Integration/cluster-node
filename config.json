@@ -6,10 +6,8 @@
     "retryTimeout": "600",
     "address": "0.0.0.0",
     "fromPort": 10001,
-    "toPort": 10010
+    "toPort": 10005
   },
-  "hostname": "0.0.0.0",
-  "port": 10001,
   "docRoot": "${directory('docroot')}"
 }, {
   "name": "admin",

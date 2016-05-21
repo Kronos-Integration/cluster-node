@@ -18,16 +18,16 @@ require('pkginfo')(module, 'version');
 
 let logLevel = 'info';
 
-let flowFileNames = [];
+const flowFileNames = [];
+const values = [];
 
 commander
   .version(module.exports.version)
   .description('run cluster node')
-  .option('-f, --flow <file>', 'flow to be registered', function (name) {
-    flowFileNames.push(name);
-  })
+  .option('-f, --flow <file>', 'flow to be registered', name => flowFileNames.push(name))
   .option('-s, --start', 'start flow after registering')
   .option('-c, --config <file>', 'use config from file')
+  .option('-d, --define <service:key=value>', 'define service value', value => values.push(value))
   .option('-d, --debug', 'enable debugging')
   .option('-t, --trace', 'enable tracing')
   .parse(process.argv);
@@ -124,6 +124,26 @@ function kronosModules() {
 Promise.all([kronosModules(), cfg]).then(results => {
   const modules = results[0];
   const cfg = results[1];
+
+  values.forEach(value => {
+    const m = value.match(/^([^:]+):([^=]+)=(.*)/);
+    if (m) {
+      let slot = cfg.find(c => c.name === m[1]);
+      if (slot) {
+        console.log(`${slot.name}: ${m[2]} = ${m[3]}`);
+        slot[m[2]] = m[3];
+      } else {
+        console.log(`name ${m[1]}: ${m[2]} = ${m[3]}`);
+
+        cfg.push({
+          name: m[1],
+          [m[2]]: m[3]
+        });
+      }
+    } else {
+      console.log(`no service:key=value ${value}`);
+    }
+  });
 
   cfg.forEach(c => c.logLevel = logLevel);
 
