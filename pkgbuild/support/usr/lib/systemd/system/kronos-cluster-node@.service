@@ -1,12 +1,12 @@
 [Unit]
-Description=kronos cluster node %id
+Description=kronos cluster node %H-%i
 Requires=network-online.target
 After=network-online.target
 [Service]
 Restart=on-failure
 User=kronos
 WorkingDirectory=/var/kronos
-ExecStart=/srv/kronos/bin/cluster_node --config /srv/kronos/config.json -d registry:id=%H-%id
+ExecStart=/srv/kronos/bin/cluster_node --config /srv/kronos/config.json -d registry:id=%H-%i
 ExecReload=/bin/kill -HUP $MAINPID
 KillSignal=SIGINT
 [Install]
