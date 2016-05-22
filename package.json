@@ -49,7 +49,7 @@
     "kronos-step-file": "^1.0.11",
     "kronos-step-gzip": "^2.0.8",
     "kronos-step-passthrough": "^2.0.9",
-    "kronos-step-stdio": "3.0.10",
+    "kronos-step-stdio": "3.0.11",
     "kronos-step-system": "^2.0.6",
     "pkginfo": "0.4.0",
     "rebirth": "0.2.3",
