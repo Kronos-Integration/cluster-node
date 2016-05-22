@@ -40,7 +40,7 @@
     "kronos-interceptor-object-data-processor-row": "^1.2.7",
     "kronos-interceptor-stream-obj2string": "2.0.6",
     "kronos-service-admin": "^2.23.7",
-    "kronos-service-consul": "^2.14.5",
+    "kronos-service-consul": "^2.14.6",
     "kronos-service-health-check": "^2.9.5",
     "kronos-service-manager": "^3.3.12",
     "kronos-service-uti": "^1.0.15",
