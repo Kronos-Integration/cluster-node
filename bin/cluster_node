@@ -130,11 +130,8 @@ Promise.all([kronosModules(), cfg]).then(results => {
     if (m) {
       let slot = cfg.find(c => c.name === m[1]);
       if (slot) {
-        console.log(`${slot.name}: ${m[2]} = ${m[3]}`);
         slot[m[2]] = m[3];
       } else {
-        console.log(`name ${m[1]}: ${m[2]} = ${m[3]}`);
-
         cfg.push({
           name: m[1],
           [m[2]]: m[3]
