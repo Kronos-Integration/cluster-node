@@ -45,7 +45,7 @@
     "kronos-service-manager": "^3.3.13",
     "kronos-service-uti": "^1.0.15",
     "kronos-step-aggregate": "^1.4.0",
-    "kronos-step-archive-tar": "^2.0.8",
+    "kronos-step-archive-tar": "^2.0.9",
     "kronos-step-file": "^1.0.12",
     "kronos-step-gzip": "^2.0.9",
     "kronos-step-passthrough": "^2.0.10",
