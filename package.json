@@ -23,7 +23,7 @@
     "commander": "2.9.0",
     "expression-expander": "^3.0.0",
     "glob": "^7.0.3",
-    "kronos-adapter-inbound-file": "2.0.6",
+    "kronos-adapter-inbound-file": "2.0.7",
     "kronos-adapter-outbound-file": "^2.0.5",
     "kronos-adapter-outbound-http": "1.0.7",
     "kronos-flow": "^2.5.20",
