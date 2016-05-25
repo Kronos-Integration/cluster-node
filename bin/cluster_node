@@ -153,6 +153,7 @@ Promise.all([kronosModules(), cfg]).then(results => {
     process.on('uncaughtException', err => manager.error(err));
     process.on('unhandledRejection', reason => manager.error(reason));
     process.on('SIGINT', () => manager.stop().then(() => process.exit()));
+    process.title = manager.id;
 
     flowFileNames.forEach(name => {
       manager.loadFlowFromFile(name).then(flow => {
