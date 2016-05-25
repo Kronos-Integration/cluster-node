@@ -6,7 +6,7 @@
     "retryTimeout": "600",
     "address": "0.0.0.0",
     "fromPort": 10001,
-    "toPort": 10005
+    "toPort": 10009
   },
   "docRoot": "${directory('docroot')}"
 }, {
@@ -15,7 +15,7 @@
     "hostKeys": [
       "${file('etc/hostKey')}"
     ],
-    "port": 10002
+    "port": 10010
   }
 }, {
   "name": "registry",
