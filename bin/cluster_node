@@ -16,7 +16,7 @@ const os = require('os'),
 
 require('pkginfo')(module, 'version');
 
-let logLevel = 'info';
+let logLevel;
 
 const flowFileNames = [];
 const values = [];
@@ -142,7 +142,9 @@ Promise.all([kronosModules(), cfg]).then(results => {
     }
   });
 
-  cfg.forEach(c => c.logLevel = logLevel);
+  if (logLevel !== undefined) {
+    cfg.forEach(c => c.logLevel = logLevel);
+  }
 
   const sds = systemdSocket();
   if (sds) {
@@ -150,6 +152,10 @@ Promise.all([kronosModules(), cfg]).then(results => {
   }
 
   ksm.manager(cfg, modules).then(manager => {
+    if (logLevel !== undefined) {
+      Object.keys(manager.services).forEach(sn => manager.services[sn].logLevel = logLevel);
+    }
+
     process.on('uncaughtException', err => manager.error(err));
     process.on('unhandledRejection', reason => manager.error(reason));
     process.on('SIGINT', () => manager.stop().then(() => process.exit()));
@@ -157,9 +163,9 @@ Promise.all([kronosModules(), cfg]).then(results => {
 
     flowFileNames.forEach(name => {
       manager.loadFlowFromFile(name).then(flow => {
-        manager.info(level => `Flow declared: ${flow}`);
+        manager.info(`Flow declared: ${flow}`);
         if (commander.start) {
-          manager.info(level => `Starting ... ${flow}`);
+          manager.info(`Starting ... ${flow}`);
           flow.start().then(() => manager.info(`Flow started: ${flow}`)).catch(error =>
             manager.error(
               `Flow started failed: ${error}`));
