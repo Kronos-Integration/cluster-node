@@ -11,6 +11,11 @@
 [![downloads](http://img.shields.io/npm/dm/kronos-cluster-node.svg?style=flat-square)](https://npmjs.org/package/kronos-cluster-node)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
+kronos-cluster-node
+=====
+kronos cluster node sample application
+
+
 install
 =======
 

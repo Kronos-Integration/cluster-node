@@ -2,7 +2,7 @@
   "name": "kronos-cluster-node",
   "bin": "bin/cluster_node",
   "version": "0.0.0-semantic-release",
-  "description": "kronos cluster managed node sample application",
+  "description": "kronos cluster node sample application",
   "scripts": {
     "start": "node bin/cluster_node",
     "cover": "node ./node_modules/istanbul/lib/cli.js cover --hook-run-in-context ./node_modules/mocha/bin/_mocha -- --R spec --U exports tests/*_test.js",
