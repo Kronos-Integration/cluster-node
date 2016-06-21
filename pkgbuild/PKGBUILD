@@ -82,9 +82,9 @@ package() {
   tar cf - docroot samples bin node_modules package.json config.json etc|(cd $pkgdir/srv/kronos;tar xf - )
   (cd pkgbuild/support
    mkdir -p etc/systemd/system/multi-user.target.wants
-   ln -s usr/lib/systemd/kronos-cluster-node@i1.service etc/systemd/system/multi-user.target.wants/kronos-cluster-node@.service
-   ln -s usr/lib/systemd/kronos-cluster-node@i2.service etc/systemd/system/multi-user.target.wants/kronos-cluster-node@.service
-   ln -s usr/lib/systemd/kronos-cluster-node@i3.service etc/systemd/system/multi-user.target.wants/kronos-cluster-node@.service
-   ln -s usr/lib/systemd/kronos-cluster-node@i4.service etc/systemd/system/multi-user.target.wants/kronos-cluster-node@.service
+   for i in {1..4}
+   do
+     ln -s /usr/lib/systemd/system/kronos-cluster-node@.service etc/systemd/system/multi-user.target.wants/kronos-cluster-node@i${i}.service
+   done
    tar cf - .)|(cd $pkgdir;tar xf - )
 }
