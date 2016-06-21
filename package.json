@@ -22,7 +22,7 @@
   "dependencies": {
     "commander": "2.9.0",
     "expression-expander": "^3.0.0",
-    "glob": "^7.0.4",
+    "glob": "^7.0.5",
     "kronos-adapter-inbound-file": "^2.0.12",
     "kronos-adapter-outbound-file": "^2.0.10",
     "kronos-adapter-outbound-http": "^1.0.9",
@@ -58,7 +58,7 @@
   "devDependencies": {
     "chai": "3.5.0",
     "cz-conventional-changelog": "1.1.6",
-    "istanbul": "0.4.3",
+    "istanbul": "0.4.4",
     "jsdoc": "3.4.0",
     "mocha": "2.5.3",
     "semantic-release": "6.3.0"
