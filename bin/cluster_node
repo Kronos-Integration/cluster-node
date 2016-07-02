@@ -12,7 +12,8 @@ const os = require('os'),
   ee = require('expression-expander'),
   systemdSocket = require('systemd-socket'),
   rebirth = require('rebirth'),
-  glob = require('glob');
+  glob = require('glob'),
+  createGrammar = require('pratt-parser').createGrammar;
 
 require('pkginfo')(module, 'version');
 
@@ -38,24 +39,85 @@ if (commander.debug) {
   logLevel = 'trace';
 }
 
+function createValue(value) {
+  return Object.create(null, {
+    value: {
+      value: value
+    }
+  });
+}
+
 const cfg = commander.config ? new Promise((fullfill, reject) => {
   fs.readFile(commander.config, (err, data) => {
     if (err) reject(err);
     else {
-      const ctx = ee.createContext({
-        evaluate: (expression, context) => {
-          let r = expression.match(/file\(\s*\'([^\']+)\'\s*\)/);
-          if (r) {
-            return fs.readFileSync(path.resolve(path.dirname(commander.config), r[1]));
-          }
+      const functions = {
+        file: args => createValue(fs.readFileSync(path.resolve(path.dirname(commander.config), args[0].value))),
+        directory: args => createValue(path.resolve(path.dirname(commander.config), args[0].value))
+      };
+      const g = createGrammar({
+        terminals: {
+          number: {},
+          identifier: {}
+        },
+        prefix: {
+          '(': {
+            precedence: 80,
+            led(grammar, left) {
+              if (left.type === 'identifier') {
+                const f = functions[left.value];
+                if (f === undefined) {
+                  throw new Error(`Unknown function: ${left.value}`);
+                }
 
-          r = expression.match(/directory\(\s*\'([^\']+)\'\s*\)/);
-          if (r) {
-            return path.resolve(path.dirname(commander.config), r[1]);
-          }
+                const args = [];
 
-          return undefined;
+                if (grammar.token.value !== ')') {
+                  while (true) {
+                    args.push(grammar.expression(0));
+
+                    if (grammar.token.value !== ',') {
+                      break;
+                    }
+                    grammar.advance(',');
+                  }
+                }
+
+                grammar.advance(')');
+
+                return f(args);
+              } else {
+                const e = grammar.expression(0);
+                grammar.advance(')');
+                return e;
+              }
+            }
+          }
+        },
+        infix: {
+          ',': {},
+          ')': {},
+          '+': {
+            precedence: 50,
+            combine: (left, right) => createValue(left.value + right.value)
+          },
+          '-': {
+            precedence: 50,
+            combine: (left, right) => createValue(left.value - right.value)
+          },
+          '*': {
+            precedence: 60,
+            combine: (left, right) => createValue(left.value * right.value)
+          },
+          '/': {
+            precedence: 60,
+            combine: (left, right) => createValue(left.value / right.value)
+          }
         }
+      });
+
+      const ctx = ee.createContext({
+        evaluate: (expression, context) => g.parse(expression).value
       });
       fullfill(ctx.expand(JSON.parse(data)));
     }
