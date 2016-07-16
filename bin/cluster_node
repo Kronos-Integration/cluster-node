@@ -51,6 +51,10 @@ const cfg = commander.config ? new Promise((fullfill, reject) => {
   fs.readFile(commander.config, (err, data) => {
     if (err) reject(err);
     else {
+      const constants = {
+        configDirectory: path.dirname(commander.config)
+      };
+
       const functions = {
         file: args => createValue(fs.readFileSync(path.resolve(path.dirname(commander.config), args[0].value))),
         directory: args => createValue(path.resolve(path.dirname(commander.config), args[0].value))
@@ -67,7 +71,13 @@ const cfg = commander.config ? new Promise((fullfill, reject) => {
 
                 if (ctx.value[value] !== undefined) {
                   properties.value.value = ctx.value[value];
+                  return;
                 }
+              }
+
+              const c = constants[value];
+              if (c) {
+                properties.value.value = c;
               }
             }
           },
@@ -76,7 +86,6 @@ const cfg = commander.config ? new Promise((fullfill, reject) => {
               precedence: 80,
               led(grammar, left) {
                 if (left.type === 'function') {
-                  const f = left.value;
                   const args = [];
 
                   if (grammar.token.value !== ')') {
@@ -92,7 +101,7 @@ const cfg = commander.config ? new Promise((fullfill, reject) => {
 
                   grammar.advance(')');
 
-                  return f(args);
+                  return left.value(args);
                 } else {
                   const e = grammar.expression(0);
                   grammar.advance(')');
@@ -126,7 +135,7 @@ const cfg = commander.config ? new Promise((fullfill, reject) => {
       const ctx = ee.createContext({
         evaluate: (expression, context, path) => {
           const v = g.parse(expression, path).value;
-          console.log(`${expression} -> ${v}`);
+          //console.log(`${expression} -> ${v}`);
           return v;
         }
       });
@@ -171,9 +180,8 @@ function kronosModules() {
             const p = JSON.parse(data);
 
             if (p.keywords) {
-              if (p.keywords.find(k => k === 'kronos-step' || k ===
-                  'kronos-service' || k ===
-                  'kronos-interceptor')) {
+              if (p.keywords.find(k =>
+                  k === 'kronos-step' || k === 'kronos-service' || k === 'kronos-interceptor')) {
                 try {
                   modules.push(require(p.name));
                   fullfill();
