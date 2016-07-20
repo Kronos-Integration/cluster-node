@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "commander": "2.9.0",
-    "expression-expander": "^4.1.1",
+    "expression-expander": "^5.0.0",
     "glob": "^7.0.5",
     "kronos-adapter-inbound-file": "^2.0.12",
     "kronos-adapter-outbound-file": "^2.0.10",
