@@ -57,7 +57,13 @@ const cfg = commander.config ? new Promise((fullfill, reject) => {
 
       const functions = {
         file: args => createValue(fs.readFileSync(path.resolve(path.dirname(commander.config), args[0].value))),
-        directory: args => createValue(path.resolve(path.dirname(commander.config), args[0].value))
+        directory: args => createValue(path.resolve(path.dirname(commander.config), args[0].value)),
+
+        // string functions
+        substring: args => createValue(args[0].value.substring(args[1].value, args[2].value)),
+        replace: args => createValue(args[0].value.replace(args[1].value, args[2].value)),
+        toUpperCase: args => createValue(args[0].value.toUpperCase()),
+        toLowerCase: args => createValue(args[0].value.toLowerCase())
       };
       const g = createGrammar({
         identifier(value, properties, context) {
@@ -71,6 +77,14 @@ const cfg = commander.config ? new Promise((fullfill, reject) => {
 
                 if (ctx.value[value] !== undefined) {
                   properties.value.value = ctx.value[value];
+                  return;
+                }
+              }
+              if (context[0].value.properties) {
+                const v = context[0].value.properties[value];
+                if (v !== undefined) {
+                  properties.value.value = v;
+                  console.log(`${value} -> ${v}`);
                   return;
                 }
               }
@@ -142,15 +156,17 @@ const cfg = commander.config ? new Promise((fullfill, reject) => {
       fullfill(ctx.expand(JSON.parse(data)));
     }
   });
-}) : Promise.resolve([{
-  name: 'kronos'
-}, {
-  name: 'koa-admin',
-  port: 10000
-}, {
-  name: 'registry', // consul
-  checkInterval: '60s'
-}]);
+}) : Promise.resolve({
+  services: [{
+    name: 'kronos'
+  }, {
+    name: 'koa-admin',
+    port: 10000
+  }, {
+    name: 'registry', // consul
+    checkInterval: '60s'
+  }]
+});
 
 process.on('SIGHUP', () => rebirth());
 
@@ -202,7 +218,7 @@ function kronosModules() {
   });
 }
 
-Promise.all([kronosModules(), cfg]).then(results => {
+Promise.all([kronosModules(), cfg.services]).then(results => {
   const modules = results[0];
   const cfg = results[1];
 
