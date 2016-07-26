@@ -84,7 +84,6 @@ const cfg = commander.config ? new Promise((fullfill, reject) => {
                 const v = context[0].value.properties[value];
                 if (v !== undefined) {
                   properties.value.value = v;
-                  console.log(`${value} -> ${v}`);
                   return;
                 }
               }
@@ -218,7 +217,7 @@ function kronosModules() {
   });
 }
 
-Promise.all([kronosModules(), cfg.services]).then(results => {
+Promise.all([kronosModules(), cfg]).then(results => {
   const modules = results[0];
   const cfg = results[1];
 
@@ -240,7 +239,7 @@ Promise.all([kronosModules(), cfg.services]).then(results => {
   });
 
   if (logLevel !== undefined) {
-    cfg.forEach(c => c.logLevel = logLevel);
+    cfg.services.forEach(c => c.logLevel = logLevel);
   }
 
   const sds = systemdSocket();
@@ -248,7 +247,7 @@ Promise.all([kronosModules(), cfg.services]).then(results => {
     cfg[1 /* TODO admin */ ].port = sds;
   }
 
-  ksm.manager(cfg, modules).then(manager => {
+  ksm.manager(cfg.services, modules).then(manager => {
     if (logLevel !== undefined) {
       Object.keys(manager.services).forEach(sn => manager.services[sn].logLevel = logLevel);
     }
