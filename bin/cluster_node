@@ -39,121 +39,11 @@ if (commander.debug) {
   logLevel = 'trace';
 }
 
-function createValue(value) {
-  return Object.create(null, {
-    value: {
-      value: value
-    }
-  });
-}
-
-const cfg = commander.config ? new Promise((fullfill, reject) => {
+const cfg = (commander.config ? new Promise((fullfill, reject) => {
   fs.readFile(commander.config, (err, data) => {
     if (err) reject(err);
-    else {
-      const constants = {
-        configDirectory: path.dirname(commander.config)
-      };
-
-      const functions = {
-        file: args => createValue(fs.readFileSync(path.resolve(path.dirname(commander.config), args[0].value))),
-        directory: args => createValue(path.resolve(path.dirname(commander.config), args[0].value)),
-
-        // string functions
-        substring: args => createValue(args[0].value.substring(args[1].value, args[2].value)),
-        replace: args => createValue(args[0].value.replace(args[1].value, args[2].value)),
-        toUpperCase: args => createValue(args[0].value.toUpperCase()),
-        toLowerCase: args => createValue(args[0].value.toLowerCase())
-      };
-      const g = createGrammar({
-        identifier(value, properties, context) {
-            const f = functions[value];
-            if (f) {
-              properties.type.value = 'function';
-              properties.value.value = f;
-            } else {
-              if (context.length >= 2) {
-                const ctx = context[context.length - 2];
-
-                if (ctx.value[value] !== undefined) {
-                  properties.value.value = ctx.value[value];
-                  return;
-                }
-              }
-              if (context[0].value.properties) {
-                const v = context[0].value.properties[value];
-                if (v !== undefined) {
-                  properties.value.value = v;
-                  return;
-                }
-              }
-
-              const c = constants[value];
-              if (c) {
-                properties.value.value = c;
-              }
-            }
-          },
-          prefix: {
-            '(': {
-              precedence: 80,
-              led(grammar, left) {
-                if (left.type === 'function') {
-                  const args = [];
-
-                  if (grammar.token.value !== ')') {
-                    while (true) {
-                      args.push(grammar.expression(0));
-
-                      if (grammar.token.value !== ',') {
-                        break;
-                      }
-                      grammar.advance(',');
-                    }
-                  }
-
-                  grammar.advance(')');
-
-                  return left.value(args);
-                } else {
-                  const e = grammar.expression(0);
-                  grammar.advance(')');
-                  return e;
-                }
-              }
-            }
-          },
-          infix: {
-            ',': {},
-            ')': {},
-            '+': {
-              precedence: 50,
-              combine: (left, right) => createValue(left.value + right.value)
-            },
-            '-': {
-              precedence: 50,
-              combine: (left, right) => createValue(left.value - right.value)
-            },
-            '*': {
-              precedence: 60,
-              combine: (left, right) => createValue(left.value * right.value)
-            },
-            '/': {
-              precedence: 60,
-              combine: (left, right) => createValue(left.value / right.value)
-            }
-          }
-      });
-
-      const ctx = ee.createContext({
-        evaluate: (expression, context, path) => {
-          const v = g.parse(expression, path).value;
-          //console.log(`${expression} -> ${v}`);
-          return v;
-        }
-      });
-      fullfill(ctx.expand(JSON.parse(data)));
-    }
+    else
+      fullfill(JSON.parse(data));
   });
 }) : Promise.resolve({
   services: [{
@@ -165,7 +55,7 @@ const cfg = commander.config ? new Promise((fullfill, reject) => {
     name: 'registry', // consul
     checkInterval: '60s'
   }]
-});
+})).then(config => expand(config));
 
 process.on('SIGHUP', () => rebirth());
 
@@ -221,27 +111,6 @@ Promise.all([kronosModules(), cfg]).then(results => {
   const modules = results[0];
   const cfg = results[1];
 
-  values.forEach(value => {
-    const m = value.match(/^([^:]+):([^=]+)=(.*)/);
-    if (m) {
-      let slot = cfg.services.find(c => c.name === m[1]);
-      if (slot) {
-        slot[m[2]] = m[3];
-      } else {
-        cfg.services.push({
-          name: m[1],
-          [m[2]]: m[3]
-        });
-      }
-    } else {
-      const m = value.match(/^([^:]+)=(.*)/);
-      if (m) {
-        cfg.properties[m[1]] = m[2];
-      } else
-        console.log(`neither service:key=value nor key=value : ${value}`);
-    }
-  });
-
   if (logLevel !== undefined) {
     cfg.services.forEach(c => c.logLevel = logLevel);
   }
@@ -281,4 +150,141 @@ Promise.all([kronosModules(), cfg]).then(results => {
       }).catch(error => manager.error(`Flow initialization failed: ${error}`));
     });
   });
-}).catch(console.log);
+}).catch(console.error);
+
+
+function createValue(value) {
+  return Object.create(null, {
+    value: {
+      value: value
+    }
+  });
+}
+
+function expand(config) {
+
+  values.forEach(value => {
+    const m = value.match(/^([^:]+):([^=]+)=(.*)/);
+    if (m) {
+      let slot = config.services.find(c => c.name === m[1]);
+      if (slot) {
+        slot[m[2]] = m[3];
+      } else {
+        config.services.push({
+          name: m[1],
+          [m[2]]: m[3]
+        });
+      }
+    } else {
+      const m = value.match(/^([^:]+)=(.*)/);
+      if (m) {
+        config.properties[m[1]] = m[2];
+      } else
+        console.error(`neither service:key=value nor key=value : ${value}`);
+    }
+  });
+
+  const constants = {
+    configDirectory: path.dirname(commander.config)
+  };
+
+  const functions = {
+    file: args => createValue(fs.readFileSync(path.resolve(path.dirname(commander.config), args[0].value))),
+    directory: args => createValue(path.resolve(path.dirname(commander.config), args[0].value)),
+
+    // string functions
+    substring: args => createValue(args[0].value.substring(args[1].value, args[2].value)),
+    replace: args => createValue(args[0].value.replace(args[1].value, args[2].value)),
+    toUpperCase: args => createValue(args[0].value.toUpperCase()),
+    toLowerCase: args => createValue(args[0].value.toLowerCase())
+  };
+  const g = createGrammar({
+    identifier(value, properties, context) {
+        const f = functions[value];
+        if (f) {
+          properties.type.value = 'function';
+          properties.value.value = f;
+        } else {
+          if (context.length >= 2) {
+            const ctx = context[context.length - 2];
+
+            if (ctx.value[value] !== undefined) {
+              properties.value.value = ctx.value[value];
+              return;
+            }
+          }
+          if (context[0].value.properties) {
+            const v = context[0].value.properties[value];
+            if (v !== undefined) {
+              properties.value.value = v;
+              return;
+            }
+          }
+
+          const c = constants[value];
+          if (c) {
+            properties.value.value = c;
+          }
+        }
+      },
+      prefix: {
+        '(': {
+          precedence: 80,
+          led(grammar, left) {
+            if (left.type === 'function') {
+              const args = [];
+
+              if (grammar.token.value !== ')') {
+                while (true) {
+                  args.push(grammar.expression(0));
+
+                  if (grammar.token.value !== ',') {
+                    break;
+                  }
+                  grammar.advance(',');
+                }
+              }
+
+              grammar.advance(')');
+
+              return left.value(args);
+            } else {
+              const e = grammar.expression(0);
+              grammar.advance(')');
+              return e;
+            }
+          }
+        }
+      },
+      infix: {
+        ',': {},
+        ')': {},
+        '+': {
+          precedence: 50,
+          combine: (left, right) => createValue(left.value + right.value)
+        },
+        '-': {
+          precedence: 50,
+          combine: (left, right) => createValue(left.value - right.value)
+        },
+        '*': {
+          precedence: 60,
+          combine: (left, right) => createValue(left.value * right.value)
+        },
+        '/': {
+          precedence: 60,
+          combine: (left, right) => createValue(left.value / right.value)
+        }
+      }
+  });
+
+  const ctx = ee.createContext({
+    evaluate: (expression, context, path) => {
+      const v = g.parse(expression, path).value;
+      //console.log(`${expression} -> ${v}`);
+      return v;
+    }
+  });
+
+  return ctx.expand(config);
+}
