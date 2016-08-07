@@ -191,7 +191,10 @@ function expand(config) {
   const functions = {
     file: args => createValue(fs.readFileSync(path.resolve(path.dirname(commander.config), args[0].value))),
     directory: args => createValue(path.resolve(path.dirname(commander.config), args[0].value)),
-    include: args => createValue(JSON.parse(fs.readFileSync(args[0].value))),
+    include: args => {
+      const v = createValue(JSON.parse(fs.readFileSync(path.resolve(path.dirname(commander.config), args[0].value))));
+      return v;
+    },
     // string functions
     substring: args => createValue(args[0].value.substring(args[1].value, args[2].value)),
     replace: args => createValue(args[0].value.replace(args[1].value, args[2].value)),
@@ -261,7 +264,13 @@ function expand(config) {
         ')': {},
         '+': {
           precedence: 50,
-          combine: (left, right) => createValue(left.value + right.value)
+          combine: (left, right) => {
+            if (parseFloat(left.value) === left.value) {
+              return createValue(left.value + parseFloat(right.value));
+            }
+
+            return createValue(left.value + right.value);
+          }
         },
         '-': {
           precedence: 50,
@@ -281,7 +290,6 @@ function expand(config) {
   const ctx = ee.createContext({
     evaluate: (expression, context, path) => {
       const v = g.parse(expression, path).value;
-      //console.log(`${expression} -> ${v}`);
       return v;
     }
   });
