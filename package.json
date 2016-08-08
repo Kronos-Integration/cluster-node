@@ -42,7 +42,7 @@
     "kronos-service-admin": "^2.24.4",
     "kronos-service-consul": "^2.17.8",
     "kronos-service-health-check": "^2.9.16",
-    "kronos-service-manager": "^3.4.12",
+    "kronos-service-manager": "^3.4.13",
     "kronos-service-uti": "^1.0.22",
     "kronos-step-aggregate": "^1.4.5",
     "kronos-step-archive-tar": "^2.0.10",
