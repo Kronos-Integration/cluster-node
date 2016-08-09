@@ -117,7 +117,10 @@ Promise.all([kronosModules(), cfg]).then(results => {
 
   const sds = systemdSocket();
   if (sds) {
-    cfg[1 /* TODO admin */ ].port = sds;
+    const as = cfg.services.find(s => s.name === 'koa-admin');
+    if (as) {
+      as.port = sds;
+    }
   }
 
   ksm.manager(cfg.services, modules).then(manager => {
