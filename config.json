@@ -1,7 +1,7 @@
 {
   "properties": {
     "base_port": 10000,
-    "node_instance": 1
+    "node_instance": "i1"
   },
 
   "services": [{
@@ -11,8 +11,8 @@
     "listen": {
       "retryTimeout": 600,
       "address": "0.0.0.0",
-      "fromPort": "${base_port + node_instance}",
-      "toPort": "${base_port + node_instance + 8}"
+      "fromPort": "${base_port + number(node_instance)}",
+      "toPort": "${base_port + number(node_instance) + 8}"
     },
     "docRoot": "${directory('docroot')}"
   }, {
@@ -21,7 +21,7 @@
       "hostKeys": [
         "${file('etc/hostKey')}"
       ],
-      "port": "${base_port + 10 + node_instance}"
+      "port": "${base_port + number(node_instance) + 10}"
     }
   }, {
     "name": "registry",

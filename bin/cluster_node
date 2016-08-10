@@ -199,6 +199,10 @@ function expand(config) {
       return v;
     },
     // string functions
+    number: args => {
+      const v = args[0].value;
+      return createValue(parseFloat(v) === v ? v : parseFloat(v.replace(/[a-z]+/, '')));
+    },
     substring: args => createValue(args[0].value.substring(args[1].value, args[2].value)),
     replace: args => createValue(args[0].value.replace(args[1].value, args[2].value)),
     toUpperCase: args => createValue(args[0].value.toUpperCase()),
