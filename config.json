@@ -12,7 +12,7 @@
       "retryTimeout": 600,
       "address": "0.0.0.0",
       "fromPort": "${base_port + node_instance}",
-      "toPort": "${base_port + 8}"
+      "toPort": "${base_port + node_instance + 8}"
     },
     "docRoot": "${directory('docroot')}"
   }, {
