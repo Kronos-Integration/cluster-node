@@ -13,6 +13,7 @@ const os = require('os'),
   systemdSocket = require('systemd-socket'),
   rebirth = require('rebirth'),
   glob = require('glob'),
+  address = require('network-address'),
   createGrammar = require('pratt-parser').createGrammar;
 
 require('pkginfo')(module, 'version');
@@ -188,7 +189,8 @@ function expand(config) {
   });
 
   const constants = {
-    configDirectory: path.dirname(commander.config)
+    configDirectory: path.dirname(commander.config),
+    networkAddress: address()
   };
 
   const functions = {

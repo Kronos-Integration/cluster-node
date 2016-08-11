@@ -51,6 +51,7 @@
     "kronos-step-passthrough": "2.0.14",
     "kronos-step-stdio": "^3.0.17",
     "kronos-step-system": "2.0.10",
+    "network-address": "^1.1.0",
     "pkginfo": "0.4.0",
     "pratt-parser": "1.5.2",
     "rebirth": "0.2.3",
