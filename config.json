@@ -10,7 +10,6 @@
     "name": "koa-admin",
     "listen": {
       "retryTimeout": 600,
-      "address": "0.0.0.0",
       "fromPort": "${base_port + number(node_instance)}",
       "toPort": "${base_port + number(node_instance) + 8}"
     },
