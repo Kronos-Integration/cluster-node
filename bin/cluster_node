@@ -119,7 +119,7 @@ Promise.all([kronosModules(), cfg]).then(results => {
   const sds = systemdSocket();
   if (sds) {
     const as = cfg.services.find(s => s.name === 'koa-admin');
-    if (as) {
+    if (as !== undefined) {
       as.port = sds;
     }
   }
@@ -298,6 +298,14 @@ function expand(config) {
 
   const ctx = ee.createContext({
     evaluate: (expression, context, path) => {
+      /*
+      if (path.length >= 4 && path[1].key === 'services') {
+        const serviceName = path[2].value.name;
+        const attributeName = path.slice(3).reduce((p, c) => p + (Number.isInteger(c.key) ? `[${c.key}]` : p ?
+          '.' + c.key : c.key), '');
+        console.log(`${path[2].value.name}.${attributeName} = ${expression}`);
+      }
+      */
       const v = g.parse(expression, path).value;
       return v;
     }
