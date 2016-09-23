@@ -4,40 +4,41 @@
     "node_instance": "i1",
     "start_timeout": 600
   },
-  "services": [{
-    "name": "kronos",
-    "timeout": {
-      "start": "${start_timeout + 10}"
-    }
-  }, {
-    "name": "koa-admin",
-    "timeout": {
-      "start": "${start_timeout}",
-      "retry": 30
+  "services": {
+    "kronos": {
+      "timeout": {
+        "start": "${start_timeout + 10}"
+      }
     },
-    "listen": {
-      "address": "${networkAddress}",
-      "retryTimeout": 30,
-      "fromPort": "${base_port + number(node_instance)}",
-      "toPort": "${base_port + number(node_instance) + 8}"
+    "koa-admin": {
+      "timeout": {
+        "start": "${start_timeout}",
+        "retry": 30
+      },
+      "listen": {
+        "address": "${networkAddress}",
+        "retryTimeout": 30,
+        "fromPort": "${base_port + number(node_instance)}",
+        "toPort": "${base_port + number(node_instance) + 8}"
+      },
+      "docRoot": "${directory('docroot')}"
     },
-    "docRoot": "${directory('docroot')}"
-  }, {
-    "name": "admin",
-    "ssh": {
-      "hostKeys": [
-        "${file('etc/hostKey')}"
-      ],
-      "port": "${base_port + number(node_instance) + 10}"
+    "admin": {
+      "ssh": {
+        "hostKeys": [
+          "${file('etc/hostKey')}"
+        ],
+        "port": "${base_port + number(node_instance) + 10}"
+      }
+    },
+    "registry": {
+      "checkInterval": 60,
+      "port": 8500,
+      "host": "localhost"
+    },
+    "health-check": {
+      "memoryInterval": 60,
+      "uptimeInterval": 60
     }
-  }, {
-    "name": "registry",
-    "checkInterval": 60,
-    "port": 8500,
-    "host": "localhost"
-  }, {
-    "name": "health-check",
-    "memoryInterval": 60,
-    "uptimeInterval": 60
-  }]
+  }
 }
