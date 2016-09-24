@@ -14,7 +14,7 @@ const os = require('os'),
   rebirth = require('rebirth'),
   glob = require('glob'),
   address = require('network-address'),
-  createGrammar = require('pratt-parser').createGrammar;
+  createGrammar = require('pratt-parser').create;
 
 require('pkginfo')(module, 'version');
 
