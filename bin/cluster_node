@@ -29,10 +29,10 @@ commander
   .option('-f, --flow <file>', 'flow to be registered', name => flowFileNames.push(name))
   .option('-s, --start', 'start flow after registering')
   .option('-c, --config <file>', 'use config from file')
-  .option('-d, --define <service:key=value> or <key=value>', 'define (service) value', value => configStatements.push(
-    value))
-  .option('-d, --debug', 'enable debugging')
-  .option('-t, --trace', 'enable tracing')
+  .option('-d --define <service.path.to.key=value> or <key=value>', 'define (service) value', value => configStatements
+    .push(value))
+  .option('--debug', 'enable debugging')
+  .option('--trace', 'enable tracing')
   .parse(process.argv);
 
 if (commander.debug) {
@@ -176,31 +176,29 @@ function createValue(value) {
   });
 }
 
+function assign(dest, value, attributePath) {
+  const m = attributePath.match(/^(\w+)\.(.*)/);
+
+  if (m) {
+    const key = m[1];
+    if (dest[key] === undefined) {
+      dest[key] = {};
+    }
+    assign(dest[key], value, m[1]);
+  } else {
+    dest[attributePath] = value;
+  }
+}
+
 function expand(config) {
 
   configStatements.forEach(value => {
-    const m = value.match(/^([a-zA-Z_][a-zA-Z_0-9]*):([a-zA-Z_][a-zA-Z_0-9]*)=(.*)/);
+    const m = value.match(/^([a-zA-Z_][a-zA-Z_0-9]*)=(.*)/);
     if (m) {
-      const serviceName = m[1];
-      const attributeName = m[2];
-      const value = m[3];
-
-      let service = config.services[serviceName];
-      if (service) {
-        service[attributeName] = value;
-      } else {
-        config.services[serviceName] = {
-          [attributeName]: value
-        };
-      }
-    } else {
-      const m = value.match(/^([a-zA-Z_][a-zA-Z_0-9]*)=(.*)/);
-      if (m) {
-        config.properties[m[1]] = m[2];
-      } else
-        console.error(`neither service:key=value nor key=value : ${value}`);
+      config.properties[m[1]] = m[2];
     }
   });
+
 
   const constants = {
     configDirectory: path.dirname(commander.config),
@@ -324,5 +322,23 @@ function expand(config) {
     }
   });
 
-  return ctx.expand(config);
+  config = ctx.expand(config);
+
+  configStatements.forEach(value => {
+    const m = value.match(/^([^\.]+).([^=]+)=(.*)/);
+    if (m) {
+      const serviceName = m[1];
+      const attributeName = m[2];
+      const value = m[3];
+
+      let service = config.services[serviceName];
+      if (!service) {
+        service = config.services[serviceName] = {};
+      }
+
+      assign(service, value, attributeName);
+    }
+  });
+
+  return config;
 }
