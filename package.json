@@ -11,7 +11,7 @@
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "engines": {
-    "node": ">=6.6"
+    "node": ">=6.9.1"
   },
   "author": "Markus Felten <markus.felten@gmx.de>",
   "license": "BSD-2-Clause",
