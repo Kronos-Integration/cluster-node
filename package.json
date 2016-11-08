@@ -53,7 +53,7 @@
     "kronos-step-system": "^2.0.10",
     "network-address": "^1.1.0",
     "pkginfo": "^0.4.0",
-    "pratt-parser": "^2.0.2",
+    "pratt-parser": "^2.0.4",
     "rebirth": "^0.2.3",
     "systemd-socket": "^0.0.0"
   },
