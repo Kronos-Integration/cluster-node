@@ -190,9 +190,8 @@ function expand(config) {
   });
 
   config = ce.expand(config, {
-    basedir: path.dirname(commander.config),
     constants: {
-      configDirectory: path.dirname(commander.config),
+      basedir: path.dirname(commander.config),
       networkAddress: address()
     }
   });
