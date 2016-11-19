@@ -1,5 +1,5 @@
 {
-  "properties": {
+  "constants": {
     "base_port": 10000,
     "node_instance": "i1",
     "start_timeout": 600
@@ -16,7 +16,7 @@
         "retry": 30
       },
       "listen": {
-        "address": "${networkAddress}",
+        "address": "localhost",
         "retryTimeout": 30,
         "fromPort": "${base_port + number(node_instance)}",
         "toPort": "${base_port + number(node_instance) + 8}"
