@@ -33,7 +33,7 @@
     "kronos-interceptor-http-request": "^3.1.1",
     "kronos-interceptor-line-header": "^2.0.7",
     "kronos-interceptor-line-parser": "^2.0.5",
-    "kronos-interceptor-line-tokenizer-csv": "^2.0.5",
+    "kronos-interceptor-line-tokenizer-csv": "^2.1.1",
     "kronos-interceptor-line-tokens2obj": "2.0.5",
     "kronos-interceptor-message-handler": "^2.0.4",
     "kronos-interceptor-object-data-processor-chunk": "^2.0.8",
