@@ -41,7 +41,7 @@
     "kronos-interceptor-stream-obj2string": "^2.0.9",
     "kronos-service-admin": "^2.25.5",
     "kronos-service-consul": "^2.18.9",
-    "kronos-service-health-check": "^2.9.20",
+    "kronos-service-health-check": "^2.10.0",
     "kronos-service-manager": "^3.4.20",
     "kronos-service-uti": "^1.0.26",
     "kronos-step-aggregate": "^1.4.6",
