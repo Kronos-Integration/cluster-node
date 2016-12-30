@@ -49,6 +49,7 @@ build() {
   find node_modules -iname "NOTICE*" -print0|xargs -r -0 rm
   find node_modules -iname "HISTORY*" -print0|xargs -r -0 rm
   find node_modules -iname "SUMMARY.md" -print0|xargs -r -0 rm
+  find node_modules -iname "PULL_REQUEST_TEMPLATE.md" -print0|xargs -r -0 rm
   find node_modules -iname "CONTRIBUTING*" -print0|xargs -r -0 rm
   find node_modules -iname "Contributors*" -print0|xargs -r -0 rm
   find node_modules -iname "CHANGES*" -print0|xargs -r -0 rm
