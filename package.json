@@ -13,6 +13,9 @@
     "build": "node_modules/rollup/bin/rollup --output=bin/cluster_node -c -- src/cluster_node.js && chmod +x bin/cluster_node",
     "docs": "jsdoc2md -l off -t doc/README.hbs -f src/*.js > README.md"
   },
+  "bin": {
+    "bluster_node": "bin/cluster_node"
+  },
   "engines": {
     "node": ">=6.9.2"
   },
