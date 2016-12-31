@@ -34,7 +34,7 @@
     "kronos-interceptor-line-header": "^2.1.0",
     "kronos-interceptor-line-parser": "^2.0.5",
     "kronos-interceptor-line-tokenizer-csv": "^2.1.1",
-    "kronos-interceptor-line-tokens2obj": "2.1.0",
+    "kronos-interceptor-line-tokens2obj": "2.1.1",
     "kronos-interceptor-message-handler": "^2.1.0",
     "kronos-interceptor-object-data-processor-chunk": "^2.1.0",
     "kronos-interceptor-object-data-processor-row": "^1.2.9",
