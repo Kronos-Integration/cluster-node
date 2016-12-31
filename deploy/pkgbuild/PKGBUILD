@@ -55,6 +55,7 @@ build() {
   find node_modules -iname "CHANGES*" -print0|xargs -r -0 rm
   find node_modules -iname "CHANGELOG*" -print0|xargs -r -0 rm
   find node_modules -iname "Makefile*" -print0|xargs -r -0 rm
+  find node_modules -name "*.bash_completion.*" -print0|xargs -r -0 rm
   find . -name "jsdoc.json" -print0|xargs -r -0 rm
   find . -name "SECURITY.md" -print0|xargs -r -0 rm
   find . -name "SFTPStream.md" -print0|xargs -r -0 rm
