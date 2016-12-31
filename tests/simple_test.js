@@ -15,11 +15,11 @@ describe('cluster_node', function () {
 
   it('simple start', done => {
     const child = child_process.spawn(
-      path.join(__dirname, '../bin/cluster_node'), ['--trace', '--config', path.join(__dirname,
-        '../config.json')], {
+      path.join(__dirname, '../bin/cluster_node'), ['--trace', '--config', path.join(__dirname, '..',
+        'config.json')], {
         cwd: path.join(__dirname, '..')
       }, (err, stdout, stderr) => {
-        console.log(err);
+        console.error(err);
         done();
       });
 
