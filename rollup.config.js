@@ -7,5 +7,6 @@ import commonjs from 'rollup-plugin-commonjs';
 export default {
   banner: '#!/usr/bin/env node',
   format: 'cjs',
-  plugins: [nodeResolve(), commonjs()]
+  plugins: [nodeResolve(), commonjs()],
+  external: ['kronos-service-manager']
 };

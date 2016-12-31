@@ -9,10 +9,12 @@ const os = require('os'),
   systemdSocket = require('systemd-socket'),
   rebirth = require('rebirth'),
   glob = require('glob'),
-  address = require('network-address'),
-  {
-    manager
-  } = require('kronos-service-manager');
+  address = require('network-address');
+
+import {
+  manager
+}
+from 'kronos-service-manager';
 
 require('pkginfo')(module, 'version');
 
