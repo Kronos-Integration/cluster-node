@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 /* jslint node: true, esnext: true */
 
 'use strict';
@@ -8,14 +6,20 @@ const os = require('os'),
   fs = require('fs'),
   path = require('path'),
   commander = require('commander'),
-  ksm = require('kronos-service-manager'),
-  ce = require('config-expander'),
   systemdSocket = require('systemd-socket'),
   rebirth = require('rebirth'),
   glob = require('glob'),
-  address = require('network-address');
+  address = require('network-address'),
+  {
+    manager
+  } = require('kronos-service-manager');
 
 require('pkginfo')(module, 'version');
+
+import {
+  expand as configExpand
+}
+from 'config-expander';
 
 let logLevel;
 
@@ -134,7 +138,7 @@ Promise.all([kronosModules(), cfg]).then(results => {
     }
   });
 
-  ksm.manager(services, modules).then(manager => {
+  manager(services, modules).then(manager => {
     if (logLevel !== undefined) {
       Object.keys(manager.services).forEach(sn => manager.services[sn].logLevel = logLevel);
     }
@@ -189,7 +193,7 @@ function expand(config) {
     }
   });
 
-  config = ce.expand(config, {
+  config = configExpand(config, {
     constants: {
       basedir: path.dirname(commander.config || process.cwd()),
       networkAddress: address()
