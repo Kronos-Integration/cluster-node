@@ -1,6 +1,8 @@
 {
   "name": "kronos-cluster-node",
-  "bin": "bin/cluster_node",
+  "bin": {
+    "bluster_node": "bin/cluster_node"
+  },
   "version": "0.0.0-semantic-release",
   "description": "kronos cluster node sample application",
   "module": "src/cluster_node.js",
@@ -13,9 +15,6 @@
     "build": "node_modules/rollup/bin/rollup --output=bin/cluster_node -c -- src/cluster_node.js && chmod +x bin/cluster_node",
     "docs": "jsdoc2md -l off -t doc/README.hbs -f src/*.js > README.md"
   },
-  "bin": {
-    "bluster_node": "bin/cluster_node"
-  },
   "engines": {
     "node": ">=6.9.2"
   },
@@ -26,7 +25,7 @@
   },
   "dependencies": {
     "commander": "^2.9.0",
-    "config-expander": "^3.0.2",
+    "config-expander": "^3.1.0",
     "glob": "^7.1.1",
     "kronos-adapter-inbound-file": "^2.0.14",
     "kronos-adapter-outbound-file": "^2.0.12",
@@ -83,8 +82,10 @@
     "url": "https://github.com/Kronos-Integration/kronos-cluster-node/issues"
   },
   "homepage": "https://github.com/Kronos-Integration/kronos-cluster-node#readme",
-  "contributors": [{
-    "name": "Markus Felten",
-    "email": "markus.felten@gmx.de"
-  }]
+  "contributors": [
+    {
+      "name": "Markus Felten",
+      "email": "markus.felten@gmx.de"
+    }
+  ]
 }
