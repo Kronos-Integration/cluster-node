@@ -1,7 +1,7 @@
 {
   "name": "kronos-cluster-node",
   "bin": {
-    "bluster_node": "bin/cluster_node"
+    "cluster_node": "bin/cluster_node"
   },
   "version": "0.0.0-semantic-release",
   "description": "kronos cluster node sample application",
@@ -82,10 +82,8 @@
     "url": "https://github.com/Kronos-Integration/kronos-cluster-node/issues"
   },
   "homepage": "https://github.com/Kronos-Integration/kronos-cluster-node#readme",
-  "contributors": [
-    {
-      "name": "Markus Felten",
-      "email": "markus.felten@gmx.de"
-    }
-  ]
+  "contributors": [{
+    "name": "Markus Felten",
+    "email": "markus.felten@gmx.de"
+  }]
 }
