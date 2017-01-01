@@ -2,7 +2,6 @@ coverage
 node_modules
 build
 dist
-bin
 out
 *.log
 *.dump
@@ -10,4 +9,6 @@ out
 .nyc_output
 .test
 .tmp
+
+bin
 docroot
