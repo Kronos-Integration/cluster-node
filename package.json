@@ -9,11 +9,11 @@
   "main": "bin/cluster_node",
   "scripts": {
     "start": "node bin/cluster_node",
-    "cover": "npm run prepublish && node_modules/.bin/istanbul cover node_modules/.bin/_mocha -- -u exports tests/*_test.js",
-    "test": "node_modules/.bin/mocha tests/*_test.js",
+    "cover": "npm run prepublish && istanbul cover node_modules/.bin/_mocha -- -u exports tests/*_test.js",
+    "test": "mocha tests/*_test.js",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
-    "prepublish": "node_modules/rollup/bin/rollup --output=bin/cluster_node -c -- src/cluster_node.js && chmod +x bin/cluster_node",
-    "docs": "jsdoc2md -l off -t doc/README.hbs -f src/*.js > README.md",
+    "prepublish": "rollup --output=bin/cluster_node -c -- src/cluster_node.js && chmod +x bin/cluster_node",
+    "docs": "jsdoc2md -l off -t doc/README.hbs -f src/*.js >README.md",
     "pretest": "npm run prepublish",
     "posttest": "markdown-doctest"
   },
