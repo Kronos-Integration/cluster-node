@@ -33,6 +33,7 @@ pkgver() {
 build() {
   cd "${pkgname}"
   npm install --production
+  npm run build
   curl -k https://mfelten.de/kronos/kronos-service-manager-ui.tar|tar xvfz -
   find . -name "*~" -print0|xargs -r -0 rm
   find node_modules -name "*.1" -print0|xargs -r -0 rm
