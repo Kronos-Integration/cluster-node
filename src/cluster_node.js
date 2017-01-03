@@ -46,20 +46,14 @@ if (commander.debug) {
   logLevel = 'trace';
 }
 
-const cfg = (commander.config ? new Promise((fullfill, reject) => {
-  fs.readFile(commander.config, (err, data) => {
-    if (err) reject(err);
-    else
-      fullfill(JSON.parse(data));
-  });
-}) : Promise.resolve({
+const cfg = expand(commander.config ? "${include('" + commander.config + "')}" : {
   services: {
     'registry': {
       // consul
       checkInterval: '60s'
     }
   }
-})).then(config => expand(config));
+});
 
 process.on('SIGHUP', () => rebirth());
 
