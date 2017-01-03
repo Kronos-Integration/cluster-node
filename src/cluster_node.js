@@ -3,13 +3,16 @@
 'use strict';
 
 const os = require('os'),
-  fs = require('fs'),
   path = require('path'),
   commander = require('commander'),
   systemdSocket = require('systemd-socket'),
   rebirth = require('rebirth'),
-  glob = require('glob'),
   address = require('network-address');
+
+import {
+  pglob, kronosModules, assign
+}
+from './util';
 
 import {
   manager
@@ -19,7 +22,7 @@ from 'kronos-service-manager';
 require('pkginfo')(module, 'version');
 
 import {
-  expand as configExpand
+  expand
 }
 from 'config-expander';
 
@@ -46,89 +49,68 @@ if (commander.debug) {
   logLevel = 'trace';
 }
 
-const cfg = expand(commander.config ? "${include('" + commander.config + "')}" : {
+process.on('SIGHUP', () => rebirth());
+
+const constants = {
+  basedir: path.dirname(commander.config || process.cwd()),
+  networkAddress: address()
+};
+
+configStatements.forEach(value => {
+  const m = value.match(/^([a-zA-Z_][a-zA-Z_0-9]*)=(.*)/);
+  if (m) {
+    constants[m[1]] = m[2];
+  }
+});
+
+Promise.all([kronosModules(), expand(commander.config ? "${include('" + commander.config + "')}" : {
   services: {
     'registry': {
       // consul
       checkInterval: '60s'
     }
   }
-});
+}, {
+  constants
+})]).then(results => {
+  const [modules, config] = results;
 
-process.on('SIGHUP', () => rebirth());
+  configStatements.forEach(value => {
+    const m = value.match(/^([^\.]+).([^=]+)=(.*)/);
+    if (m) {
+      const serviceName = m[1];
+      const attributeName = m[2];
+      const value = m[3];
 
-function pglob(path, options) {
-  return new Promise((fullfull, reject) => {
-    glob(path, options, (err, files) => {
-      if (err) {
-        reject(err);
-      } else {
-        fullfull(files);
+      let service = config.services[serviceName];
+      if (!service) {
+        service = config.services[serviceName] = {};
       }
-    });
+
+      assign(service, value, attributeName);
+    }
   });
-}
-
-function kronosModules() {
-  return pglob(path.join(__dirname, '..', 'node_modules/*/package.json'), {}).then(files => {
-    const modules = [];
-    return Promise.all(files.map(file =>
-      new Promise((fullfill, reject) => {
-        fs.readFile(file, (err, data) => {
-          if (err) {
-            reject(`loading ${file}: ${err}`);
-            return;
-          }
-          try {
-            const p = JSON.parse(data);
-
-            if (p.keywords) {
-              if (p.keywords.find(k =>
-                  k === 'kronos-step' || k === 'kronos-service' || k === 'kronos-interceptor')) {
-                try {
-                  modules.push(require(p.name));
-                  fullfill();
-                  return;
-                } catch (e) {
-                  reject(`${file}: ${p.name} ${e}`);
-                }
-              }
-            }
-          } catch (e) {
-            reject(e);
-          }
-
-          fullfill();
-        });
-      })
-    )).then(results => modules);
-  });
-}
-
-Promise.all([kronosModules(), cfg]).then(results => {
-  const modules = results[0];
-  const cfg = results[1];
 
   if (logLevel !== undefined) {
-    Object.keys(cfg.services).forEach(sn => cfg.services[sn].logLevel = logLevel);
+    Object.keys(config.services).forEach(sn => config.services[sn].logLevel = logLevel);
   }
 
   const sds = systemdSocket();
   if (sds) {
-    const as = cfg.services['koa-admin'];
+    const as = config.services['koa-admin'];
     if (as !== undefined) {
       as.port = sds;
     }
   }
 
-  const services = [cfg.services.kronos || {
+  const services = [config.services.kronos || {
     port: 10000
   }];
   services[0].name = 'kronos';
 
-  Object.keys(cfg.services).forEach(sn => {
+  Object.keys(config.services).forEach(sn => {
     if (sn !== 'kronos') {
-      const service = cfg.services[sn];
+      const service = config.services[sn];
       service.name = sn;
       services.push(service);
     }
@@ -165,52 +147,3 @@ Promise.all([kronosModules(), cfg]).then(results => {
     });
   });
 }).catch(console.error);
-
-
-function assign(dest, value, attributePath) {
-  const m = attributePath.match(/^(\w+)\.(.*)/);
-
-  if (m) {
-    const key = m[1];
-    if (dest[key] === undefined) {
-      dest[key] = {};
-    }
-    assign(dest[key], value, m[1]);
-  } else {
-    dest[attributePath] = value;
-  }
-}
-
-function expand(config) {
-  configStatements.forEach(value => {
-    const m = value.match(/^([a-zA-Z_][a-zA-Z_0-9]*)=(.*)/);
-    if (m) {
-      config.properties[m[1]] = m[2];
-    }
-  });
-
-  config = configExpand(config, {
-    constants: {
-      basedir: path.dirname(commander.config || process.cwd()),
-      networkAddress: address()
-    }
-  });
-
-  configStatements.forEach(value => {
-    const m = value.match(/^([^\.]+).([^=]+)=(.*)/);
-    if (m) {
-      const serviceName = m[1];
-      const attributeName = m[2];
-      const value = m[3];
-
-      let service = config.services[serviceName];
-      if (!service) {
-        service = config.services[serviceName] = {};
-      }
-
-      assign(service, value, attributeName);
-    }
-  });
-
-  return config;
-}
