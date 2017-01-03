@@ -1,7 +1,7 @@
 {
   "name": "kronos-cluster-node",
   "bin": {
-    "cluster_node": "bin/cluster_node"
+    "kronos-cluster-node": "bin/kronos-cluster-node"
   },
   "version": "0.0.0-semantic-release",
   "description": "kronos cluster node sample application",
@@ -12,7 +12,7 @@
     "cover": "npm run prepublish && istanbul cover node_modules/.bin/_mocha -- -u exports tests/*_test.js",
     "test": "mocha tests/*_test.js",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
-    "prepublish": "rollup --output=bin/cluster_node -c -- src/cluster_node.js && chmod +x bin/cluster_node",
+    "prepublish": "rollup --output=bin/kronos-cluster-node -c -- src/cluster_node.js && chmod +x bin/kronos-cluster-node",
     "docs": "jsdoc2md -l off -t doc/README.hbs -f src/*.js >README.md",
     "pretest": "npm run prepublish",
     "posttest": "markdown-doctest"
@@ -84,10 +84,8 @@
     "url": "https://github.com/Kronos-Integration/kronos-cluster-node/issues"
   },
   "homepage": "https://github.com/Kronos-Integration/kronos-cluster-node#readme",
-  "contributors": [
-    {
-      "name": "Markus Felten",
-      "email": "markus.felten@gmx.de"
-    }
-  ]
+  "contributors": [{
+    "name": "Markus Felten",
+    "email": "markus.felten@gmx.de"
+  }]
 }

@@ -9,4 +9,4 @@ COPY . /usr/src/app
 RUN npm install --production
 
 EXPOSE 10000
-CMD [ "node", "bin/cluster_node" ]
+CMD [ "node", "bin/kronos-cluster-node" ]

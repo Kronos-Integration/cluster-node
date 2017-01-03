@@ -19,12 +19,12 @@ import {
 }
 from 'kronos-service-manager';
 
-require('pkginfo')(module, 'version');
-
 import {
   expand
 }
 from 'config-expander';
+
+require('pkginfo')(module, 'version');
 
 let logLevel;
 
