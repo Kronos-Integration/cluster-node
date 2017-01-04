@@ -16,6 +16,7 @@ describe('cluster_node', function () {
   it('simple start', done => {
     const child = child_process.spawn(
       path.join(__dirname, '../bin/kronos-cluster-node'), ['--trace', '--config', path.join(__dirname, '..',
+        'config',
         'config.json')], {
         cwd: path.join(__dirname, '..')
       }, (err, stdout, stderr) => {
