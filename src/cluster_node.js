@@ -53,6 +53,7 @@ process.on('SIGHUP', () => rebirth());
 
 const constants = {
   basedir: path.dirname(commander.config || process.cwd()),
+  installdir: path.resolve(__dirname, '..'),
   networkAddress: address()
 };
 
