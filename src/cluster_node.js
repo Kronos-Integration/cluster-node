@@ -66,9 +66,12 @@ configStatements.forEach(value => {
 
 Promise.all([kronosModules(), expand(commander.config ? "${include('" + path.basename(commander.config) + "')}" : {
   services: {
-    'registry': {
+    registry: {
       // consul
-      checkInterval: '60s'
+      checkInterval: 60
+    },
+    'koa-admin': {
+      docRoot: "${installdir + '/docroot'}"
     }
   }
 }, {

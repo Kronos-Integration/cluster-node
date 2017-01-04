@@ -19,13 +19,18 @@ kronos-cluster-node
 kronos cluster node sample application
 
 
+```shell
+consul agent -dev
+kronos-cluster-node --trace --config=config/config.json
+```
+
 install
 =======
 
 With [npm](http://npmjs.org) do:
 
 ```shell
-npm install kronos-cluster-node
+npm install -g kronos-cluster-node
 ```
 
 license

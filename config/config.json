@@ -21,12 +21,12 @@
         "fromPort": "${base_port + number(node_instance)}",
         "toPort": "${base_port + number(node_instance) + 8}"
       },
-      "docRoot": "${directory('docroot')}"
+      "docRoot": "${installdir + '/docroot'}"
     },
     "admin": {
       "ssh": {
         "hostKeys": [
-          "${file('hostKey')}"
+          "${document('hostKey')}"
         ],
         "port": "${base_port + number(node_instance) + 10}"
       }
