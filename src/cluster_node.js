@@ -64,7 +64,7 @@ configStatements.forEach(value => {
   }
 });
 
-Promise.all([kronosModules(), expand(commander.config ? "${include('" + commander.config + "')}" : {
+Promise.all([kronosModules(), expand(commander.config ? "${include('" + path.basename(commander.config) + "')}" : {
   services: {
     'registry': {
       // consul
