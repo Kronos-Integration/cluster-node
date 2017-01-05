@@ -19,7 +19,7 @@ before_script:
   - npm prune
   - npm install -g codecov
   - ./tests/travis/start_consul.sh
-  - curl -k https://mfelten.de/kronos/kronos-service-manager-ui.tar|tar xvfz -
+  - 'curl -k https://mfelten.de/kronos/kronos-service-manager-ui.tar|tar xvfz -'
 script:
   - npm run cover
 after_script:
