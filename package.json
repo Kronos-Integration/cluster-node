@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "commander": "^2.9.0",
-    "config-expander": "^4.4.0",
+    "config-expander": "^4.4.1",
     "glob": "^7.1.1",
     "kronos-adapter-inbound-file": "^2.0.14",
     "kronos-adapter-outbound-file": "^2.0.12",
@@ -48,7 +48,7 @@
     "kronos-service-admin": "^2.26.2",
     "kronos-service-consul": "^2.19.2",
     "kronos-service-health-check": "^2.10.3",
-    "kronos-service-manager": "^3.5.4",
+    "kronos-service-manager": "^3.5.5",
     "kronos-service-uti": "^1.1.2",
     "kronos-step-aggregate": "^1.4.6",
     "kronos-step-archive-tar": "^2.0.11",
@@ -66,13 +66,13 @@
     "chai": "^3.5.0",
     "cz-conventional-changelog": "^1.2.0",
     "istanbul": "^0.4.5",
-    "mocha": "^3.2.0",
-    "semantic-release": "^6.3.5",
     "jsdoc-to-markdown": "^2.0.1",
     "markdown-doctest": "^0.9.1",
-    "rollup": "^0.40.1",
+    "mocha": "^3.2.0",
+    "rollup": "^0.40.2",
     "rollup-plugin-commonjs": "^7.0.0",
-    "rollup-plugin-node-resolve": "^2.0.0"
+    "rollup-plugin-node-resolve": "^2.0.0",
+    "semantic-release": "^6.3.5"
   },
   "keywords": [],
   "config": {
