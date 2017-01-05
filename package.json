@@ -18,7 +18,7 @@
     "posttest": "markdown-doctest"
   },
   "engines": {
-    "node": ">=6.9.2"
+    "node": ">=6.9.3"
   },
   "license": "BSD-2-Clause",
   "repository": {
