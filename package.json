@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "commander": "^2.9.0",
-    "config-expander": "^6.1.0",
+    "config-expander": "^6.1.1",
     "glob": "^7.1.1",
     "kronos-adapter-inbound-file": "^2.0.14",
     "kronos-adapter-outbound-file": "^2.0.12",
