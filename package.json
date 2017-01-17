@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "commander": "^2.9.0",
-    "config-expander": "^6.1.1",
+    "config-expander": "^6.2.0",
     "glob": "^7.1.1",
     "kronos-adapter-inbound-file": "^2.0.14",
     "kronos-adapter-outbound-file": "^2.0.12",
@@ -58,7 +58,7 @@
     "kronos-step-passthrough": "^2.0.15",
     "kronos-step-stdio": "^3.0.18",
     "kronos-step-system": "^2.0.10",
-    "network-address": "^1.1.1",
+    "network-address": "^1.1.2",
     "pkginfo": "^0.4.0",
     "rebirth": "^0.2.3",
     "systemd-socket": "^0.0.0"
