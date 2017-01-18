@@ -73,7 +73,7 @@
     "rollup-plugin-commonjs": "^7.0.0",
     "rollup-plugin-node-resolve": "^2.0.0",
     "semantic-release": "^6.3.6",
-    "nyc": "^10.0.0"
+    "nyc": "^10.1.2"
   },
   "keywords": [],
   "config": {
