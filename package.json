@@ -40,7 +40,7 @@
     "kronos-interceptor-http-request": "^3.2.6",
     "kronos-interceptor-line-header": "^2.1.5",
     "kronos-interceptor-line-parser": "^2.0.9",
-    "kronos-interceptor-line-tokenizer-csv": "^2.1.5",
+    "kronos-interceptor-line-tokenizer-csv": "^2.1.6",
     "kronos-interceptor-line-tokens2obj": "2.1.4",
     "kronos-interceptor-message-handler": "^2.1.4",
     "kronos-interceptor-object-data-processor-chunk": "^2.1.4",
@@ -65,15 +65,15 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
-    "cz-conventional-changelog": "^1.2.0",
+    "cz-conventional-changelog": "^2.0.0",
     "jsdoc-to-markdown": "^3.0.0",
     "markdown-doctest": "^0.9.1",
     "mocha": "^3.2.0",
+    "nyc": "^10.1.2",
     "rollup": "^0.41.4",
     "rollup-plugin-commonjs": "^7.0.0",
     "rollup-plugin-node-resolve": "^2.0.0",
-    "semantic-release": "^6.3.6",
-    "nyc": "^10.1.2"
+    "semantic-release": "^6.3.6"
   },
   "keywords": [],
   "config": {
