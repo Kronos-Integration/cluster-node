@@ -19,7 +19,7 @@
     "precover": "npm run prepublish"
   },
   "engines": {
-    "node": ">=6.9.4"
+    "node": ">=7.7.1"
   },
   "license": "BSD-2-Clause",
   "repository": {
@@ -84,10 +84,12 @@
     "url": "https://github.com/Kronos-Integration/kronos-cluster-node/issues"
   },
   "homepage": "https://github.com/Kronos-Integration/kronos-cluster-node#readme",
-  "contributors": [{
-    "name": "Markus Felten",
-    "email": "markus.felten@gmx.de"
-  }],
+  "contributors": [
+    {
+      "name": "Markus Felten",
+      "email": "markus.felten@gmx.de"
+    }
+  ],
   "nyc": {
     "include": [
       "dist/**/*.js"
