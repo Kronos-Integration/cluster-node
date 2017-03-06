@@ -27,7 +27,7 @@
     "url": "https://github.com/Kronos-Integration/kronos-cluster-node.git"
   },
   "dependencies": {
-    "commander": "^2.9.0",
+    "caporal": "^0.3.0",
     "config-expander": "^7.0.0",
     "glob": "^7.1.1",
     "kronos-adapter-inbound-file": "^2.0.14",
@@ -59,7 +59,6 @@
     "kronos-step-stdio": "^3.0.18",
     "kronos-step-system": "^2.0.10",
     "network-address": "^1.1.2",
-    "pkginfo": "^0.4.0",
     "rebirth": "^0.2.3",
     "systemd-socket": "^0.0.0"
   },
@@ -85,12 +84,10 @@
     "url": "https://github.com/Kronos-Integration/kronos-cluster-node/issues"
   },
   "homepage": "https://github.com/Kronos-Integration/kronos-cluster-node#readme",
-  "contributors": [
-    {
-      "name": "Markus Felten",
-      "email": "markus.felten@gmx.de"
-    }
-  ],
+  "contributors": [{
+    "name": "Markus Felten",
+    "email": "markus.felten@gmx.de"
+  }],
   "nyc": {
     "include": [
       "dist/**/*.js"
