@@ -19,7 +19,7 @@
     "precover": "npm run prepublish"
   },
   "engines": {
-    "node": ">=7.7.2"
+    "node": ">=7.8.0"
   },
   "license": "BSD-2-Clause",
   "repository": {
@@ -68,8 +68,8 @@
     "jsdoc-to-markdown": "^3.0.0",
     "markdown-doctest": "^0.9.1",
     "mocha": "^3.2.0",
-    "nyc": "^10.1.2",
-    "rollup": "^0.41.5",
+    "nyc": "^10.2.0",
+    "rollup": "^0.41.6",
     "rollup-plugin-commonjs": "^8.0.2",
     "rollup-plugin-node-resolve": "^3.0.0",
     "semantic-release": "^6.3.6"
