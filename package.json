@@ -49,7 +49,7 @@
     "kronos-service-admin": "^2.26.9",
     "kronos-service-consul": "^2.19.7",
     "kronos-service-health-check": "^2.10.10",
-    "kronos-service-manager": "^3.5.9",
+    "kronos-service-manager": "^3.5.10",
     "kronos-service-uti": "^1.1.4",
     "kronos-step-aggregate": "^1.4.6",
     "kronos-step-archive-tar": "^2.0.11",
