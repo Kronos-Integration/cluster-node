@@ -19,7 +19,7 @@
     "precover": "npm run prepublish"
   },
   "engines": {
-    "node": ">=7.8.0"
+    "node": ">=7.9.0"
   },
   "license": "BSD-2-Clause",
   "repository": {
@@ -98,5 +98,10 @@
       "lcov"
     ],
     "report-dir": "./coverage"
+  },
+  "template": {
+    "repository": {
+      "url": "https://github.com/Kronos-Tools/npm-package-template.git"
+    }
   }
 }
