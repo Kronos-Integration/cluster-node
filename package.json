@@ -38,7 +38,7 @@
     "kronos-http-routing-step": "^4.3.24",
     "kronos-interceptor-decode-json": "^1.0.10",
     "kronos-interceptor-http-request": "^3.2.7",
-    "kronos-interceptor-line-header": "^2.1.5",
+    "kronos-interceptor-line-header": "^2.1.6",
     "kronos-interceptor-line-parser": "^2.0.9",
     "kronos-interceptor-line-tokenizer-csv": "^2.1.6",
     "kronos-interceptor-line-tokens2obj": "2.1.4",
