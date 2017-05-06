@@ -19,7 +19,7 @@
     "precover": "npm run prepublish"
   },
   "engines": {
-    "node": ">=7.9.0"
+    "node": ">=7.10.0"
   },
   "license": "BSD-2-Clause",
   "repository": {
