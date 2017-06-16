@@ -19,7 +19,7 @@
     "precover": "npm run prepublish"
   },
   "engines": {
-    "node": ">=7.10.0"
+    "node": ">=8.1.2"
   },
   "license": "BSD-2-Clause",
   "repository": {
@@ -74,7 +74,9 @@
     "rollup-plugin-node-resolve": "^3.0.0",
     "semantic-release": "^6.3.6"
   },
-  "keywords": [],
+  "keywords": [
+    null
+  ],
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
