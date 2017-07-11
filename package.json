@@ -12,7 +12,7 @@
     "cover": "nyc npm test",
     "test": "mocha tests/*_test.js",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
-    "prepublish": "rollup --output=bin/kronos-cluster-node -c -- src/cluster_node.js && chmod +x bin/kronos-cluster-node",
+    "prepublish": "rollup --output=bin/cluster_node -c -- src/cluster_node.js",
     "docs": "jsdoc2md -l off -t doc/README.hbs -f src/*.js >README.md",
     "pretest": "npm run prepublish",
     "posttest": "markdown-doctest",
