@@ -19,7 +19,7 @@
     "prepare": "rollup -c -- src/kronos-cluster-node.js && chmod +x bin/kronos-cluster-node"
   },
   "engines": {
-    "node": ">=8.1.4"
+    "node": ">=8.2.0"
   },
   "license": "BSD-2-Clause",
   "repository": {
