@@ -6,9 +6,7 @@ const os = require('os'),
   address = require('network-address');
 
 import { pglob, kronosModules, assign } from './util';
-
 import { manager } from 'kronos-service-manager';
-
 import { expand } from 'config-expander';
 
 let logLevel;
@@ -29,7 +27,7 @@ program
   )
   .option('--debug', 'enable debugging')
   .option('--trace', 'enable tracing')
-  .action((args, options, logger) => {
+  .action(async (args, options, logger) => {
     if (options.debug) {
       logLevel = 'debug';
     } else if (options.trace) {
@@ -49,7 +47,7 @@ program
       }
     });
 
-    Promise.all([
+    const [modules, config] = await Promise.all([
       kronosModules(),
       expand(
         options.config
@@ -69,97 +67,89 @@ program
           constants
         }
       )
-    ])
-      .then(results => {
-        const [modules, config] = results;
+    ]);
 
-        configStatements.forEach(value => {
-          const m = value.match(/^([^\.]+).([^=]+)=(.*)/);
-          if (m) {
-            const serviceName = m[1];
-            const attributeName = m[2];
-            const value = m[3];
+    configStatements.forEach(value => {
+      const m = value.match(/^([^\.]+).([^=]+)=(.*)/);
+      if (m) {
+        const serviceName = m[1];
+        const attributeName = m[2];
+        const value = m[3];
 
-            let service = config.services[serviceName];
-            if (!service) {
-              service = config.services[serviceName] = {};
-            }
-
-            assign(service, value, attributeName);
-          }
-        });
-
-        if (logLevel !== undefined) {
-          Object.keys(config.services).forEach(
-            sn => (config.services[sn].logLevel = logLevel)
-          );
+        let service = config.services[serviceName];
+        if (!service) {
+          service = config.services[serviceName] = {};
         }
 
-        const sds = systemdSocket();
-        if (sds) {
-          const as = config.services['koa-admin'];
-          if (as !== undefined) {
-            as.port = sds;
+        assign(service, value, attributeName);
+      }
+    });
+
+    if (logLevel !== undefined) {
+      Object.keys(config.services).forEach(
+        sn => (config.services[sn].logLevel = logLevel)
+      );
+    }
+
+    const sds = systemdSocket();
+    if (sds) {
+      const as = config.services['koa-admin'];
+      if (as !== undefined) {
+        as.port = sds;
+      }
+    }
+
+    const services = [
+      config.services.kronos || {
+        port: 10000
+      }
+    ];
+    services[0].name = 'kronos';
+
+    Object.keys(config.services).forEach(sn => {
+      if (sn !== 'kronos') {
+        const service = config.services[sn];
+        service.name = sn;
+        services.push(service);
+      }
+    });
+
+    const m = await manager(services, modules);
+
+    if (logLevel !== undefined) {
+      Object.keys(m.services).forEach(
+        sn => (m.services[sn].logLevel = logLevel)
+      );
+    }
+
+    process.on('uncaughtException', err => m.error(err));
+    process.on('unhandledRejection', reason => m.error(reason));
+    process.on('SIGINT', () => {
+      try {
+        m.stop().then(() => process.exit());
+      } catch (e) {
+        console.error(e);
+        process.exit();
+      }
+    });
+
+    process.title = m.id;
+
+    flowFileNames.forEach(name => {
+      manager
+        .loadFlowFromFile(name)
+        .then(flow => {
+          m.info(`Flow declared: ${flow}`);
+          if (program.start) {
+            m.info(`Starting ... ${flow}`);
+            flow
+              .start()
+              .then(() => m.info(`Flow started: ${flow}`))
+              .catch(error => m.error(`Flow started failed: ${error}`));
           }
-        }
-
-        const services = [
-          config.services.kronos || {
-            port: 10000
-          }
-        ];
-        services[0].name = 'kronos';
-
-        Object.keys(config.services).forEach(sn => {
-          if (sn !== 'kronos') {
-            const service = config.services[sn];
-            service.name = sn;
-            services.push(service);
-          }
-        });
-
-        manager(services, modules).then(manager => {
-          if (logLevel !== undefined) {
-            Object.keys(manager.services).forEach(
-              sn => (manager.services[sn].logLevel = logLevel)
-            );
-          }
-
-          process.on('uncaughtException', err => manager.error(err));
-          process.on('unhandledRejection', reason => manager.error(reason));
-          process.on('SIGINT', () => {
-            try {
-              manager.stop().then(() => process.exit());
-            } catch (e) {
-              console.error(e);
-              process.exit();
-            }
-          });
-
-          process.title = manager.id;
-
-          flowFileNames.forEach(name => {
-            manager
-              .loadFlowFromFile(name)
-              .then(flow => {
-                manager.info(`Flow declared: ${flow}`);
-                if (program.start) {
-                  manager.info(`Starting ... ${flow}`);
-                  flow
-                    .start()
-                    .then(() => manager.info(`Flow started: ${flow}`))
-                    .catch(error =>
-                      manager.error(`Flow started failed: ${error}`)
-                    );
-                }
-              })
-              .catch(error =>
-                manager.error(`Flow initialization failed: ${error}`)
-              );
-          });
-        });
-      })
-      .catch(console.error);
+        })
+        .catch(error => m.error(`Flow initialization failed: ${error}`));
+    });
   });
 
 program.parse(process.argv);

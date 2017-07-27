@@ -14,52 +14,54 @@ export function pglob(path, options) {
   });
 }
 
-export function kronosModules() {
-  return pglob(
+export async function kronosModules() {
+  const files = await pglob(
     path.join(__dirname, '..', 'node_modules/*/package.json'),
     {}
-  ).then(files => {
-    const modules = [];
-    return Promise.all(
-      files.map(
-        file =>
-          new Promise((fullfill, reject) => {
-            fs.readFile(file, (err, data) => {
-              if (err) {
-                reject(`loading ${file}: ${err}`);
-                return;
-              }
-              try {
-                const p = JSON.parse(data);
+  );
 
-                if (p.keywords) {
-                  if (
-                    p.keywords.find(
-                      k =>
-                        k === 'kronos-step' ||
-                        k === 'kronos-service' ||
-                        k === 'kronos-interceptor'
-                    )
-                  ) {
-                    try {
-                      modules.push(require(p.name));
-                      fullfill();
-                      return;
-                    } catch (e) {
-                      reject(`${file}: ${p.name} ${e}`);
-                    }
+  const modules = [];
+  const result = await Promise.all(
+    files.map(
+      file =>
+        new Promise((fullfill, reject) => {
+          fs.readFile(file, (err, data) => {
+            if (err) {
+              reject(`loading ${file}: ${err}`);
+              return;
+            }
+            try {
+              const p = JSON.parse(data);
+
+              if (p.keywords) {
+                if (
+                  p.keywords.find(
+                    k =>
+                      k === 'kronos-step' ||
+                      k === 'kronos-service' ||
+                      k === 'kronos-interceptor'
+                  )
+                ) {
+                  try {
+                    modules.push(require(p.name));
+                    fullfill();
+                    return;
+                  } catch (e) {
+                    reject(`${file}: ${p.name} ${e}`);
                   }
                 }
-              } catch (e) {
-                reject(e);
               }
+            } catch (e) {
+              reject(e);
+            }
 
-              fullfill();
-            });
-          })
-      )
-    ).then(results => modules);
-  });
+            fullfill();
+          });
+        })
+    )
+  );
+
+  return modules;
 }
 
 export function assign(dest, value, attributePath) {
