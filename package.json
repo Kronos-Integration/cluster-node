@@ -19,7 +19,7 @@
     "prepare": "rollup -c -- src/kronos-cluster-node.js && chmod +x bin/kronos-cluster-node"
   },
   "engines": {
-    "node": ">=8.1.4"
+    "node": ">=8.2.1"
   },
   "license": "BSD-2-Clause",
   "repository": {
@@ -36,8 +36,8 @@
     "kronos-flow": "^2.5.34",
     "kronos-flow-control-step": "^3.0.11",
     "kronos-http-routing-step": "^4.3.24",
-    "kronos-interceptor-decode-json": "1.0.11",
-    "kronos-interceptor-http-request": "3.2.8",
+    "kronos-interceptor-decode-json": "1.0.12",
+    "kronos-interceptor-http-request": "3.2.9",
     "kronos-interceptor-line-header": "^2.1.6",
     "kronos-interceptor-line-parser": "2.0.10",
     "kronos-interceptor-line-tokenizer-csv": "2.1.7",
@@ -47,7 +47,7 @@
     "kronos-interceptor-object-data-processor-row": "^1.2.9",
     "kronos-interceptor-stream-obj2string": "2.0.14",
     "kronos-service-admin": "2.26.10",
-    "kronos-service-consul": "2.19.9",
+    "kronos-service-consul": "2.19.10",
     "kronos-service-health-check": "2.10.11",
     "kronos-service-manager": "3.5.10",
     "kronos-service-uti": "1.1.8",
@@ -63,7 +63,7 @@
     "systemd-socket": "^0.0.0"
   },
   "devDependencies": {
-    "ava": "0.21.0",
+    "ava": "^0.21.0",
     "babel-preset-stage-3": "^6.24.1",
     "jsdoc-babel": "^0.3.0",
     "jsdoc-to-markdown": "^3.0.0",
