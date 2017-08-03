@@ -59,7 +59,7 @@
     "kronos-step-stdio": "^3.0.18",
     "kronos-step-system": "^2.0.10",
     "network-address": "^1.1.2",
-    "rebirth": "1.0.2",
+    "rebirth": "^1.0.2",
     "systemd-socket": "^0.0.0"
   },
   "devDependencies": {
@@ -89,13 +89,8 @@
     }
   ],
   "nyc": {
-    "include": [
-      "build/test-bundle.js",
-      "src/**/*.js"
-    ],
-    "reporter": [
-      "lcov"
-    ],
+    "include": ["build/test-bundle.js", "src/**/*.js"],
+    "reporter": ["lcov"],
     "report-dir": "./build/coverage"
   },
   "template": {
@@ -107,14 +102,8 @@
     "space": true
   },
   "ava": {
-    "files": [
-      "build/test-bundle.js"
-    ],
-    "presets": [
-      "stage-3"
-    ],
-    "require": [
-      "babel-register"
-    ]
+    "files": ["build/test-bundle.js"],
+    "presets": ["stage-3"],
+    "require": ["babel-register"]
   }
 }
