@@ -1,21 +1,9 @@
 const fs = require('fs'),
   path = require('path'),
-  glob = require('glob');
-
-export function pglob(path, options) {
-  return new Promise((fullfull, reject) => {
-    glob(path, options, (err, files) => {
-      if (err) {
-        reject(err);
-      } else {
-        fullfull(files);
-      }
-    });
-  });
-}
+  globby = require('globby');
 
 export async function kronosModules() {
-  const files = await pglob(
+  const files = await globby(
     path.join(__dirname, '..', 'node_modules/*/package.json'),
     {}
   );

@@ -5,7 +5,7 @@ const os = require('os'),
   rebirth = require('rebirth'),
   address = require('network-address');
 
-import { pglob, kronosModules, assign } from './util';
+import { kronosModules, assign } from './util';
 import { manager } from 'kronos-service-manager';
 import { expand } from 'config-expander';
 
