@@ -3,13 +3,12 @@ import commonjs from 'rollup-plugin-commonjs';
 import pkg from './package.json';
 
 export default {
-  banner: '#!/usr/bin/env node',
-  targets: [
-    {
-      dest: pkg.bin['kronos-cluster-node'],
-      format: 'cjs'
-    }
-  ],
+  output: {
+    file: pkg.bin['kronos-cluster-node'],
+    format: 'cjs',
+    banner: '#!/usr/bin/env node'
+  },
   plugins: [nodeResolve(), commonjs()],
-  external: ['kronos-service-manager']
+  external: ['kronos-service-manager'],
+  input: pkg.module
 };
