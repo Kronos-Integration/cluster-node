@@ -1,5 +1,5 @@
 export default {
-  input: 'tests/**/*-test.js',
+  input: 'tests/simple-test.js',
   external: ['ava'],
   plugins: [],
 
