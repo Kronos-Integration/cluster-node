@@ -1,8 +1,11 @@
 export default {
-  entry: 'tests/simple-test.js',
+  input: 'tests/**/*-test.js',
   external: ['ava'],
   plugins: [],
-  format: 'cjs',
-  dest: 'build/test-bundle.js',
-  sourceMap: true
+
+  output: {
+    file: 'build/test-bundle.js',
+    format: 'cjs',
+    sourcemap: true
+  }
 };
