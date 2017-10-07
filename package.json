@@ -44,7 +44,7 @@
     "kronos-interceptor-line-tokens2obj": "^2.1.7",
     "kronos-interceptor-message-handler": "2.1.5",
     "kronos-interceptor-object-data-processor-chunk": "^2.1.5",
-    "kronos-interceptor-object-data-processor-row": "^1.2.9",
+    "kronos-interceptor-object-data-processor-row": "^1.2.10",
     "kronos-interceptor-stream-obj2string": "2.0.14",
     "kronos-service-admin": "2.26.17",
     "kronos-service-consul": "2.19.11",
