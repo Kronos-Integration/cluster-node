@@ -1,10 +1,8 @@
 export default {
   input: 'tests/simple-test.js',
-  external: ['ava'],
-  plugins: [],
-
+  external: ['ava', 'kronos-service-manager', 'config-expander'],
   output: {
-    file: 'build/test-bundle.js',
+    file: 'build/simple-test.js',
     format: 'cjs',
     sourcemap: true
   }
