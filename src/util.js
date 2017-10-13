@@ -1,54 +1,30 @@
 const fs = require('fs'),
-  path = require('path'),
-  globby = require('globby');
+  path = require('path');
+
+import { packageWalker } from 'npm-package-walker';
 
 export async function kronosModules() {
-  const files = await globby(
-    path.join(__dirname, '..', 'node_modules/*/package.json'),
-    {}
-  );
-
   const modules = [];
-  const result = await Promise.all(
-    files.map(
-      file =>
-        new Promise((fullfill, reject) => {
-          fs.readFile(file, (err, data) => {
-            if (err) {
-              reject(`loading ${file}: ${err}`);
-              return;
-            }
-            try {
-              const p = JSON.parse(data);
 
-              if (p.keywords) {
-                if (
-                  p.keywords.find(
-                    k =>
-                      k === 'kronos-step' ||
-                      k === 'kronos-service' ||
-                      k === 'kronos-interceptor'
-                  )
-                ) {
-                  try {
-                    modules.push(require(p.name));
-                    fullfill();
-                    return;
-                  } catch (e) {
-                    reject(`${file}: ${p.name} ${e}`);
-                  }
-                }
-              }
-            } catch (e) {
-              reject(e);
-            }
-
-            fullfill();
-          });
-        })
-    )
+  await packageWalker(
+    path.join(__dirname, '..'),
+    pkg => {
+      if (
+        pkg.keywords !== undefined &&
+        pkg.keywords.find(
+          k =>
+            k === 'kronos-step' ||
+            k === 'kronos-service' ||
+            k === 'kronos-interceptor'
+        )
+      ) {
+        modules.push(require(pkg.name));
+        return false;
+      }
+      return true;
+    },
+    ['dependencies']
   );
-
   return modules;
 }
 

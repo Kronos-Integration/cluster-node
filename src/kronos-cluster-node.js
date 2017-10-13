@@ -47,27 +47,24 @@ program
       }
     });
 
-    const [modules, config] = await Promise.all([
-      kronosModules(),
-      expand(
-        options.config
-          ? "${include('" + path.basename(options.config) + "')}"
-          : {
-              services: {
-                registry: {
-                  // consul
-                  checkInterval: 60
-                },
-                'koa-admin': {
-                  docRoot: "${installdir + '/docroot'}"
-                }
+    const config = await expand(
+      options.config
+        ? "${include('" + path.basename(options.config) + "')}"
+        : {
+            services: {
+              registry: {
+                // consul
+                checkInterval: 60
+              },
+              'koa-admin': {
+                docRoot: "${installdir + '/docroot'}"
               }
-            },
-        {
-          constants
-        }
-      )
-    ]);
+            }
+          },
+      {
+        constants
+      }
+    );
 
     configStatements.forEach(value => {
       const m = value.match(/^([^\.]+).([^=]+)=(.*)/);
@@ -114,7 +111,7 @@ program
       }
     });
 
-    const m = await manager(services, modules);
+    const m = await manager(services, await kronosModules());
 
     if (logLevel !== undefined) {
       Object.keys(m.services).forEach(

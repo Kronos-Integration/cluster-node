@@ -29,7 +29,6 @@
   "dependencies": {
     "caporal": "^0.7.0",
     "config-expander": "9.0.0",
-    "globby": "^6.1.0",
     "kronos-adapter-inbound-file": "2.0.15",
     "kronos-adapter-outbound-file": "2.0.14",
     "kronos-adapter-outbound-http": "1.0.13",
@@ -59,6 +58,7 @@
     "kronos-step-stdio": "^3.0.18",
     "kronos-step-system": "^2.0.10",
     "network-address": "^1.1.2",
+    "npm-package-walker": "^1.0.0",
     "rebirth": "^1.0.2",
     "systemd-socket": "^0.0.0"
   },
