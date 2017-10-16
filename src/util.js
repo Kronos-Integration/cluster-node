@@ -7,8 +7,7 @@ export async function kronosModules() {
   const modules = [];
 
   await packageWalker(
-    path.join(__dirname, '..'),
-    pkg => {
+    async pkg => {
       if (
         pkg.keywords !== undefined &&
         pkg.keywords.find(
@@ -23,8 +22,10 @@ export async function kronosModules() {
       }
       return true;
     },
+    path.join(__dirname, '..'),
     ['dependencies']
   );
+
   return modules;
 }
 
