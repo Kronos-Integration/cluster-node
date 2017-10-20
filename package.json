@@ -27,7 +27,7 @@
     "url": "git+https://github.com/Kronos-Integration/kronos-cluster-node.git"
   },
   "dependencies": {
-    "caporal": "^0.7.0",
+    "caporal": "^0.8.0",
     "config-expander": "9.0.0",
     "kronos-adapter-inbound-file": "2.0.15",
     "kronos-adapter-outbound-file": "2.0.14",
