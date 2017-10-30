@@ -15,7 +15,7 @@
     "precover": "rollup -c tests/rollup.config.js",
     "posttest": "npm run prepare && markdown-doctest",
     "docs": "jsdoc2md --configure doc/jsdoc.json -l off -t doc/README.hbs -f src/*.js >README.md",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "semantic-release": "semantic-release",
     "prepare": "rollup -c && chmod +x bin/kronos-cluster-node"
   },
   "engines": {
@@ -69,7 +69,7 @@
     "markdown-doctest": "^0.9.1",
     "nyc": "^11.3.0",
     "rollup": "^0.50.0",
-    "semantic-release": "^8.2.2",
+    "semantic-release": "^9.1.0",
     "xo": "^0.19.0"
   },
   "keywords": [
