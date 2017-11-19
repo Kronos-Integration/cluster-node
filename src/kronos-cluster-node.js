@@ -132,21 +132,21 @@ program
 
     process.title = m.id;
 
-    flowFileNames.forEach(name => {
-      manager
-        .loadFlowFromFile(name)
-        .then(flow => {
+    try {
+      await Promise.all(
+        flowFileNames.map(async name => {
+          const flow = await manager.loadFlowFromFile(name);
           m.info(`Flow declared: ${flow}`);
           if (program.start) {
             m.info(`Starting ... ${flow}`);
-            flow
-              .start()
-              .then(() => m.info(`Flow started: ${flow}`))
-              .catch(error => m.error(`Flow started failed: ${error}`));
+            await flow.start();
+            m.info(`Flow started: ${flow}`);
           }
         })
-        .catch(error => m.error(`Flow initialization failed: ${error}`));
-    });
+      );
+    } catch (error) {
+      m.error(`Flow initialization failed: ${error}`);
+    }
   });
 
 program.parse(process.argv);
