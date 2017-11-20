@@ -37,15 +37,15 @@
     "kronos-http-routing-step": "^4.3.24",
     "kronos-interceptor-decode-json": "1.0.12",
     "kronos-interceptor-http-request": "3.2.9",
-    "kronos-interceptor-line-header": "^2.1.8",
+    "kronos-interceptor-line-header": "^2.1.9",
     "kronos-interceptor-line-parser": "2.0.10",
     "kronos-interceptor-line-tokenizer-csv": "2.1.7",
-    "kronos-interceptor-line-tokens2obj": "^2.1.7",
+    "kronos-interceptor-line-tokens2obj": "^2.1.8",
     "kronos-interceptor-message-handler": "2.1.5",
-    "kronos-interceptor-object-data-processor-chunk": "^2.1.7",
+    "kronos-interceptor-object-data-processor-chunk": "^2.1.8",
     "kronos-interceptor-object-data-processor-row": "^1.2.10",
     "kronos-interceptor-stream-obj2string": "2.0.14",
-    "kronos-service-admin": "2.26.21",
+    "kronos-service-admin": "^2.26.22",
     "kronos-service-consul": "2.19.13",
     "kronos-service-health-check": "2.10.11",
     "kronos-service-manager": "3.5.10",
@@ -63,15 +63,15 @@
     "systemd-socket": "^0.0.0"
   },
   "devDependencies": {
-    "ava": "^0.23.0",
+    "ava": "0.23.0",
+    "babel-preset-env": "^1.6.1",
     "jsdoc-babel": "^0.3.0",
     "jsdoc-to-markdown": "^3.0.2",
     "markdown-doctest": "^0.9.1",
     "nyc": "^11.3.0",
     "rollup": "^0.51.8",
     "semantic-release": "^9.1.1",
-    "xo": "^0.19.0",
-    "babel-preset-env": "^1.6.1"
+    "xo": "^0.19.0"
   },
   "keywords": [
     "cluster"
