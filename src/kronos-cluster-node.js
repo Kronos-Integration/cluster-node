@@ -8,6 +8,7 @@ const os = require('os'),
 import { kronosModules, assign } from './util';
 import { manager } from 'kronos-service-manager';
 import { expand } from 'config-expander';
+import { version } from '../package.json';
 
 let logLevel;
 
@@ -15,7 +16,7 @@ const flowFileNames = [];
 const configStatements = [];
 
 program
-  .version(require(path.join(__dirname, '..', 'package.json')).version)
+  .version(version)
   .description('run cluster node')
   .option('-f, --flow <file>', 'flow to be registered', name =>
     flowFileNames.push(name)

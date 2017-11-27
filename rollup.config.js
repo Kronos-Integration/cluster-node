@@ -1,4 +1,5 @@
 import pkg from './package.json';
+import json from 'rollup-plugin-json';
 
 export default {
   output: {
@@ -6,6 +7,7 @@ export default {
     format: 'cjs',
     banner: '#!/usr/bin/env node'
   },
+  plugins: [json()],
   external: ['kronos-service-manager', 'config-expander', 'npm-package-walker'],
   input: pkg.module
 };
