@@ -59,7 +59,7 @@
     "kronos-step-system": "^2.0.10",
     "network-address": "^1.1.2",
     "npm-package-walker": "^3.0.4",
-    "rebirth": "^1.0.2",
+    "rebirth": "^1.0.3",
     "systemd-socket": "^0.0.0"
   },
   "devDependencies": {
