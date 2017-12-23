@@ -23,6 +23,8 @@ before_script:
   - 'curl -k https://mfelten.de/kronos/kronos-service-manager-ui.tar|tar xvfz -'
 script:
   - npm run cover
+  - npm run lint
+  - npm run docs
 after_script:
   - codecov
   - cat ./build/coverage/lcov.info | coveralls
