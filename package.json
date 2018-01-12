@@ -27,7 +27,8 @@
     "docs": "documentation readme src/kronos-cluster-node.js --section=API",
     "semantic-release": "semantic-release",
     "prepare": "rollup -c && chmod +x bin/kronos-cluster-node",
-    "lint": "documentation lint src/kronos-cluster-node.js"
+    "lint": "documentation lint src/kronos-cluster-node.js",
+    "travis-deploy-once": "travis-deploy-once"
   },
   "dependencies": {
     "caporal": "^0.9.0",
@@ -71,8 +72,9 @@
     "nyc": "^11.4.1",
     "rollup": "^0.54.0",
     "rollup-plugin-json": "^2.3.0",
-    "semantic-release": "^11.1.0",
-    "documentation": "^5.3.5"
+    "semantic-release": "^12.2.0",
+    "documentation": "^5.3.5",
+    "travis-deploy-once": "^4.3.1"
   },
   "engines": {
     "node": ">=8.9.4"
