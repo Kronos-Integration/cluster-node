@@ -1,9 +1,10 @@
-const os = require('os'),
-  path = require('path'),
-  program = require('caporal'),
-  systemdSocket = require('systemd-socket'),
-  rebirth = require('rebirth'),
-  address = require('network-address');
+const program = require('caporal'),
+  systemdSocket = require('systemd-socket');
+
+import address from 'network-address';
+import rebirth from 'rebirth';
+
+import { dirname, resolve, basename } from 'path';
 
 import { kronosModules, assign } from './util';
 import { manager } from 'kronos-service-manager';
@@ -36,8 +37,8 @@ program
     }
 
     const constants = {
-      basedir: path.dirname(options.config || process.cwd()),
-      installdir: path.resolve(__dirname, '..'),
+      basedir: dirname(options.config || process.cwd()),
+      installdir: resolve(__dirname, '..'),
       networkAddress: address()
     };
 
@@ -50,7 +51,7 @@ program
 
     const config = await expand(
       options.config
-        ? "${include('" + path.basename(options.config) + "')}"
+        ? "${include('" + basename(options.config) + "')}"
         : {
             services: {
               registry: {

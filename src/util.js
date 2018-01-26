@@ -1,6 +1,4 @@
-const fs = require('fs'),
-  path = require('path');
-
+import { join } from 'path';
 import { packageWalker } from 'npm-package-walker';
 
 export async function kronosModules() {
@@ -22,7 +20,7 @@ export async function kronosModules() {
       }
       return true;
     },
-    path.join(__dirname, '..'),
+    join(__dirname, '..'),
     ['dependencies']
   );
 
