@@ -4,9 +4,7 @@
   "main": "bin/kronos-cluster-node",
   "module": "src/kronos-cluster-node.js",
   "description": "kronos cluster node sample application",
-  "keywords": [
-    "cluster"
-  ],
+  "keywords": ["cluster"],
   "contributors": [
     {
       "name": "Markus Felten",
@@ -26,7 +24,7 @@
     "posttest": "npm run prepare && markdown-doctest",
     "docs": "documentation readme src/kronos-cluster-node.js --section=API",
     "semantic-release": "semantic-release",
-    "prepare": "rollup -c && chmod +x bin/kronos-cluster-node",
+    "prepare": "rollup -c",
     "lint": "documentation lint src/kronos-cluster-node.js",
     "travis-deploy-once": "travis-deploy-once"
   },
@@ -73,6 +71,7 @@
     "nyc": "^11.7.1",
     "rollup": "^0.58.1",
     "rollup-plugin-commonjs": "^9.1.0",
+    "rollup-plugin-executable": "^1.2.0",
     "rollup-plugin-json": "^2.3.0",
     "rollup-plugin-node-resolve": "^3.3.0",
     "semantic-release": "^15.1.7",
@@ -88,23 +87,15 @@
   "bugs": {
     "url": "https://github.com/Kronos-Integration/kronos-cluster-node/issues"
   },
-  "homepage": "https://github.com/Kronos-Integration/kronos-cluster-node#readme",
+  "homepage":
+    "https://github.com/Kronos-Integration/kronos-cluster-node#readme",
   "ava": {
-    "files": [
-      "build/*-test.js"
-    ],
-    "require": [
-      "babel-register"
-    ]
+    "files": ["build/*-test.js"],
+    "require": ["babel-register"]
   },
   "nyc": {
-    "include": [
-      "build/*-test.js",
-      "src/**/*.js"
-    ],
-    "reporter": [
-      "lcov"
-    ],
+    "include": ["build/*-test.js", "src/**/*.js"],
+    "reporter": ["lcov"],
     "report-dir": "./build/coverage"
   },
   "xo": {
