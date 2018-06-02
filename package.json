@@ -1,6 +1,9 @@
 {
   "name": "kronos-cluster-node",
   "version": "0.0.0-semantic-release",
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "bin/kronos-cluster-node",
   "module": "src/kronos-cluster-node.js",
   "description": "kronos cluster node sample application",
