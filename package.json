@@ -35,7 +35,7 @@
   },
   "dependencies": {
     "caporal": "^0.10.0",
-    "config-expander": "9.1.4",
+    "config-expander": "9.1.6",
     "kronos-adapter-inbound-file": "2.0.15",
     "kronos-adapter-outbound-file": "2.0.14",
     "kronos-adapter-outbound-http": "1.0.13",
