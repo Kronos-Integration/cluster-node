@@ -53,7 +53,7 @@
     "kronos-interceptor-object-data-processor-row": "^1.2.11",
     "kronos-interceptor-stream-obj2string": "2.0.14",
     "kronos-service-admin": "^2.26.22",
-    "kronos-service-consul": "2.20.0",
+    "kronos-service-consul": "2.20.1",
     "kronos-service-health-check": "2.11.0",
     "kronos-service-manager": "3.5.10",
     "kronos-service-uti": "1.2.0",
