@@ -56,7 +56,7 @@
     "kronos-service-consul": "2.20.1",
     "kronos-service-health-check": "2.11.0",
     "kronos-service-manager": "3.5.10",
-    "kronos-service-uti": "1.2.1",
+    "kronos-service-uti": "1.2.2",
     "kronos-step-aggregate": "^1.4.6",
     "kronos-step-archive-tar": "2.0.13",
     "kronos-step-file": "^1.1.0",
