@@ -9,10 +9,21 @@ export default {
   output: {
     file: pkg.bin["kronos-cluster-node"],
     format: "cjs",
-    banner: "#!/usr/bin/env -S node --experimental-modules --experimental-worker",
+    banner:
+      "#!/usr/bin/env -S node --experimental-modules --experimental-worker",
     interop: false
   },
-  plugins: [resolve(), commonjs(), json(), cleanup(), executable()],
+  plugins: [
+    resolve(),
+    commonjs(),
+    json({
+      include: "package.json",
+      preferConst: true,
+      compact: true
+    }),
+    cleanup(),
+    executable()
+  ],
   external: [
     "os",
     "child_process",
