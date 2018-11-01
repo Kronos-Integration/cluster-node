@@ -4,8 +4,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "main": "bin/kronos-cluster-node",
-  "module": "src/kronos-cluster-node.js",
+  "module": "src/kronos-cluster-node-cli.js",
   "description": "kronos cluster node sample application",
   "keywords": [
     "cluster"
@@ -27,10 +26,10 @@
     "pretest": "rollup -c tests/rollup.config.js",
     "precover": "rollup -c tests/rollup.config.js",
     "posttest": "npm run prepare && markdown-doctest",
-    "docs": "documentation readme src/kronos-cluster-node.js --section=API",
+    "docs": "documentation readme src/kronos-cluster-node-cli.js --section=API",
     "semantic-release": "semantic-release",
     "prepare": "rollup -c",
-    "lint": "documentation lint src/kronos-cluster-node.js",
+    "lint": "documentation lint src/kronos-cluster-node-cli.js",
     "travis-deploy-once": "travis-deploy-once"
   },
   "dependencies": {
@@ -86,7 +85,7 @@
     "rollup-plugin-cleanup": "^3.0.0"
   },
   "engines": {
-    "node": ">=10.12"
+    "node": ">=10.13"
   },
   "repository": {
     "type": "git",

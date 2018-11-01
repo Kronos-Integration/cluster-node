@@ -1,15 +1,13 @@
-const program = require('caporal'),
-  systemdSocket = require('systemd-socket');
+import address from "network-address";
+import rebirth from "rebirth";
+import { dirname, resolve, basename } from "path";
+import { kronosModules, assign } from "./util";
+import { manager } from "kronos-service-manager";
+import { expand } from "config-expander";
+import { version } from "../package.json";
+import program from "caporal";
 
-import address from 'network-address';
-import rebirth from 'rebirth';
-
-import { dirname, resolve, basename } from 'path';
-
-import { kronosModules, assign } from './util';
-import { manager } from 'kronos-service-manager';
-import { expand } from 'config-expander';
-import { version } from '../package.json';
+const systemdSocket = require("systemd-socket");
 
 let logLevel;
 
@@ -18,27 +16,27 @@ const configStatements = [];
 
 program
   .version(version)
-  .description('run cluster node')
-  .option('-f, --flow <file>', 'flow to be registered', name =>
+  .description("run cluster node")
+  .option("-f, --flow <file>", "flow to be registered", name =>
     flowFileNames.push(name)
   )
-  .option('-s, --start', 'start flow after registering')
-  .option('-c, --config <file>', 'use config from file')
-  .option('-d --define <key=value>', 'define (service) value', value =>
+  .option("-s, --start", "start flow after registering")
+  .option("-c, --config <file>", "use config from file")
+  .option("-d --define <key=value>", "define (service) value", value =>
     configStatements.push(value)
   )
-  .option('--debug', 'enable debugging')
-  .option('--trace', 'enable tracing')
+  .option("--debug", "enable debugging")
+  .option("--trace", "enable tracing")
   .action(async (args, options, logger) => {
     if (options.debug) {
-      logLevel = 'debug';
+      logLevel = "debug";
     } else if (options.trace) {
-      logLevel = 'trace';
+      logLevel = "trace";
     }
 
     const constants = {
       basedir: dirname(options.config || process.cwd()),
-      installdir: resolve(__dirname, '..'),
+      installdir: resolve(__dirname, ".."),
       networkAddress: address()
     };
 
@@ -58,7 +56,7 @@ program
                 // consul
                 checkInterval: 60
               },
-              'koa-admin': {
+              "koa-admin": {
                 docRoot: "${installdir + '/docroot'}"
               }
             }
@@ -92,7 +90,7 @@ program
 
     const sds = systemdSocket();
     if (sds) {
-      const as = config.services['koa-admin'];
+      const as = config.services["koa-admin"];
       if (as !== undefined) {
         as.port = sds;
       }
@@ -103,10 +101,10 @@ program
         port: 10000
       }
     ];
-    services[0].name = 'kronos';
+    services[0].name = "kronos";
 
     Object.keys(config.services).forEach(sn => {
-      if (sn !== 'kronos') {
+      if (sn !== "kronos") {
         const service = config.services[sn];
         service.name = sn;
         services.push(service);
@@ -121,9 +119,9 @@ program
       );
     }
 
-    process.on('uncaughtException', err => m.error(err));
-    process.on('unhandledRejection', reason => m.error(reason));
-    process.on('SIGINT', () => {
+    process.on("uncaughtException", err => m.error(err));
+    process.on("unhandledRejection", reason => m.error(reason));
+    process.on("SIGINT", () => {
       try {
         m.stop().then(() => process.exit());
       } catch (e) {
@@ -153,4 +151,4 @@ program
 
 program.parse(process.argv);
 
-process.on('SIGHUP', () => rebirth());
+process.on("SIGHUP", () => rebirth());

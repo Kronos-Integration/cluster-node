@@ -14,7 +14,6 @@ export default {
     interop: false
   },
   plugins: [
-    resolve(),
     commonjs(),
     json({
       include: "package.json",
@@ -30,7 +29,10 @@ export default {
     "path",
     "kronos-service-manager",
     "config-expander",
-    "npm-package-walker"
+    "npm-package-walker",
+    "rebirth",
+    "network-address",
+    "caporal"
   ],
   input: pkg.module
 };
