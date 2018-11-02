@@ -4,6 +4,7 @@
   "publishConfig": {
     "access": "public"
   },
+  "main": "{{main}}",
   "module": "src/kronos-cluster-node-cli.js",
   "description": "kronos cluster node sample application",
   "keywords": [
