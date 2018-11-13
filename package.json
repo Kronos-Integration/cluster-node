@@ -98,11 +98,8 @@
       "build/*-test.js"
     ],
     "require": [
-      "babel-register"
+      "esm"
     ]
-  },
-  "xo": {
-    "space": true
   },
   "template": {
     "repository": {
