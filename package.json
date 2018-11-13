@@ -95,11 +95,13 @@
   "homepage": "https://github.com/Kronos-Integration/kronos-cluster-node#readme",
   "ava": {
     "files": [
-      "build/*-test.js"
+      "tests/*-test.js"
     ],
     "require": [
       "esm"
-    ]
+    ],
+    "babel": false,
+    "compileEnhancements": false
   },
   "template": {
     "repository": {
