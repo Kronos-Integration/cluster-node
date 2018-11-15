@@ -32,7 +32,7 @@
     "travis-deploy-once": "travis-deploy-once"
   },
   "dependencies": {
-    "caporal": "^0.10.0",
+    "caporal": "^1.0.0",
     "config-expander": "^9.1.8",
     "kronos-adapter-inbound-file": "2.0.15",
     "kronos-adapter-outbound-file": "2.0.14",
