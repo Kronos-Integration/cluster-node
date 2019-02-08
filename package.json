@@ -61,7 +61,7 @@
     "kronos-step-stdio": "^3.0.18",
     "kronos-step-system": "^2.0.10",
     "network-address": "^1.1.2",
-    "npm-package-walker": "^3.0.8",
+    "npm-package-walker": "^4.0.0",
     "rebirth": "^2.0.0",
     "systemd-socket": "^0.0.0"
   },
