@@ -25,6 +25,7 @@
     "lint": "documentation lint src/kronos-cluster-node-cli.js",
     "posttest": "npm run prepare && markdown-doctest",
     "prepare": "rollup -c",
+    "package": "npm-pkgbuild --npm-dist --npm-modules -t /data/binaries/arch-linux/packages pkgbuild pacman makepkg",
     "start": "node bin/kronos-cluster-node",
     "test": "ava"
   },
@@ -70,6 +71,7 @@
     "documentation": "^9.1.1",
     "esm": "^3.0.84",
     "markdown-doctest": "^0.9.1",
+    "npm-pkgbuild": "^5.0.1",
     "rollup": "^1.1.0",
     "rollup-plugin-cleanup": "^3.1.0",
     "rollup-plugin-commonjs": "^9.2.0",
@@ -103,6 +105,23 @@
       "js",
       "mjs"
     ]
+  },
+  "pacman": {
+    "backup": "etc/${name}/config.json",
+    "install": "pacman/install.sh",
+    "installdir": "/services/${name}",
+    "content": {
+      "/usr/lib/tmpfiles.d/${name}.conf": "pacman/tmpfiles.conf",
+      "/etc/${name}/config.json": "config/config.json"
+    },
+    "depends": {
+      "systemd": ">=240.0"
+    }
+  },
+  "systemd": {
+    "units": {
+      "${name}": "systemd/${name}*"
+    }
   },
   "template": {
     "repository": {
