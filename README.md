@@ -7,7 +7,6 @@
 [![Coverage Status](https://coveralls.io/repos/Kronos-Integration/kronos-cluster-node/badge.svg)](https://coveralls.io/r/Kronos-Integration/kronos-cluster-node)
 [![Known Vulnerabilities](https://snyk.io/test/github/Kronos-Integration/kronos-cluster-node/badge.svg)](https://snyk.io/test/github/Kronos-Integration/kronos-cluster-node)
 [![GitHub Issues](https://img.shields.io/github/issues/Kronos-Integration/kronos-cluster-node.svg?style=flat-square)](https://github.com/Kronos-Integration/kronos-cluster-node/issues)
-[![Stories in Ready](https://badge.waffle.io/Kronos-Integration/kronos-cluster-node.svg?label=ready&title=Ready)](http://waffle.io/Kronos-Integration/kronos-cluster-node)
 [![Dependency Status](https://david-dm.org/Kronos-Integration/kronos-cluster-node.svg)](https://david-dm.org/Kronos-Integration/kronos-cluster-node)
 [![devDependency Status](https://david-dm.org/Kronos-Integration/kronos-cluster-node/dev-status.svg)](https://david-dm.org/Kronos-Integration/kronos-cluster-node#info=devDependencies)
 [![docs](http://inch-ci.org/github/Kronos-Integration/kronos-cluster-node.svg?branch=master)](http://inch-ci.org/github/Kronos-Integration/kronos-cluster-node)
