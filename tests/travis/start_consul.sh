@@ -6,7 +6,7 @@ cd $DIR
 pwd
 
 NAME=consul
-VERSION=0.6.4
+VERSION=1.4.3
 ARCHIVE_NAME=${NAME}_${VERSION}_linux_amd64.zip
 
 if [ ! -f ${NAME} ]; then
