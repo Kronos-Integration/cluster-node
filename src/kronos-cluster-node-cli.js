@@ -48,21 +48,20 @@ program
     });
 
     const config = await expand(
-      options.config
-        ? "${include('" + basename(options.config) + "')}"
-        : {
-            services: {
-              registry: {
-                // consul
-                checkInterval: 60
-              },
-              "koa-admin": {
-                docRoot: "${installdir + '/docroot'}"
-              }
-            }
-          },
+      options.config ? "${include('" + basename(options.config) + "')}" : {},
       {
-        constants
+        constants,
+        default: {
+          services: {
+            registry: {
+              // consul
+              checkInterval: 60
+            },
+            "koa-admin": {
+              docRoot: "${installdir + '/docroot'}"
+            }
+          }
+        }
       }
     );
 
