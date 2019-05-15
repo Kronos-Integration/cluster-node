@@ -1,3 +1,4 @@
+import builtins from "builtin-modules";
 import cleanup from "rollup-plugin-cleanup";
 import pkg from "./package.json";
 import json from "rollup-plugin-json";
