@@ -61,7 +61,7 @@
     "kronos-step-stdio": "^3.0.18",
     "kronos-step-system": "^2.0.10",
     "network-address": "^1.1.2",
-    "npm-package-walker": "^4.0.0",
+    "npm-package-walker": "^4.0.1",
     "rebirth": "^2.0.0",
     "systemd-socket": "^0.0.0"
   },
@@ -70,16 +70,16 @@
     "builtin-modules": "^3.1.0",
     "c8": "^4.1.5",
     "documentation": "^11.0.0",
-    "esm": "^3.2.22",
+    "esm": "^3.2.24",
     "markdown-doctest": "^0.9.1",
     "npm-pkgbuild": "^6.0.15",
-    "rollup": "^1.12.0",
+    "rollup": "^1.12.1",
     "rollup-plugin-cleanup": "^3.1.1",
     "rollup-plugin-commonjs": "^10.0.0",
     "rollup-plugin-executable": "^1.4.5",
     "rollup-plugin-json": "^4.0.0",
     "rollup-plugin-node-resolve": "^5.0.0",
-    "semantic-release": "^15.13.13"
+    "semantic-release": "^15.13.14"
   },
   "engines": {
     "node": ">=10.15.3"
