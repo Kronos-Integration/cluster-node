@@ -21,15 +21,14 @@ export default {
       preferConst: true,
       compact: true
     }),
-    cleanup(),
+    cleanup({
+      extensions: ['js','mjs','jsx','tag']
+    }),
     executable()
   ],
   external: [
-    "os",
-    "child_process",
-    "path",
+    ...builtins,
     "kronos-service-manager",
-    "config-expander",
     "npm-package-walker",
     "rebirth",
     "network-address",
