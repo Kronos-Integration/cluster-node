@@ -69,7 +69,7 @@
     "ava": "^2.2.0",
     "builtin-modules": "^3.1.0",
     "c8": "^5.0.2",
-    "documentation": "^12.0.1",
+    "documentation": "^12.0.2",
     "esm": "^3.2.25",
     "markdown-doctest": "^0.9.1",
     "npm-pkgbuild": "^6.6.2",
@@ -92,6 +92,11 @@
     "url": "https://github.com/Kronos-Integration/kronos-cluster-node/issues"
   },
   "homepage": "https://github.com/Kronos-Integration/kronos-cluster-node#readme",
+  "systemd": {
+    "units": {
+      "${name}": "systemd/${name}*"
+    }
+  },
   "pacman": {
     "backup": "etc/${name}/config.json",
     "install": "pacman/install.sh",
@@ -120,11 +125,6 @@
   "template": {
     "repository": {
       "url": "https://github.com/arlac77/npm-package-template.git"
-    }
-  },
-  "systemd": {
-    "units": {
-      "${name}": "systemd/${name}*"
     }
   }
 }
