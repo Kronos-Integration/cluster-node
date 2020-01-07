@@ -1,7 +1,4 @@
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
-[![Build Status](https://secure.travis-ci.org/Kronos-Integration/kronos-cluster-node.png)](http://travis-ci.org/Kronos-Integration/kronos-cluster-node)
-[![codecov.io](http://codecov.io/github/Kronos-Integration/kronos-cluster-node/coverage.svg?branch=master)](http://codecov.io/github/Kronos-Integration/kronos-cluster-node?branch=master)
-[![Coverage Status](https://coveralls.io/repos/Kronos-Integration/kronos-cluster-node/badge.svg)](https://coveralls.io/r/Kronos-Integration/kronos-cluster-node)
 [![Known Vulnerabilities](https://snyk.io/test/github/Kronos-Integration/kronos-cluster-node/badge.svg)](https://snyk.io/test/github/Kronos-Integration/kronos-cluster-node)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 [![npm](https://img.shields.io/npm/v/kronos-cluster-node.svg)](https://www.npmjs.com/package/kronos-cluster-node)
@@ -11,6 +8,9 @@
 [![minified size](https://badgen.net/bundlephobia/min/kronos-cluster-node)](https://bundlephobia.com/result?p=kronos-cluster-node)
 [![downloads](http://img.shields.io/npm/dm/kronos-cluster-node.svg?style=flat-square)](https://npmjs.org/package/kronos-cluster-node)
 [![GitHub Issues](https://img.shields.io/github/issues/Kronos-Integration/kronos-cluster-node.svg?style=flat-square)](https://github.com/Kronos-Integration/kronos-cluster-node/issues)
+[![Build Status](https://secure.travis-ci.org/Kronos-Integration/kronos-cluster-node.png)](http://travis-ci.org/Kronos-Integration/kronos-cluster-node)
+[![codecov.io](http://codecov.io/github/Kronos-Integration/kronos-cluster-node/coverage.svg?branch=master)](http://codecov.io/github/Kronos-Integration/kronos-cluster-node?branch=master)
+[![Coverage Status](https://coveralls.io/repos/Kronos-Integration/kronos-cluster-node/badge.svg)](https://coveralls.io/r/Kronos-Integration/kronos-cluster-node)
 
 # kronos-cluster-node
 
