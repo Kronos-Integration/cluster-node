@@ -26,7 +26,7 @@
     "package": "npm-pkgbuild --npm-dist --npm-modules pkgbuild pacman makepkg",
     "posttest": "npm run prepare && markdown-doctest",
     "prepare": "rollup -c",
-    "start": "node bin/kronos-cluster-node",
+    "start": "node bin/kronos-cluster-node && rollup -c -w",
     "test": "ava"
   },
   "dependencies": {
@@ -60,26 +60,27 @@
     "kronos-step-passthrough": "^2.2.0",
     "kronos-step-stdio": "^3.0.18",
     "kronos-step-system": "^2.0.10",
+    "mf-styling": "arlac77/mf-styling",
     "network-address": "^1.1.2",
     "npm-package-walker": "^4.0.5",
     "rebirth": "^2.0.0",
+    "svelte-common": "^1.3.0",
+    "svelte-guard-history-router": "^1.1.11",
+    "svelte-session-manager": "^1.0.5",
     "systemd-socket": "^0.0.0"
   },
   "devDependencies": {
-    "@rollup/plugin-json": "^4.0.1",
-    "@rollup/plugin-node-resolve": "^7.0.0",
+    "@semantic-release/exec": "^5.0.0",
     "acorn-class-fields": "https://github.com/arlac77/acorn-class-fields.git",
     "ava": "^2.4.0",
-    "builtin-modules": "^3.1.0",
     "c8": "^7.0.1",
     "documentation": "^12.1.4",
     "esm": "^3.2.25",
     "markdown-doctest": "^1.0.0",
-    "npm-pkgbuild": "^6.11.3",
+    "npm-pkgbuild": "^6.11.4",
     "rollup": "^1.31.0",
-    "rollup-plugin-cleanup": "^3.1.1",
-    "rollup-plugin-executable": "^1.5.2",
-    "semantic-release": "^17.0.2"
+    "semantic-release": "^17.0.2",
+    "svelte": "^3.18.1"
   },
   "engines": {
     "node": ">=12.14.1"
@@ -92,6 +93,11 @@
     "url": "https://github.com/Kronos-Integration/kronos-cluster-node/issues"
   },
   "homepage": "https://github.com/Kronos-Integration/kronos-cluster-node#readme",
+  "config": {
+    "base": "/services/kronos-cluster-node/",
+    "api": "/services/kronos-cluster-node/api",
+    "proxyTarget": "https://somewhere/"
+  },
   "systemd": {
     "units": {
       "${name}": "systemd/${name}*"
@@ -107,7 +113,21 @@
       "systemd": ">=241.0"
     },
     "install": "pacman/install.sh",
-    "installdir": "/services/${name}"
+    "installdir": "/services/${name}",
+    "groups": "{{group}}",
+    "hooks": "pacman/hooks.sh"
+  },
+  "release": {
+    "plugins": [
+      [
+        "@semantic-release/exec",
+        {
+          "publishCmd": "npx npm-pkgbuild --pkgver ${nextRelease.version} pkgbuild pacman makepkg"
+        }
+      ],
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator"
+    ]
   },
   "ava": {
     "files": [
