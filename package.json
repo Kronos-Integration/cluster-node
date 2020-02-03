@@ -67,7 +67,7 @@
   },
   "devDependencies": {
     "@rollup/plugin-json": "^4.0.2",
-    "@rollup/plugin-node-resolve": "^7.1.0",
+    "@rollup/plugin-node-resolve": "^7.1.1",
     "acorn-class-fields": "https://github.com/arlac77/acorn-class-fields.git",
     "ava": "^2.4.0",
     "builtin-modules": "^3.1.0",
