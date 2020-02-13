@@ -14,8 +14,6 @@ before_script:
 jobs:
   include:
     - stage: test
-      node_js:
-        - 13.8.0
       script:
         - npm run cover
         - npx codecov
