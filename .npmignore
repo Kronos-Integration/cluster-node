@@ -7,8 +7,8 @@ doc
 .tmp
 .travis.yml
 .vscode
-rollup.config.js
 .DS_Store
 update.sh
 service.json
 deploy
+rollup.config.js
