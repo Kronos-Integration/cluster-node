@@ -10,7 +10,10 @@ notifications:
     - torstenlink@gmx.de
 before_script:
   - ./tests/travis/start_consul.sh
-  - 'curl -k https://mfelten.dynv6.net/binaries/kronos/kronos-service-manager-ui.tar|tar xvfz -'
+  - >-
+    curl -k
+    https://mfelten.dynv6.net/binaries/kronos/kronos-service-manager-ui.tar|tar
+    xvfz -
 jobs:
   include:
     - stage: test
