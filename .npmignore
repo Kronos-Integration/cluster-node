@@ -7,7 +7,6 @@ doc
 .tmp
 .travis.yml
 .vscode
-.DS_Store
 update.sh
 service.json
 deploy
