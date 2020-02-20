@@ -20,14 +20,14 @@
     "kronos-cluster-node": "bin/kronos-cluster-node"
   },
   "scripts": {
-    "cover": "c8 -x 'tests/**/*' --temp-directory build/tmp ava --timeout 2m && c8 report -r lcov -o build/coverage --temp-directory build/tmp",
-    "docs": "documentation readme src/kronos-cluster-node-cli.js --section=API",
-    "lint": "documentation lint src/kronos-cluster-node-cli.js",
-    "package": "npm-pkgbuild --npm-dist --npm-modules pkgbuild pacman makepkg",
-    "posttest": "npm run prepare && markdown-doctest",
     "prepare": "rollup -c",
     "start": "node bin/kronos-cluster-node",
-    "test": "ava --timeout 2m"
+    "test": "ava --timeout 2m",
+    "package": "npm-pkgbuild --npm-dist --npm-modules pkgbuild pacman makepkg",
+    "posttest": "npm run prepare && markdown-doctest",
+    "cover": "c8 -x 'tests/**/*' --temp-directory build/tmp ava --timeout 2m && c8 report -r lcov -o build/coverage --temp-directory build/tmp",
+    "docs": "documentation readme src/kronos-cluster-node-cli.js --section=API",
+    "lint": "documentation lint src/kronos-cluster-node-cli.js"
   },
   "dependencies": {
     "caporal": "^1.3.0",
@@ -80,7 +80,7 @@
     "semantic-release": "^17.0.4"
   },
   "engines": {
-    "node": ">=12.16.0"
+    "node": ">=12.16.1"
   },
   "repository": {
     "type": "git",
