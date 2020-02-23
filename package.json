@@ -20,12 +20,12 @@
     "kronos-cluster-node": "bin/kronos-cluster-node"
   },
   "scripts": {
-    "prepare": "rollup -c",
-    "start": "node bin/kronos-cluster-node",
-    "test": "ava --timeout 2m",
     "package": "npm-pkgbuild --npm-dist --npm-modules pkgbuild pacman makepkg",
     "posttest": "npm run prepare && markdown-doctest",
-    "cover": "c8 -x 'tests/**/*' --temp-directory build/tmp ava --timeout 2m && c8 report -r lcov -o build/coverage --temp-directory build/tmp",
+    "prepare": "rollup -c",
+    "start": "node bin/kronos-cluster-node",
+    "test": "ava --node-arguments '--experimental-modules' --timeout 2m",
+    "cover": "c8 -x 'tests/**/*' --temp-directory build/tmp ava --node-arguments '--experimental-modules' --timeout 2m && c8 report -r lcov -o build/coverage --temp-directory build/tmp",
     "docs": "documentation readme src/kronos-cluster-node-cli.js --section=API",
     "lint": "documentation lint src/kronos-cluster-node-cli.js"
   },
@@ -69,7 +69,7 @@
     "@rollup/plugin-json": "^4.0.2",
     "@rollup/plugin-node-resolve": "^7.1.1",
     "acorn-class-fields": "https://github.com/arlac77/acorn-class-fields.git",
-    "ava": "^3.3.0",
+    "ava": "^3.4.0",
     "builtin-modules": "^3.1.0",
     "c8": "^7.1.0",
     "documentation": "^12.1.4",
