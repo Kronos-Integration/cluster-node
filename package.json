@@ -4,10 +4,15 @@
   "publishConfig": {
     "access": "public"
   },
+  "files": [
+    "bin/kronos-cluster-node-systemd"
+  ],
   "module": "src/kronos-cluster-node-cli.js",
   "description": "kronos cluster node sample application",
   "keywords": [
-    "cluster"
+    "cluster",
+    "kronos-integration",
+    "systemd"
   ],
   "contributors": [
     {
@@ -17,19 +22,26 @@
   ],
   "license": "BSD-2-Clause",
   "bin": {
-    "kronos-cluster-node": "bin/kronos-cluster-node"
+    "kronos-cluster-node": "bin/kronos-cluster-node",
+    "kronos-cluster-node-systemd": "bin/kronos-cluster-node-systemd"
   },
   "scripts": {
+    "posttest": "npm run prepare && markdown-doctest",
     "prepare": "rollup -c",
     "start": "node bin/kronos-cluster-node",
     "test": "ava --node-arguments '--experimental-modules' --timeout 2m",
     "cover": "c8 -x 'tests/**/*' --temp-directory build/tmp ava --node-arguments '--experimental-modules' --timeout 2m && c8 report -r lcov -o build/coverage --temp-directory build/tmp",
     "docs": "documentation readme src/kronos-cluster-node-cli.js --section=API",
     "lint": "documentation lint src/kronos-cluster-node-cli.js",
-    "posttest": "npm run prepare && markdown-doctest",
     "package": "npm-pkgbuild --npm-dist --npm-modules pkgbuild pacman makepkg"
   },
   "dependencies": {
+    "@kronos-integration/service": "^8.3.16",
+    "@kronos-integration/service-admin": "^3.0.13",
+    "@kronos-integration/service-authenticator": "^1.0.17",
+    "@kronos-integration/service-health-check": "^5.0.14",
+    "@kronos-integration/service-http": "^10.0.6",
+    "@kronos-integration/service-ldap": "^2.1.17",
     "caporal": "^1.3.0",
     "config-expander": "^11.0.10",
     "kronos-adapter-inbound-file": "2.0.15",
@@ -68,20 +80,35 @@
   "devDependencies": {
     "@rollup/plugin-json": "^4.0.2",
     "@rollup/plugin-node-resolve": "^7.1.1",
+    "@semantic-release/exec": "^5.0.0",
     "acorn-class-fields": "https://github.com/arlac77/acorn-class-fields.git",
     "ava": "^3.4.0",
     "builtin-modules": "^3.1.0",
     "c8": "^7.1.0",
     "documentation": "^12.1.4",
-    "npm-pkgbuild": "^6.11.3",
+    "npm-pkgbuild": "^6.11.5",
     "rollup": "^1.32.0",
     "rollup-plugin-cleanup": "^3.1.1",
+    "rollup-plugin-consts": "^1.0.1",
     "rollup-plugin-executable": "^1.5.2",
+    "rollup-plugin-native": "^1.2.8",
     "semantic-release": "^17.0.4"
+  },
+  "optionalDependencies": {
+    "@kronos-integration/service-systemd": "^2.2.12"
   },
   "engines": {
     "node": ">=12.16.1"
   },
+  "os": [
+    "linux",
+    "darwin"
+  ],
+  "cpu": [
+    "arm",
+    "arm64",
+    "x64"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/Kronos-Integration/kronos-cluster-node.git"
@@ -90,6 +117,9 @@
     "url": "https://github.com/Kronos-Integration/kronos-cluster-node/issues"
   },
   "homepage": "https://github.com/Kronos-Integration/kronos-cluster-node#readme",
+  "config": {
+    "socket": "/run/${name}/http/socket"
+  },
   "systemd": {
     "units": {
       "${name}": "systemd/${name}*"
@@ -105,11 +135,31 @@
       "systemd": ">=241.0"
     },
     "install": "pacman/install.sh",
-    "installdir": "/services/${name}"
+    "installdir": "/services/${name}",
+    "arch": [
+      "aarch64",
+      "armv7h",
+      "x86_64"
+    ],
+    "hooks": "pacman/hooks.sh",
+    "additional-content": [
+      "npm-dist",
+      "npm-dependencies"
+    ]
+  },
+  "release": {
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      [
+        "@semantic-release/exec",
+        {
+          "publishCmd": "npx npm-pkgbuild --pkgver ${nextRelease.version} --npm-dist --npm-modules pkgbuild pacman makepkg"
+        }
+      ]
+    ]
   },
   "template": {
-    "repository": {
-      "url": "https://github.com/arlac77/npm-package-template.git"
-    }
+    "inheritFrom": "arlac77/template-kronos-app"
   }
 }

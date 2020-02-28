@@ -6,10 +6,8 @@
 [![Build Status](https://secure.travis-ci.org/Kronos-Integration/kronos-cluster-node.png)](http://travis-ci.org/Kronos-Integration/kronos-cluster-node)
 [![Greenkeeper](https://badges.greenkeeper.io/Kronos-Integration/kronos-cluster-node.svg)](https://greenkeeper.io/)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/Kronos-Integration/kronos-cluster-node)
-[![codecov.io](http://codecov.io/github/Kronos-Integration/kronos-cluster-node/coverage.svg?branch=master)](http://codecov.io/github/Kronos-Integration/kronos-cluster-node?branch=master)
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
-[![Coverage Status](https://coveralls.io/repos/Kronos-Integration/kronos-cluster-node/badge.svg)](https://coveralls.io/r/Kronos-Integration/kronos-cluster-node)
 [![Known Vulnerabilities](https://snyk.io/test/github/Kronos-Integration/kronos-cluster-node/badge.svg)](https://snyk.io/test/github/Kronos-Integration/kronos-cluster-node)
 
 # kronos-cluster-node

@@ -1,3 +1,7 @@
+import { name, version, description, main, module, bin } from "./package.json";
+
+import consts from "rollup-plugin-consts";
+import native from "rollup-plugin-native";
 import acornClassFields from 'acorn-class-fields';
 import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "rollup-plugin-commonjs";
