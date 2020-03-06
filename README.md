@@ -4,7 +4,6 @@
 [![downloads](http://img.shields.io/npm/dm/kronos-cluster-node.svg?style=flat-square)](https://npmjs.org/package/kronos-cluster-node)
 [![GitHub Issues](https://img.shields.io/github/issues/Kronos-Integration/kronos-cluster-node.svg?style=flat-square)](https://github.com/Kronos-Integration/kronos-cluster-node/issues)
 [![Build Status](https://secure.travis-ci.org/Kronos-Integration/kronos-cluster-node.png)](http://travis-ci.org/Kronos-Integration/kronos-cluster-node)
-[![Greenkeeper](https://badges.greenkeeper.io/Kronos-Integration/kronos-cluster-node.svg)](https://greenkeeper.io/)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/Kronos-Integration/kronos-cluster-node)
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
