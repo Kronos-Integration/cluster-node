@@ -1,19 +1,4 @@
 language: node_js
-branches:
-  only:
-    - master
-    - /^greenkeeper/.*$/
-    - /^mkpr/.*$/
-    - /^npm-template-sync/.*$/
-notifications:
-  email:
-    - torstenlink@gmx.de
-before_script:
-  - ./tests/travis/start_consul.sh
-  - >-
-    curl -k
-    https://mfelten.dynv6.net/binaries/kronos/kronos-service-manager-ui.tar|tar
-    xvfz -
 jobs:
   include:
     - stage: test
@@ -37,3 +22,18 @@ jobs:
         script:
           - npx semantic-release
         cleanup: 'false'
+before_script:
+  - ./tests/travis/start_consul.sh
+  - >-
+    curl -k
+    https://mfelten.dynv6.net/binaries/kronos/kronos-service-manager-ui.tar|tar
+    xvfz -
+branches:
+  only:
+    - master
+    - /^greenkeeper/.*$/
+    - /^mkpr/.*$/
+    - /^npm-template-sync/.*$/
+notifications:
+  email:
+    - torstenlink@gmx.de
