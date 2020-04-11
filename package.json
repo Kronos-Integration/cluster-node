@@ -147,7 +147,10 @@
     "additional-content": [
       "npm-dist",
       "npm-dependencies"
-    ]
+    ],
+    "dependes": {
+      "nginx-mainline": ">=1.17.9"
+    }
   },
   "release": {
     "plugins": [
