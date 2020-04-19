@@ -1,8 +1,4 @@
 
-pre_install() {
-	useradd -U -l -M -r -s /usr/bin/nologin -d /var/lib/kronos-cluster-node -G http -c "kronos cluster node sample application" kronos-cluster-node
-}
-
 post_install() {
 	systemctl daemon-reload
 	systemctl enable kronos-cluster-node
@@ -29,6 +25,4 @@ pre_remove() {
 
 post_remove() {
 	systemctl daemon-reload
-	userdel kronos-cluster-node
-	groupdel kronos-cluster-node
 }
