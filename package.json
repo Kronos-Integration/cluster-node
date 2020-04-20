@@ -26,7 +26,6 @@
     "kronos-cluster-node-systemd": "bin/kronos-cluster-node-systemd-cli.mjs"
   },
   "scripts": {
-    "prepare": "rollup -c",
     "start": "node bin/kronos-cluster-node",
     "test": "ava --timeout 2m",
     "posttest": "npm run prepare",
@@ -109,7 +108,8 @@
     "additional-content": [
       "npm-dist",
       "npm-dependencies"
-    ]
+    ],
+    "group": "services"
   },
   "release": {
     "plugins": [
