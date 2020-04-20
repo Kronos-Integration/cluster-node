@@ -22,8 +22,8 @@
   ],
   "license": "BSD-2-Clause",
   "bin": {
-    "kronos-cluster-node": "bin/kronos-cluster-node",
-    "kronos-cluster-node-systemd": "bin/kronos-cluster-node-systemd"
+    "kronos-cluster-node": "src/kronos-cluster-node-cli.mjs",
+    "kronos-cluster-node-systemd": "bin/kronos-cluster-node-systemd-cli.mjs"
   },
   "scripts": {
     "prepare": "rollup -c",
@@ -56,7 +56,7 @@
     "semantic-release": "^17.0.6"
   },
   "optionalDependencies": {
-    "@kronos-integration/service-systemd": "^2.2.13"
+    "@kronos-integration/service-systemd": "^2.3.0"
   },
   "engines": {
     "node": ">=13.13.0"
