@@ -103,11 +103,14 @@
       "x86_64"
     ],
     "hooks": "pacman/hooks.sh",
-    "additional-content": [
-      "npm-dist",
-      "npm-dependencies"
-    ],
-    "group": "services"
+    "group": "services",
+    "content-provider": {
+      "systemd": {
+        "units": {
+          "${name}": "systemd/${name}*"
+        }
+      }
+    }
   },
   "release": {
     "plugins": [
