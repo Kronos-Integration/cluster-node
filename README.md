@@ -3,7 +3,7 @@
 [![minified size](https://badgen.net/bundlephobia/min/kronos-cluster-node)](https://bundlephobia.com/result?p=kronos-cluster-node)
 [![downloads](http://img.shields.io/npm/dm/kronos-cluster-node.svg?style=flat-square)](https://npmjs.org/package/kronos-cluster-node)
 [![GitHub Issues](https://img.shields.io/github/issues/Kronos-Integration/kronos-cluster-node.svg?style=flat-square)](https://github.com/Kronos-Integration/kronos-cluster-node/issues)
-[![Build Status](https://travis-ci.com/Kronos-Integration/kronos-cluster-node.svg?branch=master)](https://travis-ci.com/Kronos-Integration/kronos-cluster-node)
+[![Build Action Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2FKronos-Integration%2Fkronos-cluster-node%2Fbadge&style=flat)](https://actions-badge.atrox.dev/Kronos-Integration/kronos-cluster-node/goto)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/Kronos-Integration/kronos-cluster-node.git)
 
 # kronos-cluster-node
