@@ -1,5 +1,5 @@
 {
-  "name": "kronos-cluster-node",
+  "name": "@kronos-integration/cluster-node",
   "version": "0.0.0-semantic-release",
   "publishConfig": {
     "access": "public"
@@ -7,7 +7,6 @@
   "files": [
     "bin/kronos-cluster-node-systemd"
   ],
-  "module": "src/kronos-cluster-node-cli.js",
   "description": "kronos cluster node sample application",
   "keywords": [
     "cluster",
@@ -22,11 +21,10 @@
   ],
   "license": "BSD-2-Clause",
   "bin": {
-    "kronos-cluster-node": "src/kronos-cluster-node-cli.mjs",
-    "kronos-cluster-node-systemd": "src/kronos-cluster-node-systemd-cli.mjs"
+    "kronos-cluster-node": "./src/kronos-cluster-node-cli.mjs",
+    "kronos-cluster-node-systemd": "./src/kronos-cluster-node-systemd-cli.mjs"
   },
   "scripts": {
-    "start": "node bin/kronos-cluster-node",
     "test": "ava --timeout 2m",
     "posttest": "npm run prepare",
     "cover": "c8 -x 'tests/**/*' --temp-directory build/tmp ava --node-arguments '--experimental-modules' --timeout 2m && c8 report -r lcov -o build/coverage --temp-directory build/tmp",
@@ -49,7 +47,6 @@
     "c8": "^7.1.0",
     "documentation": "^13.0.0",
     "npm-pkgbuild": "^6.11.19",
-    "rollup": "^2.9.0",
     "semantic-release": "^17.0.7"
   },
   "optionalDependencies": {
