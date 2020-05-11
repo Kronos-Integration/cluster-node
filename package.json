@@ -21,6 +21,8 @@
   ],
   "license": "BSD-2-Clause",
   "bin": {
+    "@kronos-integration/cluster-node": "src/@kronos-integration/cluster-node-cli.mjs",
+    "@kronos-integration/cluster-node-systemd": "src/@kronos-integration/cluster-node-systemd-cli.mjs",
     "kronos-cluster-node": "./src/kronos-cluster-node-cli.mjs",
     "kronos-cluster-node-systemd": "./src/kronos-cluster-node-systemd-cli.mjs"
   },
@@ -66,12 +68,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/Kronos-Integration/kronos-cluster-node.git"
+    "url": "https://github.com/Kronos-Integration/cluster-node.git"
   },
   "bugs": {
-    "url": "https://github.com/Kronos-Integration/kronos-cluster-node/issues"
+    "url": "https://github.com/Kronos-Integration/cluster-node/issues"
   },
-  "homepage": "https://github.com/Kronos-Integration/kronos-cluster-node#readme",
+  "homepage": "https://github.com/Kronos-Integration/cluster-node#readme",
   "config": {
     "socket": "/run/${name}/http/socket"
   },
