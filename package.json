@@ -40,6 +40,7 @@
     "@kronos-integration/service-health-check": "^5.0.32",
     "@kronos-integration/service-http": "^10.1.12",
     "@kronos-integration/service-ldap": "^2.1.32",
+    "@kronos-integration/service-swarm": "^1.0.0",
     "kronos-interceptor-decode-json": "1.1.0"
   },
   "devDependencies": {
@@ -92,7 +93,7 @@
       "/etc/nginx/config.d/${name}.conf": "pacman/nginx.conf"
     },
     "depends": {
-      "systemd": ">=241.0",
+      "systemd": ">=245.0",
       "nginx-mainline": ">=1.17.10"
     },
     "install": "pacman/install.sh",
