@@ -37,7 +37,7 @@
     "@kronos-integration/service": "^8.5.11",
     "@kronos-integration/service-admin": "^3.1.5",
     "@kronos-integration/service-authenticator": "^1.0.35",
-    "@kronos-integration/service-health-check": "^5.0.33",
+    "@kronos-integration/service-health-check": "^5.0.34",
     "@kronos-integration/service-http": "^10.1.15",
     "@kronos-integration/service-ldap": "^2.1.33",
     "@kronos-integration/service-swarm": "^1.6.6",
