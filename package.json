@@ -4,14 +4,10 @@
   "publishConfig": {
     "access": "public"
   },
-  "files": [
-    "bin/kronos-cluster-node-systemd"
-  ],
   "description": "kronos cluster node sample application",
   "keywords": [
     "cluster",
-    "kronos-integration",
-    "systemd"
+    "kronos-integration"
   ],
   "contributors": [
     {
@@ -20,17 +16,9 @@
     }
   ],
   "license": "BSD-2-Clause",
-  "bin": {
-    "@kronos-integration/cluster-node": "src/@kronos-integration/cluster-node-cli.mjs",
-    "@kronos-integration/cluster-node-systemd": "src/@kronos-integration/cluster-node-systemd-cli.mjs",
-    "kronos-cluster-node": "./src/kronos-cluster-node-cli.mjs",
-    "kronos-cluster-node-systemd": "./src/kronos-cluster-node-systemd-cli.mjs"
-  },
   "scripts": {
     "test": "ava --timeout 2m",
-    "posttest": "npm run prepare",
-    "cover": "c8 -x 'tests/**/*' --temp-directory build/tmp ava --node-arguments '--experimental-modules' --timeout 2m && c8 report -r lcov -o build/coverage --temp-directory build/tmp",
-    "package": "npm-pkgbuild --npm-dist --npm-modules pkgbuild pacman makepkg"
+    "cover": "c8 -x 'tests/**/*' --temp-directory build/tmp ava --node-arguments '--experimental-modules' --timeout 2m && c8 report -r lcov -o build/coverage --temp-directory build/tmp"
   },
   "dependencies": {
     "@kronos-integration/interceptor-decode-json": "^2.1.10",
@@ -40,8 +28,7 @@
     "@kronos-integration/service-health-check": "^5.0.35",
     "@kronos-integration/service-http": "^10.1.17",
     "@kronos-integration/service-ldap": "^2.1.36",
-    "@kronos-integration/service-swarm": "^1.6.11",
-    "kronos-interceptor-decode-json": "1.1.0"
+    "@kronos-integration/service-swarm": "^1.6.11"
   },
   "devDependencies": {
     "@semantic-release/commit-analyzer": "^8.0.1",
