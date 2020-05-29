@@ -7,7 +7,8 @@
   "description": "kronos cluster node sample application",
   "keywords": [
     "cluster",
-    "kronos-integration"
+    "kronos-integration",
+    "systemd"
   ],
   "contributors": [
     {
@@ -16,6 +17,9 @@
     }
   ],
   "license": "BSD-2-Clause",
+  "bin": {
+    "@kronos-integration/cluster-node": "src/@kronos-integration/cluster-node-cli.mjs"
+  },
   "scripts": {
     "test": "ava --timeout 2m",
     "cover": "c8 -x 'tests/**/*' --temp-directory build/tmp ava --node-arguments '--experimental-modules' --timeout 2m && c8 report -r lcov -o build/coverage --temp-directory build/tmp"
