@@ -10,6 +10,7 @@ ExecReload=/bin/kill -HUP $MAINPID
 RestartSec=10
 TimeoutStartSec=25
 TimeoutStopSec=25
+Restart=on-failure
 NotifyAccess=all
 FileDescriptorStoreMax=5
 OOMPolicy=stop
