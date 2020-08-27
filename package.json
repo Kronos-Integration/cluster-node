@@ -84,8 +84,8 @@
       "/etc/nginx/config.d/${name}.conf": "pacman/nginx.conf"
     },
     "depends": {
-      "systemd": ">=245.0",
-      "nginx-mainline": ">=1.17.10"
+      "systemd": ">=246.2",
+      "nginx-mainline": ">=1.19.2"
     },
     "install": "pacman/install.sh",
     "installdir": "/services/${name}",
