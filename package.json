@@ -48,7 +48,7 @@
     "@kronos-integration/service-systemd": "^2.3.11"
   },
   "engines": {
-    "node": ">=14.8.0"
+    "node": ">=14.9.0"
   },
   "os": [
     "linux",
@@ -84,7 +84,7 @@
       "/etc/nginx/config.d/${name}.conf": "pacman/nginx.conf"
     },
     "depends": {
-      "systemd": ">=246.2",
+      "systemd": ">=246.3",
       "nginx-mainline": ">=1.19.2"
     },
     "install": "pacman/install.sh",
