@@ -54,15 +54,27 @@
     "linux",
     "darwin"
   ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Kronos-Integration/cluster-node.git"
-  },
   "cpu": [
     "arm",
     "arm64",
     "x64"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Kronos-Integration/cluster-node.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Kronos-Integration/cluster-node/issues"
+  },
+  "homepage": "https://github.com/Kronos-Integration/cluster-node#readme",
+  "config": {
+    "socket": "/run/${name}/http/socket"
+  },
+  "systemd": {
+    "units": {
+      "${name}": "systemd/${name}*"
+    }
+  },
   "pacman": {
     "backup": "etc/${name}/config.json",
     "content": {
@@ -90,18 +102,6 @@
           "${name}": "systemd/${name}*"
         }
       }
-    }
-  },
-  "bugs": {
-    "url": "https://github.com/Kronos-Integration/cluster-node/issues"
-  },
-  "homepage": "https://github.com/Kronos-Integration/cluster-node#readme",
-  "config": {
-    "socket": "/run/${name}/http/socket"
-  },
-  "systemd": {
-    "units": {
-      "${name}": "systemd/${name}*"
     }
   },
   "release": {
