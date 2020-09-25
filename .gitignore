@@ -6,5 +6,4 @@ build
 *.node
 .test
 .tmp
-bin
 docroot
