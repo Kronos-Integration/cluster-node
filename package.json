@@ -26,27 +26,27 @@
     "cover": "c8 -x 'tests/**/*' --temp-directory build/tmp ava --node-arguments '--experimental-modules' --timeout 2m && c8 report -r lcov -o build/coverage --temp-directory build/tmp"
   },
   "dependencies": {
-    "@kronos-integration/interceptor-decode-json": "^2.1.31",
-    "@kronos-integration/service": "^9.2.29",
-    "@kronos-integration/service-admin": "^3.1.37",
-    "@kronos-integration/service-authenticator": "^1.4.2",
-    "@kronos-integration/service-health-check": "^5.0.67",
-    "@kronos-integration/service-http": "^10.4.5",
-    "@kronos-integration/service-ldap": "^3.0.3",
-    "@kronos-integration/service-swarm": "^1.6.13"
+    "@kronos-integration/interceptor-decode-json": "^2.1.35",
+    "@kronos-integration/service": "^10.0.8",
+    "@kronos-integration/service-admin": "^3.3.8",
+    "@kronos-integration/service-authenticator": "^1.4.14",
+    "@kronos-integration/service-health-check": "^5.0.79",
+    "@kronos-integration/service-http": "^10.6.9",
+    "@kronos-integration/service-ldap": "^4.0.6",
+    "@kronos-integration/service-swarm": "^1.9.34"
   },
   "devDependencies": {
     "@semantic-release/commit-analyzer": "^8.0.1",
     "@semantic-release/exec": "^5.0.0",
     "@semantic-release/release-notes-generator": "^9.0.1",
-    "ava": "^3.13.0",
+    "ava": "^3.14.0",
     "c8": "^7.1.0",
     "documentation": "^13.0.0",
-    "npm-pkgbuild": "^6.12.13",
+    "npm-pkgbuild": "^6.12.16",
     "semantic-release": "^17.3.0"
   },
   "optionalDependencies": {
-    "@kronos-integration/service-systemd": "^2.4.2"
+    "@kronos-integration/service-systemd": "^2.4.6"
   },
   "engines": {
     "node": ">=14.15.1"
@@ -85,7 +85,7 @@
       "/etc/nginx/config.d/${name}.conf": "pacman/nginx.conf"
     },
     "depends": {
-      "systemd": ">=246.6",
+      "systemd": ">=247.1",
       "nginx-mainline": ">=1.19.3"
     },
     "install": "pacman/install.sh",
@@ -120,7 +120,7 @@
   },
   "template": {
     "inheritFrom": [
-      "arlac77/template-github",
+      "arlac77/template-arlac77-github",
       "arlac77/template-kronos-app"
     ]
   }
