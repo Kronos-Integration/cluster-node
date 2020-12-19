@@ -33,7 +33,7 @@
     "@kronos-integration/service-health": "^5.0.82",
     "@kronos-integration/service-http": "^10.6.18",
     "@kronos-integration/service-ldap": "^4.0.8",
-    "@kronos-integration/service-swarm": "^1.9.36"
+    "@kronos-integration/service-swarm": "^1.9.37"
   },
   "devDependencies": {
     "@semantic-release/commit-analyzer": "^8.0.1",
