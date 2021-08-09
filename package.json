@@ -28,12 +28,12 @@
   "dependencies": {
     "@kronos-integration/interceptor-decode-json": "^2.1.48",
     "@kronos-integration/service": "^10.4.7",
-    "@kronos-integration/service-admin": "^3.4.33",
-    "@kronos-integration/service-authenticator": "^1.5.35",
+    "@kronos-integration/service-admin": "^3.4.39",
+    "@kronos-integration/service-authenticator": "^1.5.37",
     "@kronos-integration/service-health": "^5.0.120",
     "@kronos-integration/service-http": "^10.6.65",
     "@kronos-integration/service-ldap": "^4.0.50",
-    "@kronos-integration/service-swarm": "^1.9.80"
+    "@kronos-integration/service-swarm": "^1.9.85"
   },
   "devDependencies": {
     "@semantic-release/commit-analyzer": "^8.0.1",
