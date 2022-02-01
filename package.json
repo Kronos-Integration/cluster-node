@@ -38,12 +38,12 @@
   "devDependencies": {
     "@semantic-release/commit-analyzer": "^9.0.2",
     "@semantic-release/exec": "^6.0.3",
-    "@semantic-release/release-notes-generator": "^10.0.2",
+    "@semantic-release/release-notes-generator": "^10.0.3",
     "ava": "^4.0.1",
     "c8": "^7.1.0",
     "documentation": "^13.0.0",
-    "semantic-release": "^19.0.2",
-    "npm-pkgbuild": "^6.12.89"
+    "npm-pkgbuild": "^6.12.98",
+    "semantic-release": "^19.0.2"
   },
   "optionalDependencies": {
     "@kronos-integration/service-systemd": "^2.5.3"
@@ -69,6 +69,34 @@
   "homepage": "https://github.com/Kronos-Integration/cluster-node#readme",
   "config": {
     "socket": "/run/${name}/http/socket"
+  },
+  "pacman": {
+    "arch": [
+      "aarch64",
+      "armv7h",
+      "x86_64"
+    ],
+    "group": "services",
+    "hooks": "pacman/hooks.sh",
+    "backup": "etc/${name}/config.json",
+    "installdir": "/services/${name}",
+    "content-provider": {
+      "systemd": {
+        "units": {
+          "${name}": "systemd/${name}*"
+        }
+      }
+    },
+    "content": {
+      "/usr/lib/tmpfiles.d/${name}.conf": "pacman/tmpfiles.conf",
+      "/usr/lib/sysusers.d/${name}.conf": "pacman/sysusers.conf",
+      "/etc/${name}/config.json": "config/config.json",
+      "/etc/nginx/sites/common/${name}.conf": "pacman/nginx.conf"
+    },
+    "depends": {
+      "nginx-mainline": ">=1.21.4",
+      "systemd": ">=250.3"
+    }
   },
   "pkg": {
     "backup": "etc/${name}/config.json",
@@ -109,7 +137,14 @@
           "publishCmd": "npx npm-pkgbuild"
         }
       ],
-      "@semantic-release/npm"
+      "@semantic-release/npm",
+      [
+        "@semantic-release/exec",
+        {
+          "verifyConditionsCmd": "which makepkg",
+          "publishCmd": "npx npm-pkgbuild --pkgver ${nextRelease.version} --npm-dist --npm-modules pkgbuild pacman makepkg"
+        }
+      ]
     ]
   },
   "template": {
