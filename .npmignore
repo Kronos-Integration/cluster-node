@@ -5,9 +5,11 @@ doc
 *.tmp
 .test
 .tmp
-rollup.config.*
 .vscode
 update.sh
 service.json
 deploy
 .github
+pkg
+systemd
+config
