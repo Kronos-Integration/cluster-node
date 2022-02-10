@@ -13,3 +13,4 @@ deploy
 pkg
 systemd
 config
+jsconfig.json
