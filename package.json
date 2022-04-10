@@ -92,6 +92,7 @@
     },
     "hooks": "pkg/hooks.sh",
     "backup": "${config.dir}config.json",
+    "groups": "services",
     "depends": {
       "systemd": ">=250.4",
       "nginx-mainline": ">=1.21.4"
