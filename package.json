@@ -68,9 +68,6 @@
     "url": "https://github.com/Kronos-Integration/cluster-node/issues"
   },
   "homepage": "https://github.com/Kronos-Integration/cluster-node#readme",
-  "config": {
-    "socket": "/run/${name}/http/socket"
-  },
   "pkg": {
     "content": {
       "${install.dir}": [
@@ -93,6 +90,7 @@
     "hooks": "pkg/hooks.sh",
     "backup": "${config.dir}config.json",
     "groups": "services",
+    "http.base.path": "/services/${name}/api",
     "depends": {
       "systemd": ">=250.4",
       "nginx-mainline": ">=1.21.4"
