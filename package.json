@@ -39,7 +39,7 @@
     "@semantic-release/commit-analyzer": "^9.0.2",
     "@semantic-release/exec": "^6.0.3",
     "@semantic-release/release-notes-generator": "^10.0.3",
-    "ava": "^4.1.0",
+    "ava": "^4.2.0",
     "c8": "^7.1.0",
     "documentation": "^13.0.0",
     "npm-pkgbuild": "^8.3.13",
@@ -90,11 +90,11 @@
     "hooks": "pkg/hooks.sh",
     "backup": "${config.dir}config.json",
     "groups": "services",
-    "http.base.path": "/services/${name}/api",
     "depends": {
       "systemd": ">=250.4",
       "nginx-mainline": ">=1.21.4"
-    }
+    },
+    "http.base.path": "/services/${name}/api"
   },
   "release": {
     "plugins": [
