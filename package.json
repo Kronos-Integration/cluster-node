@@ -50,7 +50,7 @@
     "mf-hosting": "github:arlac77/mf-hosting"
   },
   "engines": {
-    "node": ">=16.14.2"
+    "node": ">=16.15.0"
   },
   "os": [
     "linux"
