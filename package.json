@@ -68,7 +68,7 @@
     "url": "https://github.com/Kronos-Integration/cluster-node/issues"
   },
   "homepage": "https://github.com/Kronos-Integration/cluster-node#readme",
-  "pkg": {
+  "pkgbuild": {
     "content": {
       "${install.dir}": [
         {
