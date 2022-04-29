@@ -42,7 +42,7 @@
     "ava": "^4.2.0",
     "c8": "^7.1.0",
     "documentation": "^13.0.0",
-    "npm-pkgbuild": "^9.0.4",
+    "npm-pkgbuild": "^10.0.2",
     "semantic-release": "^19.0.2"
   },
   "optionalDependencies": {
@@ -68,7 +68,7 @@
     "url": "https://github.com/Kronos-Integration/cluster-node/issues"
   },
   "homepage": "https://github.com/Kronos-Integration/cluster-node#readme",
-  "pkg": {
+  "pkgbuild": {
     "content": {
       "${install.dir}": [
         {
@@ -99,14 +99,14 @@
     "plugins": [
       "@semantic-release/commit-analyzer",
       "@semantic-release/release-notes-generator",
-      "@semantic-release/github",
       "@semantic-release/npm",
       [
         "@semantic-release/exec",
         {
-          "publishCmd": "npx npm-pkgbuild"
+          "publishCmd": "npx npm-pkgbuild --verbose"
         }
-      ]
+      ],
+      "@semantic-release/github"
     ]
   },
   "template": {
