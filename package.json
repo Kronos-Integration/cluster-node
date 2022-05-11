@@ -42,7 +42,7 @@
     "ava": "^4.2.0",
     "c8": "^7.1.0",
     "documentation": "^13.0.0",
-    "npm-pkgbuild": "^10.4.0",
+    "npm-pkgbuild": "^10.5.0",
     "semantic-release": "^19.0.2"
   },
   "optionalDependencies": {
@@ -104,6 +104,12 @@
         "@semantic-release/exec",
         {
           "publishCmd": "npx npm-pkgbuild --verbose"
+        }
+      ],
+      [
+        "@semantic-release/exec",
+        {
+          "publishCmd": "npx npm-pkgbuild --available --verbose"
         }
       ],
       "@semantic-release/github"
