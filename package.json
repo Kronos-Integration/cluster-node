@@ -89,10 +89,6 @@
     "hooks": "pkg/hooks.sh",
     "backup": "${config.dir}config.json",
     "groups": "services",
-    "depends": {
-      "systemd": ">=251.0",
-      "nginx-mainline": ">=1.21.4"
-    },
     "http.base.path": "/services/${name}/api"
   },
   "release": {
@@ -100,12 +96,6 @@
       "@semantic-release/commit-analyzer",
       "@semantic-release/release-notes-generator",
       "@semantic-release/npm",
-      [
-        "@semantic-release/exec",
-        {
-          "publishCmd": "npx npm-pkgbuild --verbose"
-        }
-      ],
       [
         "@semantic-release/exec",
         {
