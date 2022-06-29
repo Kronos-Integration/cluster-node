@@ -86,10 +86,9 @@
       "${systemd.unit.dir}${name}.service": "pkg/${name}.service",
       "${systemd.unit.dir}${name}.socket": "pkg/${name}.socket"
     },
-    "hooks": "pkg/hooks.sh",
     "backup": "${config.dir}config.json",
     "groups": "services",
-    "http.base.path": "/services/${name}/api"
+    "http.path": "/services/${name}/api"
   },
   "release": {
     "plugins": [
