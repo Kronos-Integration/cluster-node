@@ -107,8 +107,14 @@
         "@semantic-release/github",
         {
           "assets": [
-            { "path": "dist/*.pkg*", "label": "Arch Linux"},
-            { "path": "dist/*.deb", "label": "Debian"}
+            {
+              "path": "dist/*.pkg*",
+              "label": "Arch Linux"
+            },
+            {
+              "path": "dist/*.deb",
+              "label": "Debian"
+            }
           ]
         }
       ]
