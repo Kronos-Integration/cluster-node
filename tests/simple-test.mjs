@@ -1,20 +1,18 @@
 import test from 'ava';
-
-const path = require('path');
-const child_process = require('child_process');
+const { spawn } from 'child_process';
 
 test.cb('simple start', t => {
   t.plan(1);
 
-  const child = child_process.spawn(
-    path.join(__dirname, '../bin/kronos-cluster-node'),
+  const child = spawn(
+    new URL('../bin/kronos-cluster-node', import.meta.url).pathname,
     [
       '--trace',
       '--config',
-      path.join(__dirname, '..', 'config', 'config.json')
+      new URL('../config/config.json', import.meta.url).pathname
     ],
     {
-      cwd: path.join(__dirname, '..')
+      cwd: new URL('..', import.meta.url).pathname
     },
     (err, stdout, stderr) => {
       console.error(err);
