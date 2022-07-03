@@ -1,11 +1,11 @@
 import test from 'ava';
-const { spawn } from 'child_process';
+import { spawn } from 'child_process';
 
-test.cb('simple start', t => {
+test('simple start', async t => {
   t.plan(1);
 
   const child = spawn(
-    new URL('../bin/kronos-cluster-node', import.meta.url).pathname,
+    new URL('../src/cluster-node-cli.mjs', import.meta.url).pathname,
     [
       '--trace',
       '--config',
@@ -44,4 +44,6 @@ test.cb('simple start', t => {
 
   //console.log(`child:`, child);
   setTimeout(() => child.kill('SIGKILL'), 5000);
+
+  t.pass();
 });
