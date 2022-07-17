@@ -11,5 +11,4 @@ service.json
 deploy
 .github
 pkg
-systemd
 config
