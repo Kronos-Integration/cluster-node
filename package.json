@@ -41,7 +41,7 @@
     "@semantic-release/release-notes-generator": "^10.0.3",
     "ava": "^4.3.1",
     "c8": "^7.11.3",
-    "documentation": "^13.0.0",
+    "documentation": "^14.0.0",
     "npm-pkgbuild": "^10.14.8",
     "semantic-release": "^19.0.3"
   },
