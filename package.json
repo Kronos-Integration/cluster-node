@@ -100,7 +100,7 @@
       [
         "@semantic-release/exec",
         {
-          "publishCmd": "npx npm-pkgbuild --publish dist/ --available --continue --verbose"
+          "publishCmd": "npx npm-pkgbuild --publish dist/ --available --continue"
         }
       ],
       [
