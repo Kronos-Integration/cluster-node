@@ -125,6 +125,12 @@
         }
       ],
       [
+        "@semantic-release/exec",
+        {
+          "publishCmd": "npx npm-pkgbuild --available --continue"
+        }
+      ],
+      [
         "@semantic-release/github",
         {
           "assets": [
