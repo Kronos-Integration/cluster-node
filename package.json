@@ -31,7 +31,7 @@
     "@kronos-integration/service-admin": "^3.4.65",
     "@kronos-integration/service-authenticator": "^1.6.42",
     "@kronos-integration/service-health": "^5.0.169",
-    "@kronos-integration/service-http": "^10.6.134",
+    "@kronos-integration/service-http": "^10.6.135",
     "@kronos-integration/service-ldap": "^4.0.101",
     "@kronos-integration/service-swarm": "^1.9.86"
   },
@@ -42,7 +42,7 @@
     "ava": "^5.0.1",
     "c8": "^7.11.3",
     "documentation": "^14.0.0",
-    "npm-pkgbuild": "^10.15.6",
+    "npm-pkgbuild": "^10.15.7",
     "semantic-release": "^19.0.5"
   },
   "optionalDependencies": {
