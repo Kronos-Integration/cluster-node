@@ -100,34 +100,7 @@
       [
         "@semantic-release/exec",
         {
-          "publishCmd": "npx npm-pkgbuild --publish dist/ --available --continue"
-        }
-      ],
-      [
-        "@semantic-release/github",
-        {
-          "assets": [
-            {
-              "path": "dist/*.pkg*",
-              "label": "Arch Linux"
-            },
-            {
-              "path": "dist/*.deb",
-              "label": "Debian"
-            }
-          ]
-        }
-      ],
-      [
-        "@semantic-release/exec",
-        {
-          "publishCmd": "npx npm-pkgbuild --available --continue --verbose"
-        }
-      ],
-      [
-        "@semantic-release/exec",
-        {
-          "publishCmd": "npx npm-pkgbuild --available --continue"
+          "publishCmd": "npx npm-pkgbuild --available --continue --publish dist"
         }
       ],
       [
@@ -143,12 +116,6 @@
               "label": "Arch Linux Package"
             }
           ]
-        }
-      ],
-      [
-        "@semantic-release/github",
-        {
-          "assets": []
         }
       ]
     ]
