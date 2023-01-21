@@ -42,7 +42,7 @@
     "ava": "^5.1.1",
     "c8": "^7.11.3",
     "documentation": "^14.0.0",
-    "npm-pkgbuild": "^11.1.1",
+    "npm-pkgbuild": "^11.1.2",
     "semantic-release": "^20.0.2"
   },
   "optionalDependencies": {
@@ -118,6 +118,41 @@
             {
               "path": "dist/*.rpm",
               "label": "RPM"
+            }
+          ]
+        }
+      ],
+      [
+        "@semantic-release/github",
+        {
+          "assets": [
+            {
+              "path": "dist/*.deb",
+              "label": "any Debian Package"
+            },
+            {
+              "path": "dist/*any.pkg.*",
+              "label": "any Arch Linux Package"
+            },
+            {
+              "path": "dist/*x86_64.pkg.*",
+              "label": "x86_64 Arch Linux Package"
+            },
+            {
+              "path": "dist/*aarch64.pkg.*",
+              "label": "arm64 Arch Linux Package"
+            },
+            {
+              "path": "dist/*noarch.rpm",
+              "label": "noarch RPM"
+            },
+            {
+              "path": "dist/*x86_64.rpm",
+              "label": "x86_64 RPM"
+            },
+            {
+              "path": "dist/*aarch64.rpm",
+              "label": "arm64 RPM"
             }
           ]
         }
