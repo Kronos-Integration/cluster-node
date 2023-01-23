@@ -79,16 +79,13 @@
         }
       ],
       "${sysusers.config.dir}${name}.conf": "pkg/sysusers.conf",
-      "${ngins.sites.dir}${name}.conf": "pkg/nginx.conf",
       "${tmpfiles.config.dir}${name}.conf": "pkg/tmpfiles.conf",
       "${config.dir}config.json": "config/config.json",
-      "${nginx.sites.dir}${name}.conf": "pkg/nginx.conf",
       "${systemd.unit.dir}${name}.service": "pkg/${name}.service",
       "${systemd.unit.dir}${name}.socket": "pkg/${name}.socket"
     },
     "hooks": "pkg/hooks.sh",
     "backup": "${config.dir}config.json",
-    "groups": "services",
     "http.path": "/services/${name}/api",
     "name": "cluste-node"
   },
@@ -101,25 +98,6 @@
         "@semantic-release/exec",
         {
           "publishCmd": "npx npm-pkgbuild --available --continue --publish dist"
-        }
-      ],
-      [
-        "@semantic-release/github",
-        {
-          "assets": [
-            {
-              "path": "dist/*.deb",
-              "label": "Debian Package"
-            },
-            {
-              "path": "dist/*.pkg.*",
-              "label": "Arch Linux Package"
-            },
-            {
-              "path": "dist/*.rpm",
-              "label": "RPM"
-            }
-          ]
         }
       ],
       [
