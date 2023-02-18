@@ -1,7 +1,7 @@
-import { readFileSync } from "fs";
-import { join } from "path";
-import initialize from "./initialize.mjs";
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 import { StandaloneServiceProvider } from "@kronos-integration/service";
+import initialize from "./initialize.mjs";
 
 const args = process.argv.slice(2);
 const opt = { encoding: "utf8" };
