@@ -83,10 +83,9 @@
       "${config.dir}config.json": "config/config.json",
       "${systemd.unit.dir}${name}.service": "pkg/${name}.service"
     },
-    "hooks": "pkg/hooks.sh",
-    "backup": "${config.dir}config.json",
     "http.path": "/services/${name}/api",
-    "name": "cluste-node"
+    "name": "cluste-node",
+    "kronos": true
   },
   "release": {
     "plugins": [
