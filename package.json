@@ -83,7 +83,6 @@
       "${config.dir}config.json": "config/config.json",
       "${systemd.unit.dir}${name}.service": "pkg/${name}.service"
     },
-    "hooks": "pkg/hooks.sh",
     "backup": "${config.dir}config.json",
     "http.path": "/services/${name}/api",
     "kronos": true,
