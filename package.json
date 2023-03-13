@@ -78,7 +78,6 @@
           "type": "node-modules"
         }
       ],
-      "${sysusers.config.dir}${name}.conf": "pkg/sysusers.conf",
       "${tmpfiles.config.dir}${name}.conf": "pkg/tmpfiles.conf",
       "${config.dir}config.json": "config/config.json",
       "${systemd.unit.dir}${name}.service": "pkg/${name}.service"
