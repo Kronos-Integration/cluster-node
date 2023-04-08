@@ -7,6 +7,7 @@ jobs:
       matrix:
         node-version:
           - 18.15.0
+      max-parallel: 1
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3.6.0
@@ -15,6 +16,8 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run cover --if-present
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
       - name: Coveralls Parallel
         uses: coverallsapp/github-action@master
         with:
