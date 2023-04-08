@@ -1,0 +1,8 @@
+{
+  "http": {
+    "logLevel": "trace",
+    "listen": {
+      "socket": 2345
+    }
+  }
+}
