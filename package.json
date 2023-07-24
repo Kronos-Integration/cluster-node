@@ -81,9 +81,9 @@
       "${config.dir}config.json": "config/config.json",
       "${systemd.unit.dir}${name}.service": "pkg/${name}.service"
     },
+    "example": true,
     "http.path": "/services/${name}/api",
     "kronos": true,
-    "example": true,
     "name": "cluste-node"
   },
   "release": {
