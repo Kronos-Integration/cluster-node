@@ -22,7 +22,7 @@
   },
   "scripts": {
     "test": "npm run test:ava",
-    "test:ava": "ava --timeout 2m tests/*-ava.mjs tests/*-ava-node.mjs && ava --timeout 4m tests/*-ava.mjs tests/*-ava-node.mjs",
+    "test:ava": "ava --timeout 4m tests/*-ava.mjs tests/*-ava-node.mjs",
     "cover": "c8 -x 'tests/**/*' --temp-directory build/tmp ava --node-arguments '--experimental-modules' --timeout 2m && c8 report -r lcov -o build/coverage --temp-directory build/tmp"
   },
   "dependencies": {
@@ -42,7 +42,7 @@
     "ava": "^5.3.1",
     "c8": "^8.0.0",
     "documentation": "^14.0.0",
-    "npm-pkgbuild": "^12.3.1",
+    "npm-pkgbuild": "^13.0.0",
     "semantic-release": "^22.0.6"
   },
   "optionalDependencies": {
