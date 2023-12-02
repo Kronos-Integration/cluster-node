@@ -84,7 +84,7 @@
     "example": true,
     "http.path": "/services/${name}/api",
     "kronos": true,
-    "name": "cluste-node"
+    "name": "cluster-node"
   },
   "release": {
     "plugins": [
