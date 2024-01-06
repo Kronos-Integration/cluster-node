@@ -15,6 +15,7 @@ jobs:
       matrix:
         node-version:
           - 20.10.0
+      max-parallel: 1
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4.0.1
@@ -23,6 +24,8 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run cover --if-present
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
       - name: Coveralls Parallel
         uses: coverallsapp/github-action@master
         with:
@@ -47,6 +50,22 @@ jobs:
 
           sudo apt-get install -f ./pacman-utils_5.2.2-3_amd64.deb
       - uses: actions/checkout@v4
+      - uses: uraimo/run-on-arch-action@v2
+        with:
+          arch: aarch64
+          distro: archarm_latest
+          githubToken: ${{ github.token }}
+          env: |
+            CI: "true"
+            NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            PKGBUILD_PUBLISH: ${{ secrets.PKGBUILD_PUBLISH }}
+          run: |
+            yes|pacman --noprogressbar -q -Syu nodejs npm make gcc git
+            useradd ci
+            /usr/bin/npm ci
+            chown -R ci .
+            /usr/bin/su ci npx semantic-release
       - uses: actions/setup-node@v4.0.1
         with:
           node-version: 20.10.0
