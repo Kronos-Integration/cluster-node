@@ -1,14 +1,19 @@
 {
-  "name": "@kronos-integration/cluster-node",
+  "name": "template-sync-hook",
   "version": "0.0.0-semantic-release",
   "publishConfig": {
     "access": "public"
   },
-  "description": "kronos cluster node sample application",
+  "description": "hook for npm-template-sync",
   "keywords": [
+    "OIDC",
     "cluster",
+    "github",
     "kronos-integration",
-    "systemd"
+    "npm",
+    "systemd",
+    "template",
+    "webhook"
   ],
   "contributors": [
     {
@@ -18,22 +23,34 @@
   ],
   "license": "BSD-2-Clause",
   "bin": {
-    "cluster-node": "./src/cluster-node-cli.mjs"
+    "cluster-node": "./src/cluster-node-cli.mjs",
+    "entitlement-provider": "./src/entitlement-provider-cli.mjs",
+    "template-sync-hook": "./src/template-sync-hook-cli.mjs"
   },
   "scripts": {
+    "start": "node src/template-sync-hook-cli.mjs",
     "test": "npm run test:ava",
     "test:ava": "ava --timeout 4m tests/*-ava.mjs tests/*-ava-node.mjs",
-    "cover": "c8 -x 'tests/**/*' --temp-directory build/tmp ava --node-arguments '--experimental-modules' --timeout 2m && c8 report -r lcov -o build/coverage --temp-directory build/tmp"
+    "cover": "c8 -x 'tests/**/*' --temp-directory build/tmp ava --timeout 2m tests/*-ava.mjs tests/*-ava-node.mjs && c8 report -r lcov -o build/coverage --temp-directory build/tmp && c8 -x 'tests/**/*' --temp-directory build/tmp ava --timeout 2m && c8 -x 'tests/**/*' --temp-directory build/tmp ava --node-arguments '--experimental-modules' --timeout 2m",
+    "docs": "documentation readme ./src/template-sync-hook-cli.mjs --section=API",
+    "lint": "npm run lint:docs",
+    "lint:docs": "documentation lint ./src/template-sync-hook-cli.mjs"
   },
   "dependencies": {
     "@kronos-integration/interceptor-decode-json": "^2.1.76",
+    "@kronos-integration/interceptor-webhook": "^1.1.58",
     "@kronos-integration/service": "^10.4.55",
     "@kronos-integration/service-admin": "^3.4.65",
     "@kronos-integration/service-authenticator": "^1.6.55",
     "@kronos-integration/service-health": "^5.0.179",
     "@kronos-integration/service-http": "^10.6.152",
     "@kronos-integration/service-ldap": "^4.0.127",
-    "@kronos-integration/service-swarm": "^1.9.86"
+    "@kronos-integration/service-repositories": "^2.0.156",
+    "@kronos-integration/service-smtp": "^1.0.79",
+    "@kronos-integration/service-swarm": "^1.9.86",
+    "@template-tools/template-sync": "^11.1.42",
+    "github-repository-provider": "^8.0.30",
+    "model-attributes": "^4.2.2"
   },
   "devDependencies": {
     "@semantic-release/commit-analyzer": "^11.1.0",
@@ -42,6 +59,7 @@
     "ava": "^6.0.1",
     "c8": "^9.0.0",
     "documentation": "^14.0.0",
+    "got": "^14.0.0",
     "npm-pkgbuild": "^13.0.11",
     "semantic-release": "^22.0.12"
   },
@@ -79,7 +97,8 @@
         }
       ],
       "${config.dir}config.json": "config/config.json",
-      "${systemd.unit.dir}${name}.service": "pkg/${name}.service"
+      "${systemd.unit.dir}${name}.service": "pkg/${name}.service",
+      "${well-known.content.dir}openid-configuration": "config/openid-configuration"
     },
     "example": true,
     "http.path": "/services/${name}/api",
@@ -136,8 +155,14 @@
   },
   "template": {
     "inheritFrom": [
+      "arlac77/entitlement-provider",
       "arlac77/template-arlac77-github",
-      "arlac77/template-kronos-app"
+      "arlac77/template-kronos-app",
+      "arlac77/template-nginx",
+      "arlac77/template-npm-pkgbuild",
+      "arlac77/template-root",
+      "arlac77/template-systemd",
+      "template-tools/template-sync-hook"
     ]
   }
 }
