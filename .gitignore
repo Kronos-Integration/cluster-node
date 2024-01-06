@@ -9,3 +9,4 @@ bun.lockb
 dist
 .tmp
 docroot
+bin
