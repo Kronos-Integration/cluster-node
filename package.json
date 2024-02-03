@@ -2,7 +2,8 @@
   "name": "@kronos-integration/cluster-node",
   "version": "0.0.0-semantic-release",
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "provenance": true
   },
   "description": "kronos cluster node sample application",
   "keywords": [
