@@ -19,7 +19,7 @@
   ],
   "license": "BSD-2-Clause",
   "bin": {
-    "cluster-node": "./src/cluster-node-cli.mjs"
+    "cluster-node": "src/cluster-node-cli.mjs"
   },
   "scripts": {
     "test": "npm run test:ava",
