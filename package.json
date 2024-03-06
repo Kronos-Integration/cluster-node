@@ -99,6 +99,12 @@
         }
       ],
       [
+        "@semantic-release/exec",
+        {
+          "publishCmd": "npx npm-pkgbuild --publish dist"
+        }
+      ],
+      [
         "@semantic-release/github",
         {
           "assets": [
