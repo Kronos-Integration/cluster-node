@@ -52,7 +52,7 @@
     "mf-hosting": "^2.1.1"
   },
   "engines": {
-    "node": ">=22.0.0"
+    "node": ">=22.2.0"
   },
   "os": [
     "linux"
@@ -81,7 +81,8 @@
         }
       ],
       "${config.dir}config.json": "config/config.json",
-      "${systemd.unit.dir}${name}.service": "pkg/${name}.service"
+      "${systemd.unit.dir}${name}.service": "pkg/${name}.service",
+      "kronos": true
     },
     "example": true,
     "http.path": "/services/${name}/api",
