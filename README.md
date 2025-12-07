@@ -1,7 +1,9 @@
+[![npm](https://img.shields.io/npm/v/@kronos-integration/cluster-node.svg)](https://www.npmjs.com/package/@kronos-integration/cluster-node)
 [![License](https://img.shields.io/badge/License-0BSD-blue.svg)](https://spdx.org/licenses/0BSD.html)
+[![bundlejs](https://deno.bundlejs.com/?q=@kronos-integration/cluster-node\&badge=detailed)](https://bundlejs.com/?q=@kronos-integration/cluster-node)
+[![downloads](http://img.shields.io/npm/dm/@kronos-integration/cluster-node.svg?style=flat-square)](https://npmjs.org/package/@kronos-integration/cluster-node)
 [![GitHub Issues](https://img.shields.io/github/issues/Kronos-Integration/cluster-node.svg?style=flat-square)](https://github.com/Kronos-Integration/cluster-node/issues)
 [![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2FKronos-Integration%2Fcluster-node%2Fbadge\&style=flat)](https://actions-badge.atrox.dev/Kronos-Integration/cluster-node/goto)
-[![Coverage Status](https://coveralls.io/repos/Kronos-Integration/cluster-node/badge.svg)](https://coveralls.io/github/Kronos-Integration/cluster-node)
 
 # kronos-cluster-node
 
